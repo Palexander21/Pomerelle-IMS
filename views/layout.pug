@@ -1,0 +1,118 @@
+doctype html
+head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description' content='')
+    meta(name='author' content='')
+    title Pomerelle-IMS |  #{title}
+    link(href='/vendor/fontawesome-free/css/all.min.css' rel='stylesheet' type='text/css')
+    link(href='/vendor/datatables/dataTables.bootstrap4.css' rel='stylesheet')
+    link(href='/stylesheets/sb-admin.css' rel='stylesheet')
+    link(rel='shortcut icon' type='image/x-icon' href='/images/favicon.ico')
+
+body(id='page-top').sidebar-toggled
+    nav.navbar.navbar-expand.navbar-dark.bg-dark.static-top
+        a.navbar-brand.mr-1(href='/') Pomerelle-IMS
+        button#sidebarToggle.btn.btn-link.btn-sm.text-white.order-1.order-sm-0
+            i.fas.fa-bars
+        // Navbar Search has a form before .d-noe to make search bar
+        .d-none.d-md-inline-block.form-inline.ml-auto.mr-0.mr-md-3.my-2.my-md-0
+        //    .input-group
+        //        input.form-control(type='text' placeholder='Search for...' aria-label='Search' aria-describedby='basic-addon2')
+        //        .input-group-append
+        //            button.btn.btn-primary(type='button')
+        //                i.fas.fa-search
+        // Navbar
+        ul.navbar-nav.ml-auto.ml-md-0
+            li.nav-item.dropdown.no-arrow.mx-1
+                a#alertsDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                    i.fas.fa-bell.fa-fw
+                    span.badge.badge-danger 9+
+                .dropdown-menu.dropdown-menu-right(aria-labelledby='alertsDropdown')
+                    a.dropdown-item(href='#') Action
+                    a.dropdown-item(href='#') Another action
+                    .dropdown-divider
+                    a.dropdown-item(href='#') Something else here
+            li.nav-item.dropdown.no-arrow.mx-1
+                a#messagesDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                    i.fas.fa-envelope.fa-fw
+                    span.badge.badge-danger 7
+                .dropdown-menu.dropdown-menu-right(aria-labelledby='messagesDropdown')
+                    a.dropdown-item(href='#') Action
+                    a.dropdown-item(href='#') Another action
+                    .dropdown-divider
+                    a.dropdown-item(href='#') Something else here
+            li.nav-item.dropdown.no-arrow
+                a#userDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                    i.fas.fa-user-circle.fa-fw
+                .dropdown-menu.dropdown-menu-right(aria-labelledby='userDropdown')
+                    a.dropdown-item(href='#') Settings
+                    a.dropdown-item(href='#') Activity Log
+                    .dropdown-divider
+                    a.dropdown-item(href='#' data-toggle='modal' data-target='#logoutModal') Logout
+    #wrapper
+        // Sidebar
+        ul.sidebar.navbar-nav.toggled
+            li.nav-item
+                a.nav-link(href='/')
+                    i.fas.fa-fw.fa-tachometer-alt
+                    span Dashboard
+            li.nav-item.dropdown
+                a#pagesDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                    i.fas.fa-fw.fa-folder
+                    span Pages
+                .dropdown-menu(aria-labelledby='pagesDropdown')
+                    h6.dropdown-header Login Screens:
+                    a.dropdown-item(href='login') Login
+                    a.dropdown-item(href='register') Create User
+                    a.dropdown-item(href='forgot-password') Forgot Password
+                    .dropdown-divider
+            li.nav-item
+                a.nav-link(href='charts')
+                    i.fas.fa-fw.fa-chart-area
+                    span Charts
+            li.nav-item
+                a.nav-link(href='tables')
+                    i.fas.fa-fw.fa-table
+                    span Tables
+        #content-wrapper
+            .container-fluid
+                block content
+            footer.sticky-footer
+                .container.my-auto
+                    .copyright.text-center.my-auto
+                        span Copyright &copy; Paxton Alexander 2019
+        // /.content-wrapper
+    // /#wrapper
+    // Scroll to Top Button
+    a.scroll-to-top.rounded(href='#page-top')
+        i.fas.fa-angle-up
+    // Logout Modal
+    #logoutModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5#exampleModalLabel.modal-title Ready to Leave?
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body Select &quot;Logout&quot; below if you are ready to end your current session.
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Cancel
+                    a.btn.btn-primary(href='login') Logout
+// Bootstrap core JavaScript
+script(src='/vendor/jquery/jquery.min.js')
+script(src='/vendor/bootstrap/js/bootstrap.bundle.min.js')
+// Core plugin JavaScript
+script(src='vendor/jquery-easing/jquery.easing.min.js')
+// Page level plugin JavaScript
+script(src='/vendor/chart.js/Chart.min.js')
+script(src='/vendor/datatables/jquery.dataTables.js')
+script(src='/vendor/datatables/dataTables.bootstrap4.js')
+// Custom scripts for all pages
+script(src='/js/sb-admin.min.js')
+// Demo scripts for this page
+script(src='/js/demo/datatables-demo.js')
+script(src='/js/demo/chart-area-demo.js')
+script(src='/js/date.js')
+block scripts

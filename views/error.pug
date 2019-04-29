@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  ol.breadcrumb
+    li.breadcrumb-item
+      a(href='index.html') Dashboard
+    li.breadcrumb-item.active 404 Error
+  // Page Content
+  h1.display-1 404
+  p.lead
+    | Page not found. You can
+    |
+    a(href='javascript:history.back()') go back
+    |           to the previous page, or
+    |
+    a(href='/') return home
+    | .
+
+  h1= message
+  h2= error.status
+  pre #{error.stack}
