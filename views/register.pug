@@ -3,6 +3,9 @@ extends layout
 block content
     .container
         .card.card-register.mx-auto.mt-5
+            if (errors)
+                each error in errors
+                    p.text-center.text-danger #{error.msg}
             .card-header Create New User
             .card-body
                 form(method='POST', action='/register', id='registerForm').form-signin
