@@ -10,9 +10,27 @@ block content
         .card-header
             nav
                 #nav-tab.nav.nav-tabs(role='tablist')
-                    a#nav-equipment-tab.nav-item.nav-link.active(data-toggle='tab' href='#nav-equipment' role='tab' aria-controls='nav-equipment' aria-selected='true') Equipment
-                    a#nav-employee-tab.nav-item.nav-link(data-toggle='tab' href='#nav-employee' role='tab' aria-controls='nav-employee' aria-selected='false') Employees
+                    a#nav-employee-tab.nav-item.nav-link.active(data-toggle='tab' href='#nav-employee' role='tab' aria-controls='nav-employee' aria-selected='true') Employees
+                    a#nav-equipment-tab.nav-item.nav-link(data-toggle='tab' href='#nav-equipment' role='tab' aria-controls='nav-equipment' aria-selected='false') Equipment
             #nav-tabContent.tab-content
+                #nav-employee.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='nav-employee-tab')
+                    .card-body
+                        .table-responsive
+                            table#employeeDataTable.table.table-bordered(width='100%' cellspacing='0')
+                                thead
+                                    tr
+                                        th Name
+                                        th Username
+                                        th Hire Date
+                                        th Position
+                                tbody
+                                    each user in users
+                                        tr
+                                            td #{user.firstName} #{user.lastName}
+                                            td #{user.username}
+                                            td #{user.startDate}
+                                            td #{user.position}
+                    .card-footer.small.text-muted.date-updated Updated yesterday at 11:59 PM
                 #nav-equipment.tab-pane.fade(role='tabpanel' aria-labelledby='nav-equipment-tab')
                     .card-body
                         .table-responsive
@@ -32,24 +50,6 @@ block content
                                             td #{item.last_tune}
                                             td #{item.size}
                                             td #{item.upc}
-                    .card-footer.small.text-muted.date-updated Updated yesterday at 11:59 PM
-                #nav-employee.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='nav-employee-tab')
-                    .card-body
-                        .table-responsive
-                            table#employeeDataTable.table.table-bordered(width='100%' cellspacing='0')
-                                thead
-                                    tr
-                                        th Name
-                                        th Username
-                                        th Hire Date
-                                        th Position
-                                tbody
-                                    each user in users
-                                        tr
-                                            td #{user.firstName} #{user.lastName}
-                                            td #{user.username}
-                                            td #{user.startDate}
-                                            td #{user.position}
                     .card-footer.small.text-muted.date-updated Updated yesterday at 11:59 PM
 block scripts
     script(src="/js/datatables.js")

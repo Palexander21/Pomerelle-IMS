@@ -1,5 +1,11 @@
 $(document).ready(function () {
-   $("#employeeDataTable").dataTable();
-   $("#equipmentDataTable").dataTable();
+    $("#equipmentDataTable").dataTable({
+        select: true,
+        autofill: true,
+    });
+    $("#employeeDataTable").dataTable({
+       select: true,
+       autofill: true,
+   });
 
 });
