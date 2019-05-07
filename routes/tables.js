@@ -13,16 +13,14 @@ router.get('/', function(req, res, next) {
                 users: users,
                 equipment: equipment,
             });
-        }).catch(() => { res.send('Sorry! Something went wrong.'); });
-    })).catch(() => { res.send('Sorry! Something went wrong.'); });
-    // users.find().then((users) => {
-    //     res.render('tables', {
-    //         title: 'Tables',
-    //         users: users,
-    //     });
-    // }).catch(() => { res.send('Sorry! Something went wrong.'); });
-
-
+        }).catch((err) => {
+            console.log(err);
+            res.send('Sorry! Something went wrong.');
+        });
+    })).catch((err) => {
+        console.log(err);
+        res.send('Sorry! Something went wrong.');
+    });
 });
 
 module.exports = router;

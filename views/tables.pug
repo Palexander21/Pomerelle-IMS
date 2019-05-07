@@ -16,7 +16,7 @@ block content
                 #nav-employee.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='nav-employee-tab')
                     .card-body
                         .table-responsive
-                            table#employeeDataTable.table.table-bordered(width='100%' cellspacing='0')
+                            table#employeeDataTable.table.table-bordered.data-table(width='100%' cellspacing='0')
                                 thead
                                     tr
                                         th Name
@@ -30,11 +30,11 @@ block content
                                             td #{user.username}
                                             td #{user.startDate}
                                             td #{user.position}
-                    .card-footer.small.text-muted.date-updated Updated yesterday at 11:59 PM
+                    .card-footer.small.text-muted.date-updated Updated yesterday at 11:59 <PM></PM>
                 #nav-equipment.tab-pane.fade(role='tabpanel' aria-labelledby='nav-equipment-tab')
                     .card-body
                         .table-responsive
-                            table#equipmentDataTable.table.table-bordered(width='100%' cellspacing='0')
+                            table#equipmentDataTable.table.table-bordered.data-table(width='100%' cellspacing='0')
                                 thead
                                     tr
                                         th Item
@@ -52,5 +52,7 @@ block content
                                             td #{item.upc}
                     .card-footer.small.text-muted.date-updated Updated yesterday at 11:59 PM
 block scripts
+    script(src='/vendor/datatables/jquery.dataTables.min.js')
+    script(src='/vendor/datatables/dataTables.bootstrap4.min.js')
     script(src="/js/datatables.js")
     script(src="/js/date.js")
