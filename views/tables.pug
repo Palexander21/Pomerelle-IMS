@@ -5,15 +5,14 @@ block content
         li.breadcrumb-item
             a(href='/') Dashboard
         li.breadcrumb-item.active Tables
-    // DataTables Example
     .card.mb-3
         .card-header
             nav
                 #nav-tab.nav.nav-tabs(role='tablist')
-                    a#nav-employee-tab.nav-item.nav-link.active(data-toggle='tab' href='#nav-employee' role='tab' aria-controls='nav-employee' aria-selected='true') Employees
-                    a#nav-equipment-tab.nav-item.nav-link(data-toggle='tab' href='#nav-equipment' role='tab' aria-controls='nav-equipment' aria-selected='false') Equipment
+                    a#nav-equipment-tab.nav-item.nav-link.active(data-toggle='tab' href='#nav-equipment' role='tab' aria-controls='nav-equipment' aria-selected='false') Equipment
+                    a#nav-employee-tab.nav-item.nav-link(data-toggle='tab' href='#nav-employee' role='tab' aria-controls='nav-employee' aria-selected='true') Employees
             #nav-tabContent.tab-content
-                #nav-employee.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='nav-employee-tab')
+                #nav-employee.tab-pane.fade(role='tabpanel' aria-labelledby='nav-employee-tab')
                     .card-body
                         .table-responsive
                             table#employeeDataTable.table.table-bordered.data-table(width='100%' cellspacing='0')
@@ -30,8 +29,10 @@ block content
                                             td #{user.username}
                                             td #{user.startDate}
                                             td #{user.position}
+                        button#employeeAdd.btn.btn-primary Add
+                        button#employeeDelete.btn.btn-danger Delete
                     .card-footer.small.text-muted.date-updated Updated yesterday at 11:59 <PM></PM>
-                #nav-equipment.tab-pane.fade(role='tabpanel' aria-labelledby='nav-equipment-tab')
+                #nav-equipment.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='nav-equipment-tab')
                     .card-body
                         .table-responsive
                             table#equipmentDataTable.table.table-bordered.data-table(width='100%' cellspacing='0')
@@ -50,7 +51,50 @@ block content
                                             td #{item.last_tune}
                                             td #{item.size}
                                             td #{item.upc}
+                        button#equipmentAdd.btn.btn-primary(type='button' data-toggle='modal' data-target='#equipmentModalCenter') Add
+                        button#equipmentDelete.btn.btn-danger Delete
                     .card-footer.small.text-muted.date-updated Updated yesterday at 11:59 PM
+
+        #equipmentModalCenter.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' data-backdrop='static')
+            .modal-dialog.modal-dialog-centered(role='document')
+                .modal-content
+                    .modal-header
+                        h5#exampleModalLongTitle.modal-title New Equipment
+                        button.close(type='button' data-dismiss='modal' aria-label='Close')
+                            span(aria-hidden='true') &times;
+                    .modal-body
+                        form
+                            .form-group
+                                .form-row
+                                    .col-md-6
+                                        .form-label-group
+                                            input#firstName.form-control(type='text' placeholder='First name' required='required' autofocus='autofocus')
+                                            label(for='firstName') First name
+                                    .col-md-6
+                                        .form-label-group
+                                            input#lastName.form-control(type='text' placeholder='Last name' required='required')
+                                            label(for='lastName') Last name
+                            .form-group
+                                .form-label-group
+                                    input#inputEmail.form-control(type='email' placeholder='Email address' required=false)
+                                    label(for='inputEmail') Email address
+                            .form-group
+                                .form-row
+                                    .col-md-6
+                                        .form-label-group
+                                            input#equipment.form-control(type='text' placeholder='Equipment' required='required')
+                                            label(for='equipment') Equipment
+                                    .col-md-6
+                                        .form-label-group
+                                            input#confirmPassword.form-control(type='password' placeholder='Confirm password' required='required')
+                                            label(for='confirmPassword') Confirm password
+                            a.btn.btn-primary.btn-block(href='login') Register
+                        .text-center
+                            a.d-block.small.mt-3(href='login') Login Page
+                            a.d-block.small(href='forgot-password') Forgot Password?
+                    .modal-footer
+                        button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                        button.btn.btn-primary(type='button') Save changes
 block scripts
     script(src='/vendor/datatables/jquery.dataTables.min.js')
     script(src='/vendor/datatables/dataTables.bootstrap4.min.js')

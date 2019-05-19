@@ -27,6 +27,16 @@ block content
                         .form-row
                             .col-md-6
                                 .form-label-group
+                                    input#startDate.form-control(type="date" placeholder="YYYY-MM-DD" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" name='startDate')
+                                    label(for='startDate') Hire Date
+                            .col-md-6
+                                .form-label-group
+                                    input#position.form-control(type='text' placeholder='Position', name='position')
+                                    label(for='position') Position
+                    .form-group
+                        .form-row
+                            .col-md-6
+                                .form-label-group
                                     input#inputPassword.form-control(type='password' placeholder='Password' required='required', name='password')
                                     label(for='inputPassword') Password
                             .col-md-6
