@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    ol.breadcrumb
+        li.breadcrumb-item
+            a(href='/') Dashboard
+        li.breadcrumb-item.active Tasks
+    .card.mb-3
+        .card-header
+            .card-body
+                .table-responsive
+                    table#tasksDataTable.table.table-bordered.data-table(width='100%' cellspacing='0')
+                        thead
+                            tr
+                                th Item
+                                th Last Used
+                                th Last Tuned
+                                th Size
+                                th UPC
+                        tbody
+                            each item in data
+                                tr
+                                    td #{item.type}
+                                    td #{item.last_used}
+                                    td #{item.last_tune}
+                                    td #{item.size}
+                                    td #{item.upc}
+            .card-footer.small.text-muted.date-updated Updated yesterday at 11:59 PM
+block scripts
+    script(src='/vendor/datatables/jquery.dataTables.min.js')
+    script(src='/vendor/datatables/dataTables.bootstrap4.min.js')
+    script(src="/js/datatables.js")
+    script(src="/js/date.js")

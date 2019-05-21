@@ -1,4 +1,4 @@
 $(document).ready(function () {
 
-    console.log($('.date-updated').innerHTML ='Updated at ' + new Date());
+    $('.date-updated').html('Updated ' + new Date().toISOString().split('T')[0]);
 });
