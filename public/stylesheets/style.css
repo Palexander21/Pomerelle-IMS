@@ -5,3 +5,7 @@
 tr.selected {
   background-color: darkgray !important;
 }
+
+.font-12 {
+  font-size: 12px;
+}
