@@ -1,127 +1,139 @@
 extends layout
 
 block content
-    button.btn.btn-primary(type='button' data-toggle='modal' data-target='#rentalModalCenter')
-        | Launch demo modal
-    #rentalModalCenter.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true')
-        .modal-lg.modal-dialog.modal-dialog-centered(role='document')
-            .modal-content
-                .modal-header
-                    h5#exampleModalLongTitle.modal-title Pomerelle Rental Ticket
-                    button.close(type='button' data-dismiss='modal' aria-label='Close')
-                        span(aria-hidden='true') &times;
-                .modal-body
-                    form
-                        .form-group
-                            .form-row
-                                .col-md-6
+    ol.breadcrumb
+        li.breadcrumb-item
+            a(href='/') Dashboard
+        li.breadcrumb-item.active Rentals
+    .row
+        .col.text-center
+            button.btn.btn-primary.btn-lg(type='button' data-toggle='modal' data-target='#rentalModalCenter')
+                | Start New Rental
+            #rentalModalCenter.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true')
+                .modal-lg.modal-dialog.modal-dialog-centered(role='document')
+                    .modal-content
+                        .modal-header
+                            h5#exampleModalLongTitle.modal-title Pomerelle Rental Ticket
+                            button.close(type='button' data-dismiss='modal' aria-label='Close')
+                                span(aria-hidden='true') &times;
+                        .modal-body
+                            form#rentalForm
+                                .form-group
+                                    .form-row
+                                        .col-md-6
+                                            .form-label-group
+                                                input#firstName.form-control(name='firstName' type='text' placeholder='First name' required='required' autofocus=true)
+                                                label(for='firstName') First Name
+                                        .col-md-6
+                                            .form-label-group
+                                                input#lastName.form-control(name='lastName' type='text' placeholder='Last name' required=true)
+                                                label(for='lastName') Last Name
+                                .form-group
                                     .form-label-group
-                                        input#firstName.form-control(type='text' placeholder='First name' required='required' autofocus=true)
-                                        label(for='firstName') First Name
-                                .col-md-6
-                                    .form-label-group
-                                        input#lastName.form-control(type='text' placeholder='Last name' required=true)
-                                        label(for='lastName') Last Name
-                        .form-group
-                            .form-label-group
-                                input#inputAddress.form-control(type='text' placeholder='Address' required=true)
-                                label(for='inputAddress') Address
-                        .form-group
-                            .form-row
-                                .col-md-4
-                                    .form-label-group
-                                        input#inputCity.form-control(type='text' placeholder='City' required=true)
-                                        label(for='inputCity') City
-                                .col-md-4
-                                    .form-label-group
-                                        input#inputState.form-control(type='text' placeholder='State' required=true)
-                                        label(for='inputState') State
-                                .col-md-4
-                                    .form-label-group
-                                        input#inputZip.form-control(type='text' placeholder='Zip code' required=true)
-                                        label(for='inputZip') Zip Code
-                        .form-group
-                            .form-row
-                                .col-md-6
-                                    .form-label-group
-                                        input#inputLicense.form-control(type='text' placeholder="Driver's License" required=true)
-                                        label(for='inputLicense') Driver's License
-                                .col-md-6
-                                    .form-label-group
-                                        .form-label-group
-                                            input#rentalDate.form-control(type="date" placeholder="YYYY-MM-DD" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" name='rentalDate' required=true)
-                                            label(for='rentalDate') Date of Rental
-                        hr
-                        .font-12.text-center THE FOLLOWING INFORMATION WILL BE USED TO SET THE RELEASE VALUES FOR YOUR BINDINGS AND SHOULD BE GIVEN ACCURATELY
-                        hr
-                        .text-center Skier Type
-                        .form-group.text-center
-                            .form-label-group
-                                .custom-control.custom-radio.custom-control-inline
-                                    input#skierType1.custom-control-input(type='radio' name='skierType')
-                                    label.custom-control-label(for='skierType1') I
-                                .custom-control.custom-radio.custom-control-inline
-                                    input#skierType2.custom-control-input(type='radio' name='skierType')
-                                    label.custom-control-label(for='skierType2') II
-                                .custom-control.custom-radio.custom-control-inline
-                                    input#skierType3.custom-control-input(type='radio' name='skierType')
-                                    label.custom-control-label(for='skierType3') III
-                        .form-group
-                            .form-row
-                                .col-md-4
-                                    .form-label-group
-                                        input#inputWeight.form-control(type='number' required=true)
-                                        label(for='inputWeight') Weight Lbs.
-                                .col-md-2
-                                    .form-label-group
-                                        input#inputHeightFt.form-control(type='number' required=true)
-                                        label(for='inputHeightFt') Height Ft.
-                                .col-md-2
-                                    .form-label-group
-                                        input#inputHeightIn.form-control(type='number' required=true)
-                                        label(for='inputHeightIn') In.
-                                .col-md-4
-                                    .form-label-group
-                                        input#inputAge.form-control(type='number' required=true)
-                                        label(for='inputAge') Age
-                        .form-group
-                            .form-row
-                                .col-md-4
-                                    .form-label-group
-                                        input#inputShoeSize.form-control(type='number' step=0.5 required=true)
-                                        label(for='inputShoeSize') Shoe Size
-                                .col-md-4
-                                    .form-label-group
-                                        select#inputSex.custom-select
-                                            option(selected='') -Sex-
-                                            option(value='M') Male
-                                            option(value='F') Female
-                                .col-md-4.text-center
-                                    | Ski School Today
+                                        input#inputAddress.form-control(name='address' type='text' placeholder='Address' required=true)
+                                        label(for='inputAddress') Address
+                                .form-group
+                                    .form-row
+                                        .col-md-4
+                                            .form-label-group
+                                                input#inputCity.form-control(name='city' type='text' placeholder='City' required=true)
+                                                label(for='inputCity') City
+                                        .col-md-4
+                                            .form-label-group
+                                                input#inputState.form-control(name='state' type='text' placeholder='State' required=true)
+                                                label(for='inputState') State
+                                        .col-md-4
+                                            .form-label-group
+                                                input#inputZip.form-control(name='zipcode' type='text' placeholder='Zip code' required=true)
+                                                label(for='inputZip') Zip Code
+                                .form-group
+                                    .form-row
+                                        .col-md-6
+                                            .form-label-group
+                                                input#inputLicense.form-control(name='license' type='text' placeholder="Driver's License" required=true)
+                                                label(for='inputLicense') Driver's License
+                                        .col-md-6
+                                            .form-label-group
+                                                .form-label-group
+                                                    input#rentalDate.form-control(type="date" placeholder="YYYY-MM-DD" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" name='rentalDate' required=true)
+                                                    label(for='rentalDate') Date of Rental
+                                hr
+                                .font-12.text-center THE FOLLOWING INFORMATION WILL BE USED TO SET THE RELEASE VALUES FOR YOUR BINDINGS AND SHOULD BE GIVEN ACCURATELY
+                                hr
+                                .text-center Skier Type
+                                .form-group.text-center
                                     .form-label-group
                                         .custom-control.custom-radio.custom-control-inline
-                                            input#skiSchoolYes.custom-control-input(type='radio' name='skiSchool')
-                                            label.custom-control-label(for='skiSchoolYes') Yes
+                                            input#skierType1.custom-control-input(type='radio' name='skierType' value='1')
+                                            label.custom-control-label(for='skierType1') I
                                         .custom-control.custom-radio.custom-control-inline
-                                            input#skiSchoolNo.custom-control-input(type='radio' name='skiSchool')
-                                            label.custom-control-label(for='SkiSchoolNo') No
-                        hr
-                p.text-center.font-12 RENTAL AND LIABILITY RELEASE AGREEMENT - PLEASE READ CAREFULLY BEFORE SIGNING
-                    ol.font-12
-                        li I accept for use as is the equipment listed on this form, and accept full responsibility for the care of the equipment while it is in my possession.
-                        li I will be responsible for the replacement at full retail value of any equipment rented under this form, but not returned to the shop.
-                        li I agree to return all rental equipment by the agreed date in clean condition to avoid any additional charges.
-                        li I have received instruction on the use of my equipment and fully understand its use and function.
-                        li I have made no misrepresentations to the ski shop concerning my height, weight, age, or skier type.
-                        li I verify that the visual indicator settings recorded on this form agree with the numbers appearing in the visual indicator windows of the equipment listed on this form.
-                        li I agree to hold harmless and indemnify the ski shop and its owners, agents amd employees, as well as the equipment manufacturers and distributors for any loss or damage, including any that results from claims for personal injury, death or property damage related to the use of this equipment.
-                        li I understand that there are inherent and other risks involved in the sport of snow skiing, for which this equipment is to be used, that injuries are a common and ordinary occurrence of the sport, and I freely and voluntarily assume those risks.
-                        li I understand that a ski-binding-boot system will not release at all times or under all circumstances where release may prevent injury or death, nor is it possible to predict every situation in which it will release, and it is , therefore, no guarantee of my safety.
-                        li I hereby release from any legal liability the ski shop and its owners, agents and employees, as well as the manufacturers and distributors of this equipment from any and all liability for damage and injury or death of myself or to any person or property resulting from the selection, installation, maintenance, adjustment or use of this equipment and for any claim based upon negligence, breach of warranty, contract or other legal theory, accepting myself the full responsibility for any and all such damage, injury or death which may result.
-                        li This agreement is governed by the applicable law of this state or province. If any part of this agreement is determined to be unenforceable, all other parts shall be given full force and effect.
-                    p.text-center.font-12 I, THE UNDERSIGNED HAVE READ AND UNDERSTAND THIS RENTAL AND LIABILITY RELEASE AGREEMENT.
+                                            input#skierType2.custom-control-input(type='radio' name='skierType' value='2')
+                                            label.custom-control-label(for='skierType2') II
+                                        .custom-control.custom-radio.custom-control-inline
+                                            input#skierType3.custom-control-input(type='radio' name='skierType' value='3')
+                                            label.custom-control-label(for='skierType3') III
+                                .form-group
+                                    .form-row
+                                        .col-md-4
+                                            .form-label-group
+                                                input#inputWeight.form-control(name='weight' type='number' required=true)
+                                                label(for='inputWeight') Weight Lbs.
+                                        .col-md-2
+                                            .form-label-group
+                                                input#inputHeightFt.form-control(name='height-ft' type='number' required=true)
+                                                label(for='inputHeightFt') Height Ft.
+                                        .col-md-2
+                                            .form-label-group
+                                                input#inputHeightIn.form-control(name='height-in' type='number' required=true)
+                                                label(for='inputHeightIn') In.
+                                        .col-md-4
+                                            .form-label-group
+                                                input#inputAge.form-control(name='age' type='number' required=true)
+                                                label(for='inputAge') Age
+                                .form-group
+                                    .form-row
+                                        .col-md-4
+                                            .form-label-group
+                                                input#inputShoeSize.form-control(name='bootSize' type='number' step=0.5 required=true)
+                                                label(for='inputShoeSize') Shoe Size
+                                        .col-md-4
+                                            .form-label-group
+                                                select#inputSex.custom-select(name='gender')
+                                                    option(selected='') -Sex-
+                                                    option(value='M') Male
+                                                    option(value='F') Female
+                                        .col-md-4.text-center
+                                            | Ski School Today
+                                            .form-label-group
+                                                .custom-control.custom-radio.custom-control-inline
+                                                    input#skiSchoolYes.custom-control-input(type='radio' name='skiSchool' value='Yes')
+                                                    label.custom-control-label(for='skiSchoolYes') Yes
+                                                .custom-control.custom-radio.custom-control-inline
+                                                    input#skiSchoolNo.custom-control-input(type='radio' name='skiSchool' value='No')
+                                                    label.custom-control-label(for='skiSchoolNo') No
+
+                                hr
+                                p.text-center.font-12 RENTAL AND LIABILITY RELEASE AGREEMENT - PLEASE READ CAREFULLY BEFORE SIGNING
+                                    ol.font-12.text-left
+                                        li I accept for use as is the equipment listed on this form, and accept full responsibility for the care of the equipment while it is in my possession.
+                                        li I will be responsible for the replacement at full retail value of any equipment rented under this form, but not returned to the shop.
+                                        li I agree to return all rental equipment by the agreed date in clean condition to avoid any additional charges.
+                                        li I have received instruction on the use of my equipment and fully understand its use and function.
+                                        li I have made no misrepresentations to the ski shop concerning my height, weight, age, or skier type.
+                                        li I verify that the visual indicator settings recorded on this form agree with the numbers appearing in the visual indicator windows of the equipment listed on this form.
+                                        li I agree to hold harmless and indemnify the ski shop and its owners, agents amd employees, as well as the equipment manufacturers and distributors for any loss or damage, including any that results from claims for personal injury, death or property damage related to the use of this equipment.
+                                        li I understand that there are inherent and other risks involved in the sport of snow skiing, for which this equipment is to be used, that injuries are a common and ordinary occurrence of the sport, and I freely and voluntarily assume those risks.
+                                        li I understand that a ski-binding-boot system will not release at all times or under all circumstances where release may prevent injury or death, nor is it possible to predict every situation in which it will release, and it is , therefore, no guarantee of my safety.
+                                        li I hereby release from any legal liability the ski shop and its owners, agents and employees, as well as the manufacturers and distributors of this equipment from any and all liability for damage and injury or death of myself or to any person or property resulting from the selection, installation, maintenance, adjustment or use of this equipment and for any claim based upon negligence, breach of warranty, contract or other legal theory, accepting myself the full responsibility for any and all such damage, injury or death which may result.
+                                        li This agreement is governed by the applicable law of this state or province. If any part of this agreement is determined to be unenforceable, all other parts shall be given full force and effect.
+                                    p.text-center.font-12 I, THE UNDERSIGNED HAVE READ AND UNDERSTAND THIS RENTAL AND LIABILITY RELEASE AGREEMENT.
 
 
-                .modal-footer
-                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                    button.btn.btn-primary(type='button') Save changes
+                                .modal-footer
+                                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                                    button.btn.btn-primary(type='submit') Save changes
+        .col
+            #rentalsReceived
+block scripts
+    script(src='/js/socket.io-client/dist/socket.io.slim.js')
+    script(src='/js/rentals.js')
