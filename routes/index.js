@@ -5,8 +5,7 @@ const mongoose = require('mongoose');
 const users = mongoose.model('Users');
 const equipment = mongoose.model('Equipment');
 const fs = require('fs');
-let raw = fs.readFileSync('rental_queue.json');
-let rentals = JSON.parse(raw);
+
 
 /* GET home page. */
 router.get('/', function(req, res, next){
@@ -23,7 +22,8 @@ router.get('/', function(req, res, next){
     //         console.log(err);
     //     })
 
-
+    let raw = fs.readFileSync('rental_queue.json');
+    let rentals = JSON.parse(raw);
     res.render('index', {
         title: 'Home',
         data: rentals.open,
@@ -32,6 +32,8 @@ router.get('/', function(req, res, next){
 });
 
 router.post('/', (req, res, next) => {
+    let raw = fs.readFileSync('rental_queue.json');
+    let rentals = JSON.parse(raw);
     const errors = validationResult(req);
     if (errors.isEmpty()) {
         rentals.open.push(req.body);
