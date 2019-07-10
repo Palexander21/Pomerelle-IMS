@@ -39,9 +39,6 @@ app.set('port', port);
  */
 
 let server = http.createServer(app);
-const io = require('socket.io')(server);
-app.set('socket-io', io);
-
 
 /**
  * Listen on provided port, on all network interfaces.
