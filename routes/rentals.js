@@ -1,4 +1,5 @@
 let express = require('express');
+const { body, validationResult } = require('express-validator/check');
 let router = express.Router();
 const { body, validationResult } = require('express-validator/check');
 const mongoose = require('mongoose');
@@ -33,7 +34,6 @@ router.post('/', (req, res, next) => {
             title: 'Rentals'
         });
     }
-
 });
 
 module.exports = router;
