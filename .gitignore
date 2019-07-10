@@ -1,3 +1,4 @@
 node_modules/
 .idea
 rental_queue.json
+.env
