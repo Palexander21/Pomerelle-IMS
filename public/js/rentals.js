@@ -1,10 +1,7 @@
 $(document).ready(function () {
-    console.log(rental_data);
 
-    $('.open-rentals').click( function (e) {
-        console.log(e.target.id);
-        let renter_data = rental_data.find(renter => renter.license === e.target.id);
-        $('#firstName').val(renter_data.firstName);
+    let fill_form =  function (renter_data) {
+         $('#firstName').val(renter_data.firstName);
         $('#lastName').val(renter_data.lastName);
         $('#inputAddress').val(renter_data.address);
         $('#inputCity').val(renter_data.city);
@@ -38,5 +35,34 @@ $(document).ready(function () {
                 break;
 
         }
-    })
+    };
+
+    let fetch_rentals = function() {
+        $.ajax(
+            '/rentals/open_rentals'
+        ).done((data) => {
+            $.each(data, (i, rental) => {
+                let new_rental = $('#' + rental.license);
+                if (!new_rental.length) {
+                    let val = rental.firstName + ' ' + rental.lastName;
+                    let btn = $('<input/>').attr({
+                        type : 'button',
+                        class: 'btn-block btn-info btn-lg open-rentals',
+                        id: rental.license,
+                        'data-toggle': 'modal',
+                        'data-target': '#equipmentModal',
+                        value : val,
+                    });
+                    $('#rentalsReceived')
+                        .append(btn)
+                        .on('click', new_rental, (e) => {
+                            fill_form(rental)
+                        });
+                }
+            });
+            setTimeout(fetch_rentals, 5000);
+        });
+    };
+
+    fetch_rentals();
 });

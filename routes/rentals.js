@@ -16,6 +16,12 @@ router.get('/', function(req, res, next) {
 
 });
 
+router.get('/open_rentals', function (req, res, next) {
+    let raw = fs.readFileSync('rental_queue.json');
+    let rentals = JSON.parse(raw);
+    res.json(rentals.open);
+});
+
 router.post('/', (req, res, next) => {
     let raw = fs.readFileSync('rental_queue.json');
     let rentals = JSON.parse(raw);
