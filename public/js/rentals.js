@@ -1,7 +1,8 @@
 $(document).ready(function () {
 
     let fill_form =  function (renter_data) {
-         $('#firstName').val(renter_data.firstName);
+        clear_form_elements('#rentalForm');
+        $('#firstName').val(renter_data.firstName);
         $('#lastName').val(renter_data.lastName);
         $('#inputAddress').val(renter_data.address);
         $('#inputCity').val(renter_data.city);
@@ -37,6 +38,25 @@ $(document).ready(function () {
         }
     };
 
+    function clear_form_elements(ele) {
+        $('#rentalForm').reset();
+        // $(ele).find(':input').each(function() {
+        //     switch(this.type) {
+        //         case 'password':
+        //         case 'select-multiple':
+        //         case 'select-one':
+        //         case 'text':
+        //         case 'textarea':
+        //             $(this).val('');
+        //             break;
+        //         case 'checkbox':
+        //         case 'radio':
+        //             this.checked = false;
+        //     }
+        // });
+
+    }
+
     let fetch_rentals = function() {
         $.ajax(
             '/rentals/open_rentals'
@@ -56,6 +76,7 @@ $(document).ready(function () {
                     $('#rentalsReceived')
                         .append(btn)
                         .on('click', new_rental, (e) => {
+                            console.log(e.target.id);
                             fill_form(rental)
                         });
                 }
