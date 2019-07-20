@@ -23,8 +23,6 @@ router.get('/open_rentals', function (req, res, next) {
 });
 
 router.post('/', (req, res, next) => {
-    let raw = fs.readFileSync('rental_queue.json');
-    let rentals = JSON.parse(raw);
     const errors = validationResult(req);
     if (errors.isEmpty()) {
         rentals.open.push(req.body);

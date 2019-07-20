@@ -1,10 +1,12 @@
 $(document).ready(function () {
 
-    let fill_form =  function (renter_data) {
-        clear_form_elements('#rentalForm');
+    $('.open-rentals').click( function (e) {
+        let renter_data = rental_data.find(renter => renter.license === e.target.id);
+        console.log(renter_data);
         $('#firstName').val(renter_data.firstName);
         $('#lastName').val(renter_data.lastName);
         $('#inputAddress').val(renter_data.address);
+        $('#inputPhone').val(renter_data.phone);
         $('#inputCity').val(renter_data.city);
         $('#inputState').val(renter_data.state);
         $('#inputZip').val(renter_data.zipcode);
@@ -36,7 +38,7 @@ $(document).ready(function () {
                 break;
 
         }
-    };
+    });
 
     function clear_form_elements(ele) {
         $('#rentalForm').reset();
@@ -57,33 +59,33 @@ $(document).ready(function () {
 
     }
 
-    let fetch_rentals = function() {
-        $.ajax(
-            '/rentals/open_rentals'
-        ).done((data) => {
-            $.each(data, (i, rental) => {
-                let new_rental = $('#' + rental.license);
-                if (!new_rental.length) {
-                    let val = rental.firstName + ' ' + rental.lastName;
-                    let btn = $('<input/>').attr({
-                        type : 'button',
-                        class: 'btn-block btn-info btn-lg open-rentals',
-                        id: rental.license,
-                        'data-toggle': 'modal',
-                        'data-target': '#equipmentModal',
-                        value : val,
-                    });
-                    $('#rentalsReceived')
-                        .append(btn)
-                        .on('click', new_rental, (e) => {
-                            console.log(e.target.id);
-                            fill_form(rental)
-                        });
-                }
-            });
-            setTimeout(fetch_rentals, 5000);
-        });
-    };
-
-    fetch_rentals();
+    // let fetch_rentals = function() {
+    //     $.ajax(
+    //         '/rentals/open_rentals'
+    //     ).done((data) => {
+    //         $.each(data, (i, rental) => {
+    //             let new_rental = $('#' + rental.license);
+    //             if (!new_rental.length) {
+    //                 let val = rental.firstName + ' ' + rental.lastName;
+    //                 let btn = $('<input/>').attr({
+    //                     type : 'button',
+    //                     class: 'btn-block btn-info btn-lg open-rentals',
+    //                     id: rental.license,
+    //                     'data-toggle': 'modal',
+    //                     'data-target': '#equipmentModal',
+    //                     value : val,
+    //                 });
+    //                 $('#rentalsReceived')
+    //                     .append(btn)
+    //                     .on('click', new_rental, (e) => {
+    //                         console.log(e.target.id);
+    //                         fill_form(rental)
+    //                     });
+    //             }
+    //         });
+    //         setTimeout(fetch_rentals, 5000);
+    //     });
+    // };
+    //
+    // fetch_rentals();
 });

@@ -73,9 +73,15 @@ block content
                                         input#lastName.form-control(name='lastName' type='text' placeholder='Last name' required=true)
                                         label(for='lastName') Last Name
                         .form-group
-                            .form-label-group
-                                input#inputAddress.form-control(name='address' type='text' placeholder='Address' required=true)
-                                label(for='inputAddress') Address
+                            .form-row
+                                .col-md-8
+                                    .form-label-group
+                                        input#inputAddress.form-control(name='address' type='text' placeholder='Address' required=true)
+                                        label(for='inputAddress') Address
+                                .col-md-4
+                                    .form-label-group
+                                        input#inputPhone.form-control(name='phone' type='text' data-inputmask="'mask': '(999)-999-9999'" required=true)
+                                        label(for='inputPhone') Phone
                         .form-group
                             .form-row
                                 .col-md-4
