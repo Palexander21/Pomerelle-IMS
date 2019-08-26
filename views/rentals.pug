@@ -5,7 +5,7 @@ block content
         li.breadcrumb-item
             a(href='/') Dashboard
         li.breadcrumb-item.active Rentals
-    #equipmentModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true')
+    #equipmentModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true')
         .modal-lg.modal-dialog.modal-dialog-centered(role='document')
             .modal-content
                 .modal-header
@@ -127,15 +127,15 @@ block content
                             .form-row
                                 .col-md-4
                                     .form-label-group
-                                        input#inputPoleNumber.form-control(name='poleNumber' type='text' required=true)
-                                        label(for='inputBootNumber') Pole #
+                                        input#inputPoleNumber.form-control(name='poleNumber' type='text')
+                                        label(for='inputPoleNumber') Pole #
                                 .col-md-4
                                     .form-label-group
-                                        input#inputRT.form-control(name='RT' type='number' required=true)
+                                        input#inputRT.form-control(name='rt' type='number' )
                                         label(for='inputRT') RT
                                 .col-md-4
                                     .form-label-group
-                                        input#inputRTH.form-control(name='RTH' type='number' required=true)
+                                        input#inputRTH.form-control(name='rth' type='number' )
                                         label(for='inputRTH') H
                             .form-row
                                 .col-md-4
@@ -144,11 +144,11 @@ block content
                                         label(for='inputSkiNumber') Ski/Board #
                                 .col-md-4
                                     .form-label-group
-                                        input#inputLT.form-control(name='LT' type='number' required=true)
+                                        input#inputLT.form-control(name='lt' type='number' )
                                         label(for='inputRT') LT
                                 .col-md-4
                                     .form-label-group
-                                        input#inputLTH.form-control(name='LTH' type='number' required=true)
+                                        input#inputLTH.form-control(name='lth' type='number' )
                                         label(for='inputLTH') H
                         .form-group
                             .form-row
@@ -182,8 +182,9 @@ block content
         .col-md-4
         .col-md-4
             #rentalsReceived.text-center
+                - console.log(data)
                  each item in data
-                     button.btn-block.btn-info.btn-lg.open-rentals(id=item.license data-toggle='modal' data-target='#equipmentModal') #{item.firstName} #{item.lastName}
+                     button.btn-block.btn-info.btn-lg.open-rentals(id=item.customer.license data-toggle='modal' data-target='#equipmentModal') #{item.customer.firstName} #{item.customer.lastName}
         .col-md-4
 block scripts
     script.

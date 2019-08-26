@@ -29,6 +29,26 @@ const EquipmentSchema = new mongoose.Schema({
         maxlength: 50,
         trim: true,
     },
+    rt: {
+        type: String,
+        required: false,
+        trim: true,
+    },
+    lt: {
+        type: String,
+        required: false,
+        trim: true,
+    },
+    rth: {
+        type: String,
+        required: false,
+        trim: true,
+    },
+    lth: {
+        type: String,
+        required: false,
+        trim: true,
+    },
     upc: {
         type: String,
         trim: true,
