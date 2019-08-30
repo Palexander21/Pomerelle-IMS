@@ -2,7 +2,6 @@ $(document).ready(function () {
 
     $('.open-rentals').click( function (e) {
         let renter_data = rental_data.find(renter => renter.customer.license === e.target.id);
-        console.log(renter_data);
         $('#firstName').val(renter_data.customer.firstName);
         $('#lastName').val(renter_data.customer.lastName);
         $('#inputAddress').val(renter_data.customer.address);
@@ -40,8 +39,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#inputBootNumber').bind('focusout', () => {
-        // let ret = checkID($('#inputBootNumber').val());
+    $('#inputBootNumber').on('focusout', () => {
         $.ajax({
             url: "/rentals/id-check",
             data: {
@@ -56,8 +54,7 @@ $(document).ready(function () {
         })
     });
 
-    $('#inputSkiNumber').bind('focusout', () => {
-        // let ret = checkID($('#inputBootNumber').val());
+    $('#inputSkiNumber').on('focusout', () => {
         $.ajax({
             url: "/rentals/id-check",
             data: {
@@ -72,15 +69,23 @@ $(document).ready(function () {
         })
     });
 
-
-    function checkID(id) {
-        $.ajax({
+    $('#inputPoleNumber').on('focusout', () => {
+        if ($('#inputPoleNumber').val().length !== 0) {
+            $.ajax({
                 url: "/rentals/id-check",
                 data: {
-                    'number': id,
+                    'number': $('#inputPoleNumber').val(),
                 },
             }).done(data => {
-                return data;
-        })
-    }
+                if (data !== 'success') {
+                    $('#inputPoleNumber').addClass('invalid')
+                } else
+                    $('#inputPoleNumber').removeClass('invalid')
+            })
+        }
+        else {
+            $('#inputPoleNumber').removeClass('invalid')
+        }
+    });
+
 });

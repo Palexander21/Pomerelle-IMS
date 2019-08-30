@@ -12,10 +12,9 @@ const fs = require('fs');
 router.get('/', async function(req, res, next) {
     let open_rentals_list = await open_rentals.find()
         .catch(e => {
-            console.log(e);
+            console.error(`Failed to collect open rentals list ${e}`);
         });
     if (open_rentals_list) {
-        console.log(open_rentals_list);
         res.render('rentals', {
             title: 'Rentals',
             data: open_rentals_list,
@@ -43,6 +42,19 @@ router.get('/id-check', async (req, res) => {
         res.send('No Matching Item');
 });
 
+router.get('/returns', async (req, res) => {
+   let returns = await rentals.find()
+       .catch(e => {
+           console.error(`Failed to collect returns list ${e}`);
+       });
+   if (returns) {
+       res.render('rentals', {
+           title: 'Returns',
+           data: returns,
+           rentals: returns.length,
+       })
+   }
+});
 
 router.post('/', async (req, res, next) => {
     const errors = validationResult(req);
@@ -59,7 +71,6 @@ router.post('/', async (req, res, next) => {
         ski.rh = req.body.rth;
         ski.lh = req.body.lth;
         if (customer) {
-            console.log(customer);
             if (poles) {
                 poles.last_used = today;
                 customer.previousRentals.push([boots, ski, poles]);
@@ -67,30 +78,30 @@ router.post('/', async (req, res, next) => {
             else {
                 customer.previousRentals.push([boots, ski]);
             }
-            let rental = new rentals({customer: customer, equipment: [ski, boots]});
-            await rental.save();
-            res.render('rentals', {
-                title: 'Rentals',
-                data: [
-                    {customer: customer}
-                ],
-            });
         }
 
         else {
             customer = new customers(req.body);
-            await customer.save();
-            res.render('rentals', {
-                title: 'Rentals',
-                data: [],
-            });
+            if (poles) {
+                poles.last_used = today;
+                customer.previousRentals.push([boots, ski, poles]);
+            }
+            else {
+                customer.previousRentals.push([boots, ski]);
+            }
         }
+        let rental = new rentals({customer: customer, equipment: [ski, boots], date: today, returned: false});
+        await rental.save();
+        console.log(customer);
+        await open_rentals.findOneAndDelete({'customer.license': customer.license}, (err, doc) => {
+             if (err) {
+                 console.error(`Failed to delete open rental ${err}`);
+             }
+         });
     } else {
         console.log(errors.array());
-        res.render('rentals', {
-            title: 'Rentals'
-        });
     }
+    res.redirect('/rentals');
 });
 
 module.exports = router;

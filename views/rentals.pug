@@ -182,7 +182,6 @@ block content
         .col-md-4
         .col-md-4
             #rentalsReceived.text-center
-                - console.log(data)
                  each item in data
                      button.btn-block.btn-info.btn-lg.open-rentals(id=item.customer.license data-toggle='modal' data-target='#equipmentModal') #{item.customer.firstName} #{item.customer.lastName}
         .col-md-4
