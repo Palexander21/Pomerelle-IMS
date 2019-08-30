@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const equipment = mongoose.model('Equipment');
 const customers = mongoose.model('Customers');
 const open_rentals = mongoose.model('OpenRentals');
+const rentals = mongoose.model('Rentals');
 const fs = require('fs');
 
 
@@ -29,44 +30,45 @@ router.get('/', async function(req, res, next) {
 
 });
 
-// Ajax endpoint that returns success if both ID's are valid. Otherwise returns the invalid part number
+// Ajax endpoint that returns success if both ID's are valid
 router.get('/id-check', async (req, res) => {
-    let valid_boot = await equipment.findOne({upc: req.query.bootNumber})
+    let valid = await equipment.findOne({upc: req.query.number})
         .catch(e => {
             console.log(e);
+            res.send('Error: ${e}')
         });
-    if (valid_boot) {
-        let valid_ski = await equipment.findOne({upc: req.query.skiNumber})
-            .catch(e => {
-                console.log(e);
-        });
-        if (valid_ski) {
-            res.send("Success")
-        }
-        else
-            res.send('ski');
-    }
+    if (valid)
+        res.send("success");
     else
-        res.send('boot');
+        res.send('No Matching Item');
 });
 
 
 router.post('/', async (req, res, next) => {
     const errors = validationResult(req);
+    const today = new Date().toISOString().split('T')[0];
     if (errors.isEmpty()) {
         let customer = await customers.findOne({license: req.body.license});
+        let boots = await equipment.findOne({upc: req.body.bootNumber});
+        let ski = await equipment.findOne({upc: req.body.skiNumber});
+        let poles = await equipment.findOne({upc: req.body.poleNumber});
+        boots.last_used = today;
+        ski.last_used = today;
+        ski.rt = req.body.rt;
+        ski.lt = req.body.lt;
+        ski.rh = req.body.rth;
+        ski.lh = req.body.lth;
         if (customer) {
             console.log(customer);
-            let boots = await equipment.findOne({upc: req.body.bootNumber});
-            let ski = await equipment.findOne({upc: req.body.skiNumber});
-            if (boots) {
-                console.log(boots);
-                if (ski) {
-                    console.log(ski);
-                }
+            if (poles) {
+                poles.last_used = today;
+                customer.previousRentals.push([boots, ski, poles]);
             }
-            // customer.previousRentals.push(equip);
-            await customer.save();
+            else {
+                customer.previousRentals.push([boots, ski]);
+            }
+            let rental = new rentals({customer: customer, equipment: [ski, boots]});
+            await rental.save();
             res.render('rentals', {
                 title: 'Rentals',
                 data: [

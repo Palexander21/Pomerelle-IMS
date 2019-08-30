@@ -8,3 +8,6 @@ tr.selected {
 .font-12 {
   font-size: 12px;
 }
+.invalid {
+  box-shadow: 0 0 3px 3px red
+}

@@ -40,22 +40,47 @@ $(document).ready(function () {
         }
     });
 
-    $('#inputBootNumber').bind('input', () => {
-        checkID($('#inputBootNumber').val());
+    $('#inputBootNumber').bind('focusout', () => {
+        // let ret = checkID($('#inputBootNumber').val());
+        $.ajax({
+            url: "/rentals/id-check",
+            data: {
+                'number': $('#inputBootNumber').val(),
+            },
+        }).done(data => {
+            if (data !== 'success') {
+                $('#inputBootNumber').addClass('invalid')
+            }
+            else
+                $('#inputBootNumber').removeClass('invalid')
+        })
+    });
+
+    $('#inputSkiNumber').bind('focusout', () => {
+        // let ret = checkID($('#inputBootNumber').val());
+        $.ajax({
+            url: "/rentals/id-check",
+            data: {
+                'number': $('#inputSkiNumber').val(),
+            },
+        }).done(data => {
+            if (data !== 'success') {
+                $('#inputSkiNumber').addClass('invalid')
+            }
+            else
+                $('#inputSkiNumber').removeClass('invalid')
+        })
     });
 
 
     function checkID(id) {
-        $.ajax(
-            {
-                url: "id-check",
+        $.ajax({
+                url: "/rentals/id-check",
                 data: {
-                    'bootNumber': id,
+                    'number': id,
                 },
-                onSuccess: function (msg) {
-                    console.log(msg);
-                }
-            }
-        )
+            }).done(data => {
+                return data;
+        })
     }
 });
