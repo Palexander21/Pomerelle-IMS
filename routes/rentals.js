@@ -48,7 +48,7 @@ router.get('/returns', async (req, res) => {
            console.error(`Failed to collect returns list ${e}`);
        });
    if (returns) {
-       res.render('rentals', {
+       res.render('returns', {
            title: 'Returns',
            data: returns,
            rentals: returns.length,

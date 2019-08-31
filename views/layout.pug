@@ -65,16 +65,16 @@ body(id='page-top').sidebar-toggled
                     span Pages
                 .dropdown-menu(aria-labelledby='pagesDropdown')
                     h6.dropdown-header Login Screens:
-                    a.dropdown-item(href='login') Login
-                    a.dropdown-item(href='register') Create User
-                    a.dropdown-item(href='forgot-password') Forgot Password
+                    a.dropdown-item(href='/login') Login
+                    a.dropdown-item(href='/register') Create User
+                    a.dropdown-item(href='/forgot-password') Forgot Password
                     .dropdown-divider
             li.nav-item
-                a.nav-link(href='charts')
+                a.nav-link(href='/charts')
                     i.fas.fa-fw.fa-chart-area
                     span Charts
             li.nav-item
-                a.nav-link(href='tables')
+                a.nav-link(href='/tables')
                     i.fas.fa-fw.fa-table
                     span Tables
         #content-wrapper
@@ -105,7 +105,7 @@ body(id='page-top').sidebar-toggled
 script(src='/vendor/jquery/jquery.min.js')
 script(src='/vendor/bootstrap/js/bootstrap.bundle.min.js')
 // Core plugin JavaScript
-script(src='vendor/jquery-easing/jquery.easing.min.js')
+script(src='/vendor/jquery-easing/jquery.easing.min.js')
 // Page level plugin JavaScript
 script(src='/vendor/chart.js/Chart.min.js')
 // Custom scripts for all pages

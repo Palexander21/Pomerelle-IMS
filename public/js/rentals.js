@@ -88,4 +88,10 @@ $(document).ready(function () {
         }
     });
 
+    $('#search').on('keyup', function() {
+        let val = $(this).val().toLowerCase();
+        $('#rentalsOut').filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1);
+        })
+    })
 });
