@@ -7,6 +7,8 @@
 require('../models/Users');
 require('../models/Equipment');
 require('../models/Customers');
+require('../models/OpenRentals');
+require('../models/Rentals');
 let app = require('../app');
 let debug = require('debug')('pomerelle-ims:server');
 let http = require('http');

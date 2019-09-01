@@ -5,11 +5,13 @@ block content
         li.breadcrumb-item
             a(href='/') Dashboard
         li.breadcrumb-item.active Rentals
-    #equipmentModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true')
+        li.breadcrumb-item
+            a(href='/rentals/returns') Returns
+    #equipmentModal.modal(tabindex='-1' role='dialog' aria-labelledby='Technician Modal' aria-hidden='true')
         .modal-lg.modal-dialog.modal-dialog-centered(role='document')
             .modal-content
                 .modal-header
-                    h5#exampleModalLongTitle.modal-title Pomerelle Rental Ticket
+                    h5#modalTitle.modal-title Pomerelle Rental Ticket
                     button.close(type='button' data-dismiss='modal' aria-label='Close')
                         span(aria-hidden='true') &times;
                 .modal-body
@@ -25,9 +27,15 @@ block content
                                         input#lastName.form-control(name='lastName' type='text' placeholder='Last name' required=true)
                                         label(for='lastName') Last Name
                         .form-group
-                            .form-label-group
-                                input#inputAddress.form-control(name='address' type='text' placeholder='Address' required=true)
-                                label(for='inputAddress') Address
+                            .form-row
+                                .col-md-8
+                                    .form-label-group
+                                        input#inputAddress.form-control(name='address' type='text' placeholder='Address' required=true)
+                                        label(for='inputAddress') Address
+                                .col-md-4
+                                    .form-label-group
+                                        input#inputPhone.form-control(name='phone' type='tel' placeholder='Phone Number' required=true)
+                                        label(for='inputPhone') Phone Number
                         .form-group
                             .form-row
                                 .col-md-4
@@ -121,15 +129,15 @@ block content
                             .form-row
                                 .col-md-4
                                     .form-label-group
-                                        input#inputPoleNumber.form-control(name='poleNumber' type='text' required=true)
-                                        label(for='inputBootNumber') Pole #
+                                        input#inputPoleNumber.form-control(name='poleNumber' type='text')
+                                        label(for='inputPoleNumber') Pole #
                                 .col-md-4
                                     .form-label-group
-                                        input#inputRT.form-control(name='RT' type='number' required=true)
+                                        input#inputRT.form-control(name='rt' type='number' )
                                         label(for='inputRT') RT
                                 .col-md-4
                                     .form-label-group
-                                        input#inputRTH.form-control(name='RTH' type='number' required=true)
+                                        input#inputRTH.form-control(name='rth' type='number' )
                                         label(for='inputRTH') H
                             .form-row
                                 .col-md-4
@@ -138,11 +146,11 @@ block content
                                         label(for='inputSkiNumber') Ski/Board #
                                 .col-md-4
                                     .form-label-group
-                                        input#inputLT.form-control(name='LT' type='number' required=true)
+                                        input#inputLT.form-control(name='lt' type='number' )
                                         label(for='inputRT') LT
                                 .col-md-4
                                     .form-label-group
-                                        input#inputLTH.form-control(name='LTH' type='number' required=true)
+                                        input#inputLTH.form-control(name='lth' type='number' )
                                         label(for='inputLTH') H
                         .form-group
                             .form-row
@@ -166,7 +174,8 @@ block content
                                 li I understand that a ski-binding-boot system will not release at all times or under all circumstances where release may prevent injury or death, nor is it possible to predict every situation in which it will release, and it is , therefore, no guarantee of my safety.
                                 li I hereby release from any legal liability the ski shop and its owners, agents and employees, as well as the manufacturers and distributors of this equipment from any and all liability for damage and injury or death of myself or to any person or property resulting from the selection, installation, maintenance, adjustment or use of this equipment and for any claim based upon negligence, breach of warranty, contract or other legal theory, accepting myself the full responsibility for any and all such damage, injury or death which may result.
                                 li This agreement is governed by the applicable law of this state or province. If any part of this agreement is determined to be unenforceable, all other parts shall be given full force and effect.
-                            p.text-center.font-12 BY CLICKING SUBMIT I AGREE THAT I HAVE READ AND UNDERSTAND THIS RENTAL AND LIABILITY RELEASE AGREEMENT.
+                            p.text-center.font-12
+                                strong BY CLICKING SUBMIT I AGREE THAT I HAVE READ AND UNDERSTAND THIS RENTAL AND LIABILITY RELEASE AGREEMENT.
 
 
                         .modal-footer
@@ -176,11 +185,10 @@ block content
         .col-md-4
         .col-md-4
             #rentalsReceived.text-center
-                // each item in data
-                //     button.btn-block.btn-info.btn-lg.open-rentals(id=item.license data-toggle='modal' data-target='#equipmentModal') #{item.firstName} #{item.lastName}
+                 each item in data
+                     button.btn-block.btn-info.btn-lg.open-rentals(id=item.customer.license data-toggle='modal' data-target='#equipmentModal') #{item.customer.firstName} #{item.customer.lastName}
         .col-md-4
 block scripts
     script.
          let rental_data = !{JSON.stringify(data).replace(/<\//g, '<\\/')};
-    script(src='/js/socket.io-client/dist/socket.io.slim.js')
     script(src='/js/rentals.js')

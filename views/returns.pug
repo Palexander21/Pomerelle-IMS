@@ -1,0 +1,72 @@
+extends layout
+
+block content
+    ol.breadcrumb
+        li.breadcrumb-item
+            a(href='/') Dashboard
+        li.breadcrumb-item
+            a(href='/rentals') Rentals
+        li.breadcrumb-item.active Returns
+
+    .d-none.d-md-inline-block.form-inline.ml-auto.mr-0.mr-md-3.my-2.my-md-0
+        .input-group
+            input.form-control#search(type='text' placeholder='Search for...' aria-label='Search')
+
+    #equipmentModal.modal(tabindex='-1' role='dialog' aria-labelledby='Return Modal' aria-hidden='true')
+        .modal-lg.modal-dialog.modal-dialog-centered(role='document')
+            .modal-content
+                .modal-header
+                    h5#modalTitle.modal-title Rental Return
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body
+                    form(method='POST', action='/rentals/returns')#returnForm
+                        .form-group
+                            .form-row
+                                .col-md-6
+                                    input#license.form-control(name='license' style='display: none;')
+                                    .form-label-group
+                                        input#firstName.form-control(name='firstName' type='text' placeholder='First name' required='required' autofocus=true)
+                                        label(for='firstName') First Name
+                                .col-md-6
+                                    .form-label-group
+                                        input#lastName.form-control.disabled(name='lastName' type='text' placeholder='Last name' required=true)
+                                        label(for='lastName') Last Name
+                        .form-group.text-center
+                            .form-row
+                                .col-md-4
+                                    .form-label-group
+                                        input#inputSkiNumber.form-control(name='skiNumber' type='text' required=true)
+                                        label(for='inputSkiNumber') Ski/Board #
+                                .col-md-4
+                                    .form-label-group
+                                        input#inputBootNumber.form-control(name='bootNumber' type='text' required=true)
+                                        label(for='inputBootNumber') Boot #
+                                .col-md-4
+                                    .form-label-group
+                                        input#inputPoleNumber.form-control(name='poleNumber' type='text')
+                                        label(for='inputPoleNumber') Pole #
+                        .form-group
+                            .form-label-group
+                                textarea#inputNote.form-control(name='inputNote' rows='5' placeholder='Notes...')
+                        .form-group.text-center
+                            .form-label-group
+                                .custom-control.custom-checkbox.custom-control
+                                    input#inputReturned.custom-control-input(type='checkbox' name='returned' required=true)
+                                    label.custom-control-label(for='inputReturned') Equipment Returned
+
+                        .modal-footer
+                            button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                            button.btn.btn-primary(type='submit') Submit
+
+    .row
+        .col-md-4
+        .col-md-4
+            #rentalsOut.text-center
+                each item in data
+                    button.btn-block.btn-info.btn-lg.rentals-out(id=item.customer.license data-toggle='modal' data-target='#equipmentModal') #{item.customer.firstName} #{item.customer.lastName}
+        .col-md-4
+block scripts
+    script.
+        let rental_data = !{JSON.stringify(data).replace(/<\//g, '<\\/')};
+    script(src='/js/rentals.js')
