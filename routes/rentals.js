@@ -43,7 +43,7 @@ router.get('/id-check', async (req, res) => {
 });
 
 router.get('/returns', async (req, res) => {
-   let returns = await rentals.find()
+   let returns = await rentals.find({returned: false})
        .catch(e => {
            console.error(`Failed to collect returns list ${e}`);
        });
@@ -54,6 +54,27 @@ router.get('/returns', async (req, res) => {
            rentals: returns.length,
        })
    }
+});
+
+router.post('/returns', async (req, res) => {
+    const errors = validationResult(req);
+    if (errors.isEmpty()) {
+        const rental = await rentals.updateOne(
+            {
+                'customer.license': req.body.license
+            },
+            {
+                returned: true,
+                note: req.body.inputNote
+            })
+            .catch(e => {
+                console.error(`Failed to collect returns list ${e}`);
+            });
+        console.log(`Matched ${rental.n} documents\n Updated ${rental.nModified} documents.` );
+    }else {
+        console.log(errors.array());
+    }
+    res.redirect('returns');
 });
 
 router.post('/', async (req, res, next) => {
@@ -90,7 +111,8 @@ router.post('/', async (req, res, next) => {
                 customer.previousRentals.push([boots, ski]);
             }
         }
-        let rental = new rentals({customer: customer, equipment: [ski, boots], date: today, returned: false});
+        let rental = new rentals({customer: customer, equipment: [ski, boots, poles], date: today, technician: req.body.techSignature, returned: false});
+        await customer.save();
         await rental.save();
         console.log(customer);
         await open_rentals.findOneAndDelete({'customer.license': customer.license}, (err, doc) => {

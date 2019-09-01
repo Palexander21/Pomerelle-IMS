@@ -53,11 +53,11 @@ block content
     //    .card-body
     //        canvas#myAreaChart(width='100%' height='30')
     //    .card-footer.small.text-muted.date-updated Updated yesterday at 11:59 PM
-    #rentalModalCenter.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true')
+    #rentalModalCenter.modal.fade(tabindex='-1' role='dialog' aria-labelledby='Rental Modal' aria-hidden='true')
         .modal-lg.modal-dialog.modal-dialog-centered(role='document')
             .modal-content
                 .modal-header
-                    h5#exampleModalLongTitle.modal-title Pomerelle Rental Ticket
+                    h5#modalTitle.modal-title Pomerelle Rental Ticket
                     button.close(type='button' data-dismiss='modal' aria-label='Close')
                         span(aria-hidden='true') &times;
                 .modal-body
@@ -176,7 +176,8 @@ block content
                                 li I understand that a ski-binding-boot system will not release at all times or under all circumstances where release may prevent injury or death, nor is it possible to predict every situation in which it will release, and it is , therefore, no guarantee of my safety.
                                 li I hereby release from any legal liability the ski shop and its owners, agents and employees, as well as the manufacturers and distributors of this equipment from any and all liability for damage and injury or death of myself or to any person or property resulting from the selection, installation, maintenance, adjustment or use of this equipment and for any claim based upon negligence, breach of warranty, contract or other legal theory, accepting myself the full responsibility for any and all such damage, injury or death which may result.
                                 li This agreement is governed by the applicable law of this state or province. If any part of this agreement is determined to be unenforceable, all other parts shall be given full force and effect.
-                            p.text-center.font-12 BY CLICKING SUBMIT I AGREE THAT I HAVE READ AND UNDERSTAND THIS RENTAL AND LIABILITY RELEASE AGREEMENT.
+                            p.text-center.font-12
+                                strong BY CLICKING SUBMIT I AGREE THAT I HAVE READ AND UNDERSTAND THIS RENTAL AND LIABILITY RELEASE AGREEMENT.
 
 
                         .modal-footer

@@ -9,5 +9,5 @@ tr.selected {
   font-size: 12px;
 }
 .invalid {
-  box-shadow: 0 0 3px 3px red
+  box-shadow: 0 0 1px 1px red
 }

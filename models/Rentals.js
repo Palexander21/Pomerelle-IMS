@@ -6,19 +6,24 @@ const customer_schema = Customers.model('Customers').schema;
 
 const RentalsSchema = new mongoose.Schema({
     customer: customer_schema,
-    equipment: [equipment_schema],
     date: {
         type: String,
-        required: false,
+        required: true,
         minlength: 3,
         maxlength: 50,
         trim: true,
     },
+    equipment: [equipment_schema],
+    technician: {
+        type: String,
+        required: true,
+        trim: true,
+        minlength: 2
+    },
     returned: {
         type: Boolean,
-    }
-
-
+    },
+    note: String
 
 }, {autoCreate: true});
 

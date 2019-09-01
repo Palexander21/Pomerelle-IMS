@@ -39,53 +39,34 @@ $(document).ready(function () {
         }
     });
 
-    $('#inputBootNumber').on('focusout', () => {
-        $.ajax({
-            url: "/rentals/id-check",
-            data: {
-                'number': $('#inputBootNumber').val(),
-            },
-        }).done(data => {
-            if (data !== 'success') {
-                $('#inputBootNumber').addClass('invalid')
-            }
-            else
-                $('#inputBootNumber').removeClass('invalid')
-        })
-    });
-
-    $('#inputSkiNumber').on('focusout', () => {
-        $.ajax({
-            url: "/rentals/id-check",
-            data: {
-                'number': $('#inputSkiNumber').val(),
-            },
-        }).done(data => {
-            if (data !== 'success') {
-                $('#inputSkiNumber').addClass('invalid')
-            }
-            else
-                $('#inputSkiNumber').removeClass('invalid')
-        })
-    });
-
-    $('#inputPoleNumber').on('focusout', () => {
-        if ($('#inputPoleNumber').val().length !== 0) {
+    $('#inputSkiNumber, #inputBootNumber, #inputPoleNumber').on('focusout', function() {
+        if ($(this).val().length !== 0) {
             $.ajax({
                 url: "/rentals/id-check",
                 data: {
-                    'number': $('#inputPoleNumber').val(),
+                    'number': $(this).val(),
                 },
             }).done(data => {
                 if (data !== 'success') {
-                    $('#inputPoleNumber').addClass('invalid')
+                    $(this).addClass('invalid')
                 } else
-                    $('#inputPoleNumber').removeClass('invalid')
+                    $(this).removeClass('invalid')
             })
+        } else {
+            $(this).removeClass('invalid')
         }
-        else {
-            $('#inputPoleNumber').removeClass('invalid')
-        }
+    });
+
+    $('.rentals-out').click( function (e) {
+        let renter_data = rental_data.find(renter => renter.customer.license === e.target.id);
+        console.log(renter_data);
+        $('#license').val(renter_data.customer.license);
+        $('#firstName').val(renter_data.customer.firstName);
+        $('#lastName').val(renter_data.customer.lastName);
+        $('#inputSkiNumber').val(renter_data.equipment[0].upc);
+        $('#inputBootNumber').val(renter_data.equipment[1].upc);
+        if (renter_data.equipment[2])
+            $('#inputPoleNumber').val(renter_data.equipment[2].upc);
     });
 
     $('#search').on('keyup', function() {
