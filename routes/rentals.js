@@ -61,15 +61,22 @@ router.post('/returns', async (req, res) => {
     if (errors.isEmpty()) {
         const rental = await rentals.updateOne(
             {
-                'customer.license': req.body.license
+                $and: [
+                    {'customer.license': req.body.license},
+                    {returned: false}
+                ]
             },
             {
-                returned: true,
-                note: req.body.inputNote
+                $set: {
+                    returned: true,
+                    note: req.body.inputNote
+                }
+
             })
             .catch(e => {
                 console.error(`Failed to collect returns list ${e}`);
             });
+        console.log(rental);
     }else {
         console.log(errors.array());
     }

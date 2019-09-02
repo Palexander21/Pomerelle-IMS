@@ -20,9 +20,7 @@ const RentalsSchema = new mongoose.Schema({
         trim: true,
         minlength: 2
     },
-    returned: {
-        type: Boolean,
-    },
+    returned: Boolean,
     note: String
 
 }, {autoCreate: true});

@@ -61,6 +61,7 @@ $(document).ready(function () {
         let renter_data = rental_data.find(renter => renter.customer.license === e.target.id);
         console.log(renter_data);
         $('#license').val(renter_data.customer.license);
+        console.log(renter_data.customer.license);
         $('#firstName').val(renter_data.customer.firstName);
         $('#lastName').val(renter_data.customer.lastName);
         $('#inputSkiNumber').val(renter_data.equipment[0].upc);
