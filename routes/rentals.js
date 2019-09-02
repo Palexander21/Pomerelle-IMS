@@ -70,7 +70,6 @@ router.post('/returns', async (req, res) => {
             .catch(e => {
                 console.error(`Failed to collect returns list ${e}`);
             });
-        console.log(`Matched ${rental.n} documents\n Updated ${rental.nModified} documents.` );
     }else {
         console.log(errors.array());
     }
@@ -89,8 +88,8 @@ router.post('/', async (req, res, next) => {
         ski.last_used = today;
         ski.rt = req.body.rt;
         ski.lt = req.body.lt;
-        ski.rh = req.body.rth;
-        ski.lh = req.body.lth;
+        ski.rth = req.body.rth;
+        ski.lth = req.body.lth;
         if (customer) {
             if (poles) {
                 poles.last_used = today;
@@ -114,7 +113,6 @@ router.post('/', async (req, res, next) => {
         let rental = new rentals({customer: customer, equipment: [ski, boots, poles], date: today, technician: req.body.techSignature, returned: false});
         await customer.save();
         await rental.save();
-        console.log(customer);
         await open_rentals.findOneAndDelete({'customer.license': customer.license}, (err, doc) => {
              if (err) {
                  console.error(`Failed to delete open rental ${err}`);
