@@ -55,46 +55,49 @@ block content
                         button#equipmentDelete.btn.btn-danger Delete
                     .card-footer.small.text-muted.date-updated Updated yesterday at 11:59 PM
 
-        #equipmentModalCenter.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' data-backdrop='static')
-            .modal-dialog.modal-dialog-centered(role='document')
+        #equipmentModalCenter.modal.fade(tabindex='-1' role='dialog' aria-labelledby='addEquipmentModal' aria-hidden='true' data-backdrop='static')
+            .modal.modal-dialog.modal-dialog-centered(role='document')
                 .modal-content
                     .modal-header
                         h5#exampleModalLongTitle.modal-title New Equipment
                         button.close(type='button' data-dismiss='modal' aria-label='Close')
                             span(aria-hidden='true') &times;
                     .modal-body
-                        form
+                        form(method='POST' action='/tables')
                             .form-group
                                 .form-row
                                     .col-md-6
                                         .form-label-group
-                                            input#firstName.form-control(type='text' placeholder='First name' required='required' autofocus='autofocus')
-                                            label(for='firstName') First name
+                                            select#type.custom-select(name='type')
+                                                option(selected='') -Type-
+                                                option(value='ski') Ski
+                                                option(value='snowboard') Snowboard
+                                                option(value='boots') Boots
+                                                option(value='poles') Poles
                                     .col-md-6
                                         .form-label-group
-                                            input#lastName.form-control(type='text' placeholder='Last name' required='required')
-                                            label(for='lastName') Last name
+                                            input#upc.form-control(type='text' placeholder='UPC' required=true name='upc')
+                                            label(for='upc') UPC
+                            .form-group
+                                .form-row
+                                    .col-md-4
+                                        .form-label-group
+                                            input#size.form-control(type='text' placeholder='Size' required=true name='size')
+                                            label(for='size') Size
+                                    .col-md-4
+                                        .form-label-group
+                                            input#last_tune.form-control(type="date" placeholder="YYYY-MM-DD" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" name='last_tune')
+                                            label(for='last_tune') Last Tune
+                                    .col-md-4
+                                        .form-label-group
+                                            input#last_used.form-control(type="date" placeholder="YYYY-MM-DD" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" name='last_used')
+                                            label(for='last_used') Last Used
                             .form-group
                                 .form-label-group
-                                    input#inputEmail.form-control(type='email' placeholder='Email address' required=false)
-                                    label(for='inputEmail') Email address
-                            .form-group
-                                .form-row
-                                    .col-md-6
-                                        .form-label-group
-                                            input#equipment.form-control(type='text' placeholder='Equipment' required='required')
-                                            label(for='equipment') Equipment
-                                    .col-md-6
-                                        .form-label-group
-                                            input#confirmPassword.form-control(type='password' placeholder='Confirm password' required='required')
-                                            label(for='confirmPassword') Confirm password
-                            a.btn.btn-primary.btn-block(href='login') Register
-                        .text-center
-                            a.d-block.small.mt-3(href='login') Login Page
-                            a.d-block.small(href='forgot-password') Forgot Password?
-                    .modal-footer
-                        button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                        button.btn.btn-primary(type='button') Save changes
+                                    textarea#note.form-control(name='note' rows='5' placeholder='Notes...')
+                            .modal-footer
+                                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                                button.btn.btn-primary(type='submit') Save changes
 block scripts
     script(src='/vendor/datatables/jquery.dataTables.min.js')
     script(src='/vendor/datatables/dataTables.bootstrap4.min.js')
