@@ -53,6 +53,10 @@ const EquipmentSchema = new mongoose.Schema({
         type: String,
         trim: true,
     },
+    note: {
+        type: String,
+        trim: false,
+    }
 }, {autoCreate: true});
 
 module.exports = mongoose.model('Equipment', EquipmentSchema);
