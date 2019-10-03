@@ -45,7 +45,7 @@ body(id='page-top').sidebar-toggled
             //        .dropdown-divider
             //        a.dropdown-item(href='#') Something else here
             li.nav-item.dropdown.no-arrow
-                a#userDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                a#userDropdown.nav-link.dropdown-toggle.disabled(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
                     i.fas.fa-user-circle.fa-fw
                 .dropdown-menu.dropdown-menu-right(aria-labelledby='userDropdown')
                     a.dropdown-item(href='#') Settings
@@ -63,16 +63,16 @@ body(id='page-top').sidebar-toggled
                 a.nav-link(href='/tables')
                     i.fas.fa-fw.fa-table
                     span Tables
-            li.nav-item.dropdown
-                a#pagesDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-                    i.fas.fa-fw.fa-cog
-                    span Admin
-                .dropdown-menu(aria-labelledby='pagesDropdown')
-                    h6.dropdown-header Login Screens:
-                    a.dropdown-item(href='/login') Login
-                    a.dropdown-item(href='/register') Create User
-                    a.dropdown-item(href='/forgot-password') Forgot Password
-                    .dropdown-divider
+            //li.nav-item.dropdown
+            //    a#pagesDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+            //        i.fas.fa-fw.fa-cog
+            //        span Admin
+            //    .dropdown-menu(aria-labelledby='pagesDropdown')
+            //        h6.dropdown-header Login Screens:
+            //        a.dropdown-item(href='/login') Login
+            //        a.dropdown-item(href='/register') Create User
+            //        a.dropdown-item(href='/forgot-password') Forgot Password
+            //        .dropdown-divider
             //li.nav-item
             //    a.nav-link(href='/charts')
             //        i.fas.fa-fw.fa-chart-area

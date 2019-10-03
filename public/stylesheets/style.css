@@ -11,3 +11,6 @@ tr.selected {
 .invalid {
   box-shadow: 0 0 1px 1px red
 }
+.table-btn {
+  margin: 4px;
+}
