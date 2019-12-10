@@ -37,7 +37,7 @@ router.post('/',  async (req, res, next) => {
             });
         }
     } else {
-        console.log(errors.array());
+        console.error('Failed to validate POST request: ' + errors.array());
         res.render('register', {
             title: 'Register',
             errors: errors.array(),

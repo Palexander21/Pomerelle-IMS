@@ -27,7 +27,7 @@ router.get('/', async function(req, res, next){
 
     let new_count = await open_rentals.countDocuments()
         .catch(e => {
-            console.log(e);
+            console.error(`Failed to count open_rentals: ${e}`);
         });
     let return_count = await rentals.countDocuments({returned: false});
         res.render('index', {
@@ -53,7 +53,7 @@ router.post('/', async (req, res, next) => {
             rentals: count,
         });
     } else {
-        console.log(errors.array());
+        console.error('Failed to validate POST request: ' + errors.array());
         res.render('index', {
             title: 'Dashboard'
         });
@@ -71,7 +71,7 @@ router.get('/tasks', function (req, res, next) {
             })
         })
         .catch(error => {
-            console.log(error);
+            console.error(`Failed to find equipment with specified query "$lte: ${last_year}: ${error}`);
         })
 });
 

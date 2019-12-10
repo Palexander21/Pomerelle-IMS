@@ -10,9 +10,9 @@ block content
             nav
                 #nav-tab.nav.nav-tabs(role='tablist')
                     a#nav-equipment-tab.nav-item.nav-link.active(data-toggle='tab' href='#nav-equipment' role='tab' aria-controls='nav-equipment' aria-selected='false') Equipment
-                    a#nav-employee-tab.nav-item.nav-link(data-toggle='tab' href='#nav-employee' role='tab' aria-controls='nav-employee' aria-selected='true') Employees
-            #nav-tabContent.tab-content
-                #nav-employee.tab-pane.fade(role='tabpanel' aria-labelledby='nav-employee-tab')
+                    a#nav-employee-tab.nav-item.nav-link.disabled(data-toggle='tab' href='#nav-employee' role='tab' aria-controls='nav-employee' aria-selected='true') Employees
+            #nav-tabContent.tab-content.disabled
+                #nav-employee.tab-pane.fade(role='tabpanel' aria-labelledby='nav-employee-tab').disabled
                     .card-body
                         .table-responsive
                             table#employeeDataTable.table.table-bordered.data-table(width='100%' cellspacing='0')
@@ -29,8 +29,8 @@ block content
                                             td #{user.username}
                                             td #{user.startDate}
                                             td #{user.position}
-                        button#employeeAdd.btn.btn-primary Add
-                        button#employeeDelete.btn.btn-danger Delete
+                        button#employeeAdd.btn.btn-primary.table-btn Add
+                        button#employeeDelete.btn.btn-danger.table-btn Delete
                     .card-footer.small.text-muted.date-updated Updated yesterday at 11:59 <PM></PM>
                 #nav-equipment.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='nav-equipment-tab')
                     .card-body
@@ -51,8 +51,8 @@ block content
                                             td #{item.last_tune}
                                             td #{item.size}
                                             td #{item.upc}
-                        button#equipmentAdd.btn.btn-primary(type='button' data-toggle='modal' data-target='#equipmentModalCenter') Add
-                        button#equipmentDelete.btn.btn-danger Delete
+                        button#equipmentAdd.btn.btn-primary.table-btn(type='button' data-toggle='modal' data-target='#equipmentModalCenter') Add
+                        button#equipmentDelete.btn.btn-danger.table-btn.disabled Delete
                     .card-footer.small.text-muted.date-updated Updated yesterday at 11:59 PM
 
         #equipmentModalCenter.modal.fade(tabindex='-1' role='dialog' aria-labelledby='addEquipmentModal' aria-hidden='true' data-backdrop='static')
@@ -70,7 +70,7 @@ block content
                                         .form-label-group
                                             select#type.custom-select(name='type')
                                                 option(selected='') -Type-
-                                                option(value='ski') Ski
+                                                option(value='ski') Skis
                                                 option(value='snowboard') Snowboard
                                                 option(value='boots') Boots
                                                 option(value='poles') Poles

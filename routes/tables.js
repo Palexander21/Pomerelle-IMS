@@ -15,12 +15,12 @@ router.get('/', function(req, res, next) {
                 equipment: equipment,
             });
         }).catch((err) => {
-            console.log(err);
-            res.send('Sorry! Something went wrong.');
+            console.error(`Failed to find users: ${err}`);
+            res.send('Failed to find users');
         });
     })).catch((err) => {
-        console.log(err);
-        res.send('Sorry! Something went wrong.');
+        console.error(`Failed to find equipment: ${err}`);
+        res.send('Failed to find equipment');
     });
 });
 

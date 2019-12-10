@@ -33,7 +33,7 @@ router.get('/', async function(req, res, next) {
 router.get('/id-check', async (req, res) => {
     let valid = await equipment.findOne({upc: req.query.number})
         .catch(e => {
-            console.log(e);
+            console.error(`Failed to find equipment by query "upc: ${req.query.number}: ${e}`);
             res.send('Error: ${e}')
         });
     if (valid)
@@ -78,7 +78,7 @@ router.post('/returns', async (req, res) => {
             });
         console.log(rental);
     }else {
-        console.log(errors.array());
+        console.error('Failed to validate POST request: ' + errors.array());
     }
     res.redirect('returns');
 });
@@ -126,7 +126,7 @@ router.post('/', async (req, res, next) => {
              }
          });
     } else {
-        console.log(errors.array());
+        console.error('Failed to validate POST request: ' + errors.array());
     }
     res.redirect('/rentals');
 });
