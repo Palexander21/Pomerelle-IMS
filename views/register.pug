@@ -8,7 +8,7 @@ block content
                     p.text-center.text-danger #{error.msg}
             .card-header Create New User
             .card-body
-                form(method='POST', action='/register', id='registerForm').form-signin
+                form(method='POST', action='/api/users', id='registerForm').form-signin
                     .form-group
                         .form-row
                             .col-md-6

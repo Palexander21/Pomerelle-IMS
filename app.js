@@ -4,13 +4,11 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 
-let indexRouter = require('./routes/index');
-let usersRouter = require('./routes/users');
-let registerRouter = require('./routes/register');
-let loginRouter = require('./routes/login');
-let forgotRouter = require('./routes/forgot-password');
-let tablesRouter = require('./routes/tables');
-let rentalRouter = require('./routes/rentals');
+let indexRouter = require('./src/routes/index.route');
+let usersRouter = require('./src/routes/users.route');
+let forgotRouter = require('./src/routes/forgot-password.route');
+let tablesRouter = require('./src/routes/tables.route');
+let rentalRouter = require('./src/routes/rentals.route');
 
 let app = express();
 
@@ -25,10 +23,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/users', usersRouter);
 app.use('/tables', tablesRouter);
-app.use('/register', registerRouter);
-app.use('/login', loginRouter);
 app.use('/rentals', rentalRouter);
 app.use('/forgot-password', forgotRouter);
 
