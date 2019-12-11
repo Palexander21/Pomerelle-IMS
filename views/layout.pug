@@ -44,8 +44,8 @@ body(id='page-top').sidebar-toggled
             //        a.dropdown-item(href='#') Another action
             //        .dropdown-divider
             //        a.dropdown-item(href='#') Something else here
-            li.nav-item.dropdown.no-arrow
-                a#userDropdown.nav-link.dropdown-toggle.disabled(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+            li.nav-item.dropdown.no-arrow #{user}
+                a#userDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
                     i.fas.fa-user-circle.fa-fw
                 .dropdown-menu.dropdown-menu-right(aria-labelledby='userDropdown')
                     a.dropdown-item(href='#') Settings

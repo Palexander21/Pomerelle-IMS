@@ -8,34 +8,10 @@ const customers = mongoose.model('Customers');
 const open_rentals = mongoose.model('OpenRentals');
 const rentals = mongoose.model('Rentals');
 const fs = require('fs');
-
+let controller = require('../controllers/index.controller');
 
 /* GET home page. */
-router.get('/', async function(req, res, next){
-    // let last_year = getDateRange(1);
-    // equipment
-    //     .countDocuments({ last_tune : {$lte: last_year, $ne: "N/A"} })
-    //     .then((count) => {
-    //         res.render('index', {
-    //             title: 'Home',
-    //             tunes: count
-    //         });
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //     })
-
-    let new_count = await open_rentals.countDocuments()
-        .catch(e => {
-            console.error(`Failed to count open_rentals: ${e}`);
-        });
-    let return_count = await rentals.countDocuments({returned: false});
-        res.render('index', {
-            title: 'Home',
-            rentals: new_count,
-            returns: return_count
-        })
-});
+router.get('/', controller.getDashboard);
 
 router.post('/', async (req, res, next) => {
     const errors = validationResult(req);
@@ -61,28 +37,28 @@ router.post('/', async (req, res, next) => {
 
 });
 
-router.get('/tasks', function (req, res, next) {
-    let last_year = getDateRange(1);
-    equipment.find({last_tune : {$lte: last_year}})
-        .then((found) => {
-            res.render('tasks', {
-                title: 'Tasks',
-                data: found
-            })
-        })
-        .catch(error => {
-            console.error(`Failed to find equipment with specified query "$lte: ${last_year}: ${error}`);
-        })
-});
-
-router.get('/charts', function(req, res, next) {
-
-    res.render('charts', { title: 'Charts' });
-});
-
-function getDateRange(range=1) {
-    let last_year = new Date();
-    last_year.setFullYear(new Date().getFullYear() - range);
-    return last_year.toISOString().split('T')[0];
-}
+// router.get('/tasks', function (req, res, next) {
+//     let last_year = getDateRange(1);
+//     equipment.find({last_tune : {$lte: last_year}})
+//         .then((found) => {
+//             res.render('tasks', {
+//                 title: 'Tasks',
+//                 data: found
+//             })
+//         })
+//         .catch(error => {
+//             console.error(`Failed to find equipment with specified query "$lte: ${last_year}: ${error}`);
+//         })
+// });
+//
+// router.get('/charts', function(req, res, next) {
+//
+//     res.render('charts', { title: 'Charts' });
+// });
+//
+// function getDateRange(range=1) {
+//     let last_year = new Date();
+//     last_year.setFullYear(new Date().getFullYear() - range);
+//     return last_year.toISOString().split('T')[0];
+// }
 module.exports = router;
