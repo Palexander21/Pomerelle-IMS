@@ -44,7 +44,7 @@ controller.get_open_rentals = async (req, res) => {
         })
     }
     else {
-        return res.status(400).send({
+        return res.status(404).send({
             msg: 'No open rentals found',
         })
     }
@@ -52,11 +52,11 @@ controller.get_open_rentals = async (req, res) => {
 };
 
 controller.check_id = async (req, res) => {
-    let valid = await equipment.findOne({upc: req.query.number})
+    let valid = await equipment.findOne({upc: req.params.number})
         .catch(e => {
-            console.error(`Failed to find equipment by query "upc: ${req.query.number}: ${e}`);
-            return res.status(500).send({
-                msg: `Failed to find equipment by query "upc: ${req.query.number}: ${e}`
+            console.error(`Failed to find equipment by query "upc: ${req.params.number}: ${e}`);
+            return res.status(400).send({
+                msg: `Failed to find equipment by query "upc: ${req.params.number}: ${e}`
             })
         });
     if (valid)
@@ -113,12 +113,12 @@ controller.returned = async (req, res) => {
                 })
             });
         console.log(rental);
-        return res.send({
+        return res.status(201).send({
             msg: 'Rental successfully returned'
         });
     }else {
         console.error('Failed to validate POST request: ' + errors.array());
-        return res.status(500).send({
+        return res.status(400).send({
             msg: 'Failed to validate POST'
         })
     }
@@ -175,7 +175,7 @@ controller.completed_rental = async (req, res) => {
         });
     } else {
         console.error('Failed to validate POST request: ' + errors.array());
-        return res.status(500).send({
+        return res.status(400).send({
             msg: 'Failed to validate POST'
         })
     }

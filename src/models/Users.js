@@ -39,11 +39,16 @@ const UserSchema = new mongoose.Schema({
         // maxlength: 20,
         trim: true,
     },
+    role: {
+        type: String,
+        required: true,
+        trim: true,
+    }
 }, {autoCreate: true});
 
 UserSchema.pre('save', function (next) {
     let user = this;
-    bcrypt.hash(user.password, 10, function (err, hash){
+    bcrypt.hash(user.password, 15, function (err, hash){
         if (err) {
             return next(err);
         }

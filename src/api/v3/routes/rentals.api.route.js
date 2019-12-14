@@ -6,9 +6,9 @@ const express = require('express'),
 
 router.get('/', controller.get_all);
 
-router.get('/open_rentals', controller.get_open_rentals);
+router.get('/open', controller.get_open_rentals);
 
-router.get('/id-check', controller.check_id);
+router.get('/:id', controller.check_id);
 
 router.get('/returns', controller.get_returns);
 

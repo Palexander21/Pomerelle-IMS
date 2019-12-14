@@ -7,7 +7,7 @@ router.get('/', controller.findAll);
 
 router.post('/', controller.newUser);
 
-router.post('/:username', controller.login);
+router.post('/login', controller.login);
 
 router.put('/:username', controller.update);
 
