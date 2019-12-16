@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('Users');
 const {body, validationResult} = require('express-validator/check');
 const bcrypt = require('bcrypt');
+const auth = require('../../../../src/middleware/auth');
 
 let controller = {};
 
@@ -53,7 +54,7 @@ controller.newUser = async (req, res) => {
     }
 };
 
-controller.login = async (req, res) => {
+controller.login = async (req, res, next) => {
     let user = await User.findOne({username: req.body.username})
         .catch(err => {
             return res.status(404).send({
@@ -67,8 +68,15 @@ controller.login = async (req, res) => {
     } else {
         bcrypt.compare(req.body.password, user.password, (err, success) => {
             if (success) {
-                return res.status(201).send({
-                    msg: user.username + ' successfully logged in.'
+                auth.storeSession(req, res, next, user)
+                    .then(function () {
+                        console.log(req.sessionID);
+                        res.status(201).send({
+                            msg: user.username + ' successfully logged in.',
+                            session: req.session
+                     })
+                }).catch(err => {
+                    console.error(err)
                 });
             } else {
                 return res.status(400).send({

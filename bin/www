@@ -4,29 +4,9 @@
  * Module dependencies.
  */
 
-require('../src/models/Users');
-require('../src/models/Equipment');
-require('../src/models/Customers');
-require('../src/models/OpenRentals');
-require('../src/models/Rentals');
 let app = require('../app');
 let debug = require('debug')('pomerelle-ims:server');
 let http = require('http');
-let mongoose = require('mongoose');
-require('dotenv').config();
-
-
-mongoose.Promise = global.Promise;
-mongoose.connect(process.env.DATABASE, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
-    .then(() => {
-        console.log(`Mongoose connection open on ${process.env.DATABASE}`);
-    })
-    .catch(err => {
-        console.error(`Failed to connect to mongo database: ${err.message}`);
-    });
 
 /**
  * Get port from environment and store in Express.

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('Users');
 const {body, validationResult} = require('express-validator');
+const bcrypt = require('bcrypt');
 
 let controller = {};
 
@@ -20,18 +21,8 @@ controller.findAll = async (req, res) => {
 };
 
 controller.login = async (req, res) => {
-    let user = await User.findOne({username: req.params.username})
-        .catch(err => {
-            return res.status(500).send({
-                msg: `Error retrieving user: ${req.params.username}`
-            })
-        });
-    if(!user) {
-        return res.status(404).send({
-            msg: `User not found: ${req.params.username}`
-        })
-    }
-    res.send(user);
+    return res.render('login')
+
 };
 
 module.exports = controller;

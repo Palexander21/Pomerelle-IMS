@@ -9,9 +9,10 @@ const open_rentals = mongoose.model('OpenRentals');
 const rentals = mongoose.model('Rentals');
 const fs = require('fs');
 let controller = require('../controllers/index.controller');
+let auth = require('../middleware/auth');
 
 /* GET home page. */
-router.get('/', controller.getDashboard);
+router.get('/', auth.isLoggedIn, controller.getDashboard);
 
 router.post('/', async (req, res, next) => {
     const errors = validationResult(req);

@@ -11,6 +11,9 @@ const express = require('express'),
 let controller = {};
 
 controller.getDashboard = async (req, res, next) => {
+    // if (!req.isLoggedIn) {
+    //     return res.redirect('/users/login');
+    // }
     let new_count = await open_rentals.countDocuments()
         .catch(e => {
             console.error(`Failed to count open_rentals: ${e}`);
@@ -18,6 +21,7 @@ controller.getDashboard = async (req, res, next) => {
     let return_count = await rentals.countDocuments({returned: false});
     return res.render('index', {
         title: 'Home',
+        user: req.session.user,
         rentals: new_count,
         returns: return_count
     })
