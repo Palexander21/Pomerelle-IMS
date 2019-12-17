@@ -1,42 +1,11 @@
-let express = require('express');
-let router = express.Router();
-const { body, validationResult } = require('express-validator/check');
-const mongoose = require('mongoose');
-const users = mongoose.model('Users');
-const equipment = mongoose.model('Equipment');
-const customers = mongoose.model('Customers');
-const open_rentals = mongoose.model('OpenRentals');
-const rentals = mongoose.model('Rentals');
-const fs = require('fs');
-let controller = require('../controllers/index.controller');
-let auth = require('../middleware/auth');
+const express = require('express'),
+    router = express.Router(),
+    controller = require('../controllers/index.controller'),
+    auth = require('../middleware/auth');
 
-/* GET home page. */
-router.get('/', auth.isLoggedIn, controller.getDashboard);
+router.get('/', auth.isAuthorized, controller.getDashboard);
 
-router.post('/', async (req, res, next) => {
-    const errors = validationResult(req);
-    if (errors.isEmpty()) {
-        let customer = await customers.findOne({license: req.body.license});
-        if (!customer) {
-            customer = new customers(req.body);
-            await customer.save();
-        }
-        let new_open_rental = new open_rentals({customer: customer});
-        await new_open_rental.save();
-        let count = await open_rentals.countDocuments();
-        res.render('index', {
-            title: 'Dashboard',
-            rentals: count,
-        });
-    } else {
-        console.error('Failed to validate POST request: ' + errors.array());
-        res.render('index', {
-            title: 'Dashboard'
-        });
-    }
-
-});
+router.post('/', auth.isAuthorized, controller.startRental);
 
 // router.get('/tasks', function (req, res, next) {
 //     let last_year = getDateRange(1);

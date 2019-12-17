@@ -11,8 +11,7 @@ $(document).ready(function () {
                 password: password
             },
             type: 'post',
-            success: function (data) {
-                console.log(data);
+            success: function () {
                 window.location.href = '/';
             },
             error: function (data) {

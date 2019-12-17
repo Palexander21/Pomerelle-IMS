@@ -49,7 +49,7 @@ const EquipmentSchema = new mongoose.Schema({
         required: false,
         trim: true,
     },
-    upc: {
+    number: {
         type: String,
         trim: true,
     },

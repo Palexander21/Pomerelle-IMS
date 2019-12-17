@@ -1,8 +1,5 @@
-const express = require('express'),
-    { body, validationResult } = require('express-validator/check'),
+const { body, validationResult } = require('express-validator/check'),
     mongoose = require('mongoose'),
-    users = mongoose.model('Users'),
-    equipment = mongoose.model('Equipment'),
     customers = mongoose.model('Customers'),
     open_rentals = mongoose.model('OpenRentals'),
     rentals = mongoose.model('Rentals')
@@ -11,9 +8,6 @@ const express = require('express'),
 let controller = {};
 
 controller.getDashboard = async (req, res, next) => {
-    // if (!req.isLoggedIn) {
-    //     return res.redirect('/users/login');
-    // }
     let new_count = await open_rentals.countDocuments()
         .catch(e => {
             console.error(`Failed to count open_rentals: ${e}`);
@@ -25,6 +19,32 @@ controller.getDashboard = async (req, res, next) => {
         rentals: new_count,
         returns: return_count
     })
+};
+
+controller.startRental = async (req, res, next) => {
+    const errors = validationResult(req);
+    if (errors.isEmpty()) {
+        let customer = await customers.findOne({license: req.body.license});
+        if (!customer) {
+            customer = new customers(req.body);
+            await customer.save();
+        }
+        let new_open_rental = new open_rentals({customer: customer});
+        await new_open_rental.save();
+        let count = await open_rentals.countDocuments();
+        res.render('index', {
+            title: 'Dashboard',
+            user: req.session.user,
+            rentals: count,
+        });
+    } else {
+        console.error('Failed to validate POST request: ' + errors.array());
+        res.render('index', {
+            title: 'Dashboard',
+            user: req.session.user,
+        });
+    }
+
 };
 
 module.exports = controller;

@@ -28,4 +28,6 @@ $(document).ready(function () {
         .on('click', () => {
             window.location.href = "/register";
         })
+
+
 });

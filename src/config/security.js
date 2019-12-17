@@ -8,7 +8,10 @@ acl = new node_acl(backend);
 acl.allow([{
     roles: 'admin',
     allows: [{
-        resources: '/',
+        resources: [
+            '/',
+            '/users'
+        ],
         permissions: '*',
     }]
 }, {
@@ -17,10 +20,10 @@ acl.allow([{
         {
             resources: [
                 '/',
-                'rentals',
+                '/rentals',
+                '/rentals/returns',
                 '/api/v3/rentals',
                 '/api/v3/equipment',
-
             ],
             permissions: '*'
         },
@@ -41,5 +44,8 @@ acl.allow([{
 ]).catch(err => {
     console.log(`ACL error ${err}`);
 });
+
+acl.addRoleParents('user', 'guest').catch(err => console.error(err));
+acl.addRoleParents('admin', 'user').catch(err => console.error(err));
 
 module.exports = acl;

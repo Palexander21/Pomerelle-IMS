@@ -1,16 +1,19 @@
-const express = require('express');
-const router = express.Router();
-const controller = require('../controllers/users.api.controller');
+const express = require('express'),
+    router = express.Router(),
+    controller = require('../controllers/users.api.controller'),
+    auth = require('../../../middleware/auth');
 
 /* GET users listing. */
 router.get('/', controller.findAll);
 
-router.post('/', controller.newUser);
+router.post('/create', auth.isAuthorized, controller.newUser);
 
 router.post('/login', controller.login);
 
-router.put('/:username', controller.update);
+router.get('/logout', controller.logout);
 
-router.delete('/:username', controller.delete);
+router.put('/:username', auth.isAuthorized, controller.update);
+
+router.delete('/:username', auth.isAuthorized, controller.delete);
 
 module.exports = router;

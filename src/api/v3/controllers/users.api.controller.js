@@ -70,7 +70,6 @@ controller.login = async (req, res, next) => {
             if (success) {
                 auth.storeSession(req, res, next, user)
                     .then(function () {
-                        console.log(req.sessionID);
                         res.status(201).send({
                             msg: user.username + ' successfully logged in.',
                             session: req.session
@@ -85,6 +84,17 @@ controller.login = async (req, res, next) => {
             }
         });
     }
+};
+
+controller.logout = (req, res, next) => {
+    if (req.session)
+        req.session.destroy((err) => {
+            if (err)
+                return next(err);
+            else
+                return res.send({ msg: 'User successfully logged out '})
+        })
+
 };
 
 controller.update = (req, res) => {
