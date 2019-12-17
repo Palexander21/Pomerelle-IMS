@@ -8,7 +8,7 @@ block content
                     p.text-center.text-danger #{error.msg}
             .card-header Create New User
             .card-body
-                form(method='POST', action='/register', id='registerForm').form-signin
+                form(method='POST', action='/api/v3/users/create', id='registerForm').form-signin
                     .form-group
                         .form-row
                             .col-md-6
@@ -20,9 +20,17 @@ block content
                                     input#lastName.form-control(type='text' placeholder='Last name' required='required', name='lastName')
                                     label(for='lastName') Last name
                     .form-group
-                        .form-label-group
-                            input#username.form-control(type='text' placeholder='Username' required='required', name='username')
-                            label(for='username') Username
+                        .form-row
+                            .col-md-6
+                                .form-label-group
+                                    input#username.form-control(type='text' placeholder='Username' required='required', name='username')
+                                    label(for='username') Username
+                            .col-md-6
+                                .form-label-group
+                                    select#type.custom-select(name='role' required=true)
+                                        option(selected='') -Role-
+                                        option(value='admin') Administrator
+                                        option(value='user') Employee
                     .form-group
                         .form-row
                             .col-md-6
@@ -45,5 +53,5 @@ block content
                                     label(for='confirmPassword') Confirm password
                     button.btn.btn-lg.btn-primary.btn-block(type='submit') Create Account
                 .text-center
-                    a.d-block.small.mt-3(href='login') Login Page
-                    a.d-block.small(href='forgot-password') Forgot Password?
+                    //a.d-block.small.mt-3(href='login') Login Page
+                    //a.d-block.small(href='forgot-password') Forgot Password?

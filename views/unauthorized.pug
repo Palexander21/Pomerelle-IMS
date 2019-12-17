@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  ol.breadcrumb
+    li.breadcrumb-item
+      a(href='/') Dashboard
+    li.breadcrumb-item.active Unauthorized
+  // Page Content
+  h1.display-1 Unauthorized
+  p.lead
+    | #{msg}
+    |
+    a(href='javascript:history.back()') go back
+    |           to the previous page, or
+    |
+    a(href='/') return home
+    | .
+
