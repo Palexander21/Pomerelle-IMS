@@ -17,7 +17,8 @@ controller.getDashboard = async (req, res, next) => {
         title: 'Home',
         user: req.session.user,
         rentals: new_count,
-        returns: return_count
+        returns: return_count,
+        admin: req.session.role === 'admin',
     })
 };
 
@@ -36,12 +37,14 @@ controller.startRental = async (req, res, next) => {
             title: 'Dashboard',
             user: req.session.user,
             rentals: count,
+            admin: req.session.role === 'admin',
         });
     } else {
         console.error('Failed to validate POST request: ' + errors.array());
         res.render('index', {
             title: 'Dashboard',
             user: req.session.user,
+            admin: req.session.role === 'admin',
         });
     }
 

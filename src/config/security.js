@@ -10,7 +10,8 @@ acl.allow([{
     allows: [{
         resources: [
             '/',
-            '/users'
+            '/users',
+            '/admin'
         ],
         permissions: '*',
     }]

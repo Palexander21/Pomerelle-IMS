@@ -18,12 +18,14 @@ controller.get_rentals = async function(req, res, next) {
             user: req.session.user,
             data: open_rentals_list,
             rentals: open_rentals_list.length,
+            admin: req.session.role === 'admin',
         })
     }
     else {
         res.render('rentals', {
             title: 'Rentals',
             user: req.session.user,
+            admin: req.session.role === 'admin',
         })
     }
 };
@@ -39,6 +41,7 @@ controller.get_returns = async function(req, res, next) {
             user: req.session.user,
             data: returns,
             rentals: returns.length,
+            admin: req.session.role === 'admin',
         })
     }
 };

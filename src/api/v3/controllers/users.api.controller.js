@@ -72,7 +72,8 @@ controller.login = async (req, res, next) => {
                     .then(function () {
                         res.status(201).send({
                             msg: user.username + ' successfully logged in.',
-                            session: req.session
+                            session: req.session,
+                            token: req.token
                      })
                 }).catch(err => {
                     console.error(err)

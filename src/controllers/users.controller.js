@@ -8,6 +8,7 @@ controller.create = async (req, res) => {
     return res.render('register', {
         title: 'Create User',
         user: req.session.user,
+        admin: req.session.role === 'admin',
     })
 };
 

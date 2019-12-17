@@ -60,11 +60,8 @@ initApp = function() {
     require('./src/config/routes')(app);
     let auth = require('./src/middleware/auth');
 
-
-// Check a user is logged in
-    app.use(auth.storeSession);
-    app.use(auth.isLoggedIn);
     app.use(auth.isAuthorized);
+    app.use('/api/v3', auth.api_auth);
 
 // catch 404 and forward to error handler
     app.use(function(req, res, next) {

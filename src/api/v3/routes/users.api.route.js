@@ -6,14 +6,14 @@ const express = require('express'),
 /* GET users listing. */
 router.get('/', controller.findAll);
 
-router.post('/create', auth.isAuthorized, controller.newUser);
+router.post('/create', auth.api_auth, controller.newUser);
 
 router.post('/login', controller.login);
 
 router.get('/logout', controller.logout);
 
-router.put('/:username', auth.isAuthorized, controller.update);
+router.put('/:username', auth.api_auth, controller.update);
 
-router.delete('/:username', auth.isAuthorized, controller.delete);
+router.delete('/:username', auth.api_auth, controller.delete);
 
 module.exports = router;

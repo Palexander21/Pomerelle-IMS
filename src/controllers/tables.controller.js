@@ -22,6 +22,7 @@ controller.get_tables = async function(req, res, next) {
         user: req.session.user,
         users: users,
         equipment: equipment,
+        admin: req.session.role === 'admin',
     });
 };
 

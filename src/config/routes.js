@@ -4,11 +4,13 @@ module.exports = (function (app) {
     let tablesRouter = require('../routes/tables.route');
     let rentalRouter = require('../routes/rentals.route');
     let usersRouter = require('../routes/users.route');
+    let adminRouter = require('../routes/admin.route');
 
     app.use('/', indexRouter);
     app.use('/users', usersRouter);
     app.use('/tables', tablesRouter);
     app.use('/rentals', rentalRouter);
+    app.use('/admin', adminRouter);
 
 // API routes
     let users_api = require('../api/v3/routes/users.api.route');
