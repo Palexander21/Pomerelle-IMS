@@ -56,12 +56,11 @@ initApp = function() {
             maxAge: 3 * 3600000 // 3 hours
         }
     }));
+
+
 // Load routes
     require('./src/config/routes')(app);
-    let auth = require('./src/middleware/auth');
 
-    app.use(auth.isAuthorized);
-    app.use('/api/v3', auth.api_auth);
 
 // catch 404 and forward to error handler
     app.use(function(req, res, next) {

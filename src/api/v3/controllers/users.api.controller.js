@@ -103,20 +103,20 @@ controller.update = (req, res) => {
 };
 
 controller.delete = async (req, res) => {
-    let user = await User.findOneAndDelete({username: req.params.username})
+    let user = await User.findOneAndDelete({username: req.body.username})
         .catch(err => {
             if (err.name === 'NotFound') {
                 return res.status(404).send({
-                    msg: `Could not find user: ${req.params.username}`
+                    msg: `Could not find user: ${req.body.username}`
                 })
             }
             return res.status(500).send({
-                msg: `Could not delete user: ${req.params.username}`
+                msg: `Could not delete user: ${req.body.username}`
             })
         });
     if (!user) {
         return res.status(404).send({
-            msg: `Could not find user: ${req.params.username}`
+            msg: `Could not find user: ${req.body.username}`
         })
     }
     res.send({msg: 'User successfully deleted'})

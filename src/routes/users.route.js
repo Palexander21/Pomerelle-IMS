@@ -5,6 +5,6 @@ const express = require('express'),
 
 router.get('/login', controller.login);
 
-router.get('/create', auth.isAuthorized, controller.create);
+router.get('/create', controller.create);
 
 module.exports = router;

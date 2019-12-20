@@ -3,6 +3,6 @@ const express = require('express'),
     controller = require('../controllers/tables.controller'),
     auth = require('../middleware/auth');
 
-router.get('/', auth.isAuthorized, controller.get_tables);
+router.get('/', controller.get_tables);
 
 module.exports = router;
