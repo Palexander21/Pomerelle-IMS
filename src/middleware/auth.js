@@ -43,7 +43,7 @@ auth.isAuthorized = async function (req, res, next) {
             .catch(err => {
                 return res.status(400).send({ msg: 'Failed retrieving user' })
             });
-        let url = req.url === '/' ? req.url : req.baseUrl;
+        let url = req.url;
         if (user) {
             acl.isAllowed(user.username, url , req.method.toLowerCase(), (err, allow) => {
                 if (allow)
