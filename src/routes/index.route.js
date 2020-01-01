@@ -3,9 +3,9 @@ const express = require('express'),
     controller = require('../controllers/index.controller'),
     auth = require('../middleware/auth');
 
-router.get('/', auth.isAuthorized, controller.getDashboard);
+router.get('/', controller.getDashboard);
 
-router.post('/', auth.isAuthorized, controller.startRental);
+router.post('/', controller.startRental);
 
 // router.get('/tasks', function (req, res, next) {
 //     let last_year = getDateRange(1);

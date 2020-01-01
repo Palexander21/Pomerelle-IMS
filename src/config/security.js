@@ -11,7 +11,8 @@ acl.allow([{
         resources: [
             '/',
             '/users',
-            '/admin'
+            '/admin',
+            '/tables',
         ],
         permissions: '*',
     }]
@@ -23,22 +24,15 @@ acl.allow([{
                 '/',
                 '/rentals',
                 '/rentals/returns',
-                '/api/v3/rentals',
-                '/api/v3/equipment',
+                '/logout',
             ],
             permissions: '*'
         },
         {
-            resources: '/api/v3/users',
+            resources: [
+                '/tables',
+            ],
             permissions: ['get']
-        }
-    ]
-}, {
-    roles: 'guest',
-    allows: [
-        {
-            resources: ['login',],
-            permissions: ['get', 'post']
         }
     ]
 }

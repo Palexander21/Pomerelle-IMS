@@ -4,13 +4,13 @@ const express = require('express'),
     auth = require('../middleware/auth');
 
 
-router.get('/', auth.isAuthorized, controller.get_rentals);
+router.get('/', controller.get_rentals);
 
-router.post('/', auth.isAuthorized, controller.add_equipment);
+router.post('/', controller.add_equipment);
 
-router.get('/returns', auth.isAuthorized, controller.get_returns);
+router.get('/returns', controller.get_returns);
 
-router.post('/returns', auth.isAuthorized, controller.return);
+router.post('/returns', controller.return);
 
 
 module.exports = router;
