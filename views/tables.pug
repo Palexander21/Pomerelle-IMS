@@ -1,5 +1,7 @@
 extends layout
 
+block head
+    link(href='cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css')
 block content
     ol.breadcrumb
         li.breadcrumb-item
@@ -99,6 +101,5 @@ block content
                                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                                 button.btn.btn-primary(type='submit') Save changes
 block scripts
-    script(src='/vendor/datatables/jquery.dataTables.min.js')
-    script(src='/vendor/datatables/dataTables.bootstrap4.min.js')
+    script(src='cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js')
     script(src="/js/datatables.js")

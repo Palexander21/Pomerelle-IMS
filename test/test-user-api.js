@@ -183,14 +183,6 @@ describe('GET Functionality', function () {
             })
         });
     });
-    describe('Unauthorized GET /api/v3/users/logout', function () {
-        it('Returns 401', function (done) {
-            request('http://localhost/api/v3/users/logout', function (err, res, body) {
-                expect(res.statusCode).to.equal(401);
-                done();
-            })
-        });
-    });
     describe('Authorized GET /api/v3/users/logout', function () {
         it('Returns 200', function (done) {
             let config = {
