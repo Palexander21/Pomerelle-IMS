@@ -6,11 +6,11 @@ head
     meta(name='description' content='')
     meta(name='author' content='')
     title Pomerelle-IMS |  #{title}
-    link(href='/vendor/fontawesome-free/css/all.min.css' rel='stylesheet' type='text/css')
-    link(href='/vendor/datatables/dataTables.bootstrap4.min.css' rel='stylesheet')
+    link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' rel='stylesheet' type='text/css')
     link(href='/stylesheets/sb-admin.css' rel='stylesheet')
     link(href='/stylesheets/style.css' rel='stylesheet')
     link(rel='shortcut icon' type='image/x-icon' href='/images/favicon.ico')
+    block head
 
 body(id='page-top').sidebar-toggled
     nav.navbar.navbar-expand.navbar-dark.bg-dark.static-top
@@ -93,15 +93,11 @@ body(id='page-top').sidebar-toggled
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Cancel
                     a.btn.btn-primary#logout-btn(href='login') Logout
-// Bootstrap core JavaScript
-script(src='/vendor/jquery/jquery.min.js')
-script(src='/vendor/bootstrap/js/bootstrap.bundle.min.js')
-// Core plugin JavaScript
-script(src='/vendor/jquery-easing/jquery.easing.min.js')
-// Page level plugin JavaScript
-script(src='/vendor/chart.js/Chart.min.js')
-// Custom scripts for all pages
+
+script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/inputmask/4.0.9/jquery.inputmask.bundle.min.js')
 script(src='/js/sb-admin.min.js')
-script(src='/js/inputmask/jquery.inputmask.bundle.min.js')
 script(src='/js/utils.js')
 block scripts

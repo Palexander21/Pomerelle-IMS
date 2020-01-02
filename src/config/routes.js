@@ -12,6 +12,7 @@ module.exports = (function (app) {
         };
     };
 
+
 // Routes for rendering
     let indexRouter = require('../routes/index.route');
     let tablesRouter = require('../routes/tables.route');
@@ -27,7 +28,7 @@ module.exports = (function (app) {
     app.use('/rentals', rentalRouter);
     app.use('/admin', adminRouter);
 
-    app.use(unless(auth.api_auth, '/api/v3/users/login'));
+    app.use(unless(auth.api_auth, '/api/v3/users/login', '/api/v3/users/logout'));
 
 // API routes
     let users_api = require('../api/v3/routes/users.api.route');

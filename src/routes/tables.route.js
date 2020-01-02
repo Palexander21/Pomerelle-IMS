@@ -1,7 +1,6 @@
 const express = require('express'),
     router = express.Router(),
-    controller = require('../controllers/tables.controller'),
-    auth = require('../middleware/auth');
+    controller = require('../controllers/tables.controller');
 
 router.get('/', controller.get_tables);
 
