@@ -48,7 +48,13 @@ controller.get_open_rentals = async (req, res) => {
             msg: 'No open rentals found',
         })
     }
+};
 
+controller.get_open_count = async (req, res) => {
+    let count = await open_rentals.countDocuments();
+    return res.send({
+        data: count,
+    })
 };
 
 controller.check_id = async (req, res) => {
@@ -87,6 +93,37 @@ controller.get_returns = async (req, res) => {
         return res.status(404).send({
             msg: 'No returns found'
         })
+};
+
+controller.get_returns_count = async (req, res) => {
+    let count = await rentals.countDocuments({returned: false});
+    return res.send({
+        data: count,
+    })
+};
+
+controller.new_rental = async (req, res) => {
+    const errors = validationResult(req);
+    if (errors.isEmpty()) {
+        let customer = await customers.findOne({license: req.body.license});
+        if (!customer) {
+            customer = new customers(req.body);
+            await customer.save();
+        }
+        let new_open_rental = new open_rentals({customer: customer});
+        await new_open_rental.save();
+        let count = await open_rentals.countDocuments();
+        return res.status(201).send({
+            msg: `Successfully started a new Rental for ${customer}`,
+            data: count,
+        })
+    } else {
+        console.error('Failed to validate POST request: ' + errors.array());
+        return res.status(400).send({
+            msg: 'Failed to validate POST'
+        })
+    }
+
 };
 
 controller.returned = async (req, res) => {
@@ -129,9 +166,9 @@ controller.completed_rental = async (req, res) => {
     const today = new Date().toISOString().split('T')[0];
     if (errors.isEmpty()) {
         let customer = await customers.findOne({license: req.body.license});
-        let boots = await equipment.findOne({upc: req.body.bootNumber});
-        let ski = await equipment.findOne({upc: req.body.skiNumber});
-        let poles = await equipment.findOne({upc: req.body.poleNumber});
+        let boots = await equipment.findOne({number: req.body.bootNumber});
+        let ski = await equipment.findOne({number: req.body.skiNumber});
+        let poles = await equipment.findOne({number: req.body.poleNumber});
         boots.last_used = today;
         ski.last_used = today;
         ski.rt = req.body.rt;
@@ -141,10 +178,10 @@ controller.completed_rental = async (req, res) => {
         if (customer) {
             if (poles) {
                 poles.last_used = today;
-                customer.previousRentals.push([boots, ski, poles]);
+                customer.previousRentals.push(JSON.stringify([boots, ski, poles]));
             }
             else {
-                customer.previousRentals.push([boots, ski]);
+                customer.previousRentals.push(JSON.stringify([boots, ski]));
             }
         }
 
@@ -152,13 +189,19 @@ controller.completed_rental = async (req, res) => {
             customer = new customers(req.body);
             if (poles) {
                 poles.last_used = today;
-                customer.previousRentals.push([boots, ski, poles]);
+                customer.previousRentals.push(JSON.stringify([boots, ski, poles]));
             }
             else {
-                customer.previousRentals.push([boots, ski]);
+                customer.previousRentals.push(JSON.stringify([boots, ski]));
             }
         }
-        let rental = new rentals({customer: customer, equipment: [ski, boots, poles], date: today, technician: req.body.techSignature, returned: false});
+        let rental = new rentals({
+            customer: customer,
+            equipment: [ski, boots, poles],
+            date: today,
+            technician: req.body.techSignature,
+            returned: false,
+            });
         await customer.save();
         await rental.save();
         await open_rentals.findOneAndDelete({'customer.license': customer.license}, (err, doc) => {

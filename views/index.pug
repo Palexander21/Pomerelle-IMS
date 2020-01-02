@@ -20,7 +20,7 @@ block content
                 .card-body
                     .card-body-icon
                         i.fas.fa-fw.fa-list
-                    .mr-5 #{rentals} New Rentals
+                    .mr-5#rental-count New Rentals
                 a.card-footer.text-white.clearfix.small.z-1(href='rentals')
                     span.float-left View Details
                     span.float-right
@@ -30,7 +30,7 @@ block content
                 .card-body
                     .card-body-icon
                         i.fas.fa-fw.fa-reply
-                    .mr-5 #{returns} Waiting to Return
+                    .mr-5#return-count Waiting to Return
                 a.card-footer.text-white.clearfix.small.z-1(href='rentals/returns')
                     span.float-left View Details
                     span.float-right
@@ -198,4 +198,7 @@ block content
 
                         .modal-footer
                             button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                            button.btn.btn-primary(type='submit') Submit
+                            button.btn.btn-primary#submit-btn Submit
+
+block scripts
+    script(src='/js/index.js')

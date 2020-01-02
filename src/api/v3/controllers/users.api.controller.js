@@ -70,7 +70,11 @@ controller.login = async (req, res, next) => {
             if (success) {
                 auth.storeSession(req, res, next, user)
                     .then(function () {
-                        res.status(201).send({
+                        const options = {
+                            httpOnly: true,
+                            maxAge: 3600000
+                        };
+                        return res.status(201).cookie('jwt', req.token, options).send({
                             msg: user.username + ' successfully logged in.',
                             session: req.session,
                             token: req.token

@@ -1,7 +1,8 @@
 extends layout
 
 block head
-    link(href='cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css')
+    link(rel='stylesheet' type='text/css' href='https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css')
+
 block content
     ol.breadcrumb
         li.breadcrumb-item
@@ -44,7 +45,7 @@ block content
                                         th Last Used
                                         th Last Tuned
                                         th Size
-                                        th UPC
+                                        th Item Number
                                 tbody
                                     each item in equipment
                                         tr
@@ -52,7 +53,7 @@ block content
                                             td #{item.last_used}
                                             td #{item.last_tune}
                                             td #{item.size}
-                                            td #{item.upc}
+                                            td #{item.number}
                         button#equipmentAdd.btn.btn-primary.table-btn(type='button' data-toggle='modal' data-target='#equipmentModalCenter') Add
                         button#equipmentDelete.btn.btn-danger.table-btn.disabled Delete
                     .card-footer.small.text-muted.date-updated Updated yesterday at 11:59 PM
@@ -101,5 +102,6 @@ block content
                                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                                 button.btn.btn-primary(type='submit') Save changes
 block scripts
-    script(src='cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js')
+    script(type='text/javascript' charset='utf8' src='https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js')
+    script(type='text/javascript' charset='utf8' src='https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js')
     script(src="/js/datatables.js")

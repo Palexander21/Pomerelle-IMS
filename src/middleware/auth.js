@@ -14,19 +14,18 @@ auth.isLoggedIn = function (req, res, next) {
 };
 
 auth.api_auth = async function (req, res, next) {
-    const header = req.headers.authorization;
     let result;
-    if (header) {
-        const token = req.headers.authorization.split(' ')[1];
-        const options = {
-            expiresIn: '1d',
-        };
+    const token = req.cookies.jwt;
+    const options = {
+        expiresIn: '1d',
+    };
+    if (token) {
         try {
             result = jwt.verify(token, process.env.SECRET, options);
             req.decoded = result;
             next();
         } catch (err) {
-            throw new Error(err);
+            console.log(err);
         }
     } else {
         result = {
@@ -69,10 +68,10 @@ auth.storeSession = function (req, res, next, user) {
     req.session.role = user.role;
     req.session.user = `${user.firstName} ${user.lastName}`;
     req.session.userId = user._id;
-    req.session.save();
     req.token = jwt.sign({id: user._id}, process.env.SECRET, {
         expiresIn: '1d',
     });
+    req.session.save();
     acl.addUserRoles(user.username, user.role, function (err) {
         if (err)
             console.error(err);
