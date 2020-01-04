@@ -12,6 +12,8 @@ acl.allow([{
             '/',
             '/users',
             '/admin',
+            '/admin/users',
+            '/admin/users/create',
             '/tables',
         ],
         permissions: '*',

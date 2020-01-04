@@ -50,7 +50,7 @@ initApp = function() {
             return uuid()
         },
         secret: process.env.SECRET,
-        resave: false,
+        resave: true,
         store: new MongoStore({mongooseConnection: db}),
         saveUninitialized: false,
         cookie: {

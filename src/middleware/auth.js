@@ -46,7 +46,7 @@ auth.isAuthorized = async function (req, res, next) {
         if (user) {
             acl.isAllowed(user.username, url , req.method.toLowerCase(), (err, allow) => {
                 if (allow)
-                    next();
+                    return next();
                 else
                     return res.render('unauthorized',
                         {
