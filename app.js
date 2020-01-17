@@ -76,7 +76,8 @@ initApp = function() {
         res.locals.error = process.env.ENV === 'development' ? err : {};
 
         // render the error page
-        return res.status(err.status || 500);
+        res.status(err.status || 500);
+        res.render('404error');
     });
 };
 

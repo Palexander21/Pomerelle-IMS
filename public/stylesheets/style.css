@@ -14,3 +14,13 @@ tr.selected {
 .table-btn {
   margin: 4px;
 }
+.a-no-style:hover {
+  text-decoration: none;
+}
+.card-pop:hover {
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+  transform: scale(1.05);
+}

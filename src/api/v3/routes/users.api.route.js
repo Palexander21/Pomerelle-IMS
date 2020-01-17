@@ -12,6 +12,6 @@ router.get('/logout', controller.logout);
 
 router.put('/:username', controller.update);
 
-router.delete('/:username', controller.delete);
+router.delete('/delete/:username', controller.delete);
 
 module.exports = router;
