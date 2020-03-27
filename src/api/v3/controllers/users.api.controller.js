@@ -21,6 +21,20 @@ controller.findAll = async (req, res) => {
         return res.status(404).send('Failed to get users.')
 };
 
+controller.findUser = async (req, res, next) => {
+    let user = await User.findOne({username: req.params.username})
+        .catch(err => {
+            return res.status(404).send({
+                message: err.message || `Failed to find user ${req.params.username}`
+            })
+        });
+    if (user) {
+        return res.send(user);
+    }
+    else
+        return res.status(404).send('Failed to get users');
+};
+
 controller.newUser = async (req, res) => {
     const errors = validationResult(req);
     if (errors.isEmpty()) {
@@ -92,6 +106,7 @@ controller.login = async (req, res, next) => {
 };
 
 controller.logout = (req, res, next) => {
+    console.log(req);
     if (req.session)
         req.session.destroy((err) => {
             if (err)
@@ -99,15 +114,34 @@ controller.logout = (req, res, next) => {
             else
                 return res.send({ msg: 'User successfully logged out '})
         })
-
 };
 
-controller.update = (req, res) => {
-
+controller.update = async (req, res) => {
+    let user = await User.updateOne({_id: req.params.id}, req.body)
+        .catch(err => {
+            if (err.name === 'NotFound') {
+                return res.status(404).send({
+                    msg: `Could not find user: ${req.params.id}`
+                })
+            }
+            return res.status(500).send({
+                msg: `Could not update user: ${req.params.id}`
+            })
+        });
+    if (!user) {
+        return res.status(404).send({
+            msg: `Could not find user: ${req.params.id}`
+        })
+    }
+    let ret = await User.findOne({_id:req.params.id});
+    return res.send({
+        msg: 'User successfully updated',
+        user: ret
+    })
 };
 
 controller.delete = async (req, res) => {
-    let user = await User.findOneAndDelete({username: req.params.username})
+    let user = await User.deleteOne({username: req.params.username})
         .catch(err => {
             if (err.name === 'NotFound') {
                 return res.status(404).send({
@@ -123,7 +157,7 @@ controller.delete = async (req, res) => {
             msg: `Could not find user: ${req.params.username}`
         })
     }
-    res.send({msg: 'User successfully deleted'})
+    return res.send({msg: 'User successfully deleted'})
 };
 
 module.exports = controller;
