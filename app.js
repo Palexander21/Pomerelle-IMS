@@ -77,7 +77,7 @@ initApp = function() {
 
         // render the error page
         res.status(err.status || 500);
-        res.render('404error');
+        // res.render('404error');
     });
 };
 

@@ -5,7 +5,7 @@ block content
         li.breadcrumb-item
             a(href='/') Dashboard
         li.breadcrumb-item
-            a(href='/rentals') Rentals
+            a(href='/rental_shop') Rental Shop
         li.breadcrumb-item.active Returns
 
     .d-none.d-md-inline-block.form-inline.ml-auto.mr-0.mr-md-3.my-2.my-md-0
@@ -20,7 +20,7 @@ block content
                     button.close(type='button' data-dismiss='modal' aria-label='Close')
                         span(aria-hidden='true') &times;
                 .modal-body
-                    form(method='POST', action='/rentals/returns')#returnForm
+                    form(method='POST', action='/rental_shop/returns')#returnForm
                         .form-group
                             .form-row
                                 .col-md-6

@@ -3,10 +3,13 @@ const express = require('express'),
     controller = require('../controllers/rentals.controller'),
     auth = require('../middleware/auth');
 
+router.get('/', controller.get_rental_shop);
 
-router.get('/', controller.get_rentals);
+router.post('/', controller.startRental);
 
-router.post('/', controller.add_equipment);
+router.get('/rentals', controller.get_rentals);
+
+router.post('/rentals', controller.add_equipment);
 
 router.get('/returns', controller.get_returns);
 

@@ -17,6 +17,13 @@ acl.allow([{
             '/admin/users/update',
             '/admin/users/delete',
             '/tables',
+            '/users/',
+            '/admin/',
+            '/admin/users/',
+            '/admin/users/create/',
+            '/admin/users/update/',
+            '/admin/users/delete/',
+            '/tables/',
         ],
         permissions: '*',
     }]
@@ -26,9 +33,14 @@ acl.allow([{
         {
             resources: [
                 '/',
-                '/rentals',
-                '/rentals/returns',
+                '/rental_shop',
+                '/rental_shop/rentals',
+                '/rental_shop/returns',
                 '/logout',
+                '/rental_shop/',
+                '/rental_shop/rentals/',
+                '/rental_shop/returns/',
+                '/logout/',
             ],
             permissions: '*'
         },

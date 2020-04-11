@@ -25,7 +25,7 @@ module.exports = (function (app) {
     app.use('/', indexRouter);
     app.use('/users', usersRouter);
     app.use('/tables', tablesRouter);
-    app.use('/rentals', rentalRouter);
+    app.use('/rental_shop', rentalRouter);
     app.use('/admin', adminRouter);
 
     app.use(unless(auth.api_auth, '/api/v3/users/login', '/api/v3/users/logout'));

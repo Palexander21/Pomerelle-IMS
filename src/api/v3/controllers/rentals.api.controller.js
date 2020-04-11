@@ -58,11 +58,11 @@ controller.get_open_count = async (req, res) => {
 };
 
 controller.check_id = async (req, res) => {
-    let valid = await equipment.findOne({upc: req.params.number})
+    let valid = await equipment.findOne({number: req.params.id})
         .catch(e => {
-            console.error(`Failed to find equipment by query "upc: ${req.params.number}: ${e}`);
+            console.error(`Failed to find equipment by query "upc: ${req.params.id}: ${e}`);
             return res.status(400).send({
-                msg: `Failed to find equipment by query "upc: ${req.params.number}: ${e}`
+                msg: `Failed to find equipment by query "upc: ${req.params.id}: ${e}`
             })
         });
     if (valid)

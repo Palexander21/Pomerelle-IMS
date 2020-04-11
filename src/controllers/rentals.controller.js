@@ -7,6 +7,21 @@ const { body, validationResult } = require('express-validator/check'),
 
 let controller = {};
 
+controller.get_rental_shop = function(req, res, next) {
+    return res.render('rental_shop', {
+        title: "Rental Shop",
+        user: req.session.user,
+        admin: req.session.role === 'admin'
+    })
+}
+
+controller.startRental = async (req, res, next) => {
+    res.render('rental_shop', {
+        title: 'Rental Shop',
+        user: req.session.user,
+        admin: req.session.role === 'admin',
+    });
+};
 controller.get_rentals = async function(req, res, next) {
     let open_rentals_list = await open_rentals.find()
         .catch(e => {
@@ -78,9 +93,9 @@ controller.add_equipment = async function(req, res, next) {
     const today = new Date().toISOString().split('T')[0];
     if (errors.isEmpty()) {
         let customer = await customers.findOne({license: req.body.license});
-        let boots = await equipment.findOne({upc: req.body.bootNumber});
-        let ski = await equipment.findOne({upc: req.body.skiNumber});
-        let poles = await equipment.findOne({upc: req.body.poleNumber});
+        let boots = await equipment.findOne({number: req.body.bootNumber});
+        let ski = await equipment.findOne({number: req.body.skiNumber});
+        let poles = await equipment.findOne({number: req.body.poleNumber});
         boots.last_used = today;
         ski.last_used = today;
         ski.rt = req.body.rt;
@@ -90,10 +105,10 @@ controller.add_equipment = async function(req, res, next) {
         if (customer) {
             if (poles) {
                 poles.last_used = today;
-                customer.previousRentals.push([boots, ski, poles]);
+                customer.previousRentals.push(JSON.stringify([boots, ski, poles]));
             }
             else {
-                customer.previousRentals.push([boots, ski]);
+                customer.previousRentals.push(JSON.stringify([boots, ski]));
             }
         }
 
@@ -101,10 +116,10 @@ controller.add_equipment = async function(req, res, next) {
             customer = new customers(req.body);
             if (poles) {
                 poles.last_used = today;
-                customer.previousRentals.push([boots, ski, poles]);
+                customer.previousRentals.push(JSON.stringify([boots, ski, poles]));
             }
             else {
-                customer.previousRentals.push([boots, ski]);
+                customer.previousRentals.push(JSON.stringify([boots, ski]));
             }
         }
         let rental = new rentals({customer: customer, equipment: [ski, boots, poles], date: today, technician: req.body.techSignature, returned: false});

@@ -5,7 +5,6 @@ const express = require('express'),
 
 router.get('/', controller.getDashboard);
 
-router.post('/', controller.startRental);
 
 // router.get('/tasks', function (req, res, next) {
 //     let last_year = getDateRange(1);
