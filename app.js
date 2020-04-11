@@ -12,6 +12,7 @@ const createError = require('http-errors'),
     session = require('express-session'),
     MongoStore = require('connect-mongo')(session),
     uuid = require('uuid/v4');
+    cookieParser = require('cookie-parser');
 
 let db;
 
@@ -25,6 +26,7 @@ app.use(logger(':remote-addr [:date[web]] :method :url :status - :response-time 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser());
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.DATABASE, {
@@ -48,12 +50,12 @@ initApp = function() {
             return uuid()
         },
         secret: process.env.SECRET,
-        resave: false,
+        resave: true,
         store: new MongoStore({mongooseConnection: db}),
-        saveUninitialized: true,
+        saveUninitialized: false,
         cookie: {
             secure: 'auto',
-            maxAge: 3 * 3600000 // 3 hours
+            maxAge: 3600000 // 1 hour
         }
     }));
 
@@ -75,7 +77,7 @@ initApp = function() {
 
         // render the error page
         res.status(err.status || 500);
-        res.render('404error');
+        // res.render('404error');
     });
 };
 
