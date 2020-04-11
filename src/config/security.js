@@ -26,8 +26,9 @@ acl.allow([{
         {
             resources: [
                 '/',
-                '/rentals',
-                '/rentals/returns',
+                '/rental_shop',
+                '/rental_shop/rentals',
+                '/rental_shop/returns',
                 '/logout',
             ],
             permissions: '*'

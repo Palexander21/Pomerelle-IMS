@@ -2,203 +2,21 @@ extends layout
 
 block content
     ol.breadcrumb
-        li.breadcrumb-item
-            a(href='#') Dashboard
-    .row
-        .col-xl-4.col-md-4.col-sm-6.mb-3
-            a.a-no-style.card.text-white.bg-primary.o-hidden.h-100(href='/' data-toggle='modal' data-target='#rentalModalCenter')
+        li.breadcrumb-item.active
+            a(href='/') Dashboard
+    .row.text-center.justify-content-center.center
+        .col-xl-3.col-md-4.col-sm-6.mb-3
+            a.card-pop.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(href='/rental_shop', style='width: auto;')
                 .card-body
-                    .card-body-icon
-                        i.fas.fa-fw.fa-cash-register
-                    .mr-5 Rental Form
-                .card-footer.text-white.clearfix.small.z-1
-                    span.float-left Start New Rental
-                    span.float-right
-                        i.fas.fa-angle-right
-        .col-xl-4.col-md-4.col-sm-6.mb-3
-            a.a-no-style.card.text-white.bg-warning.o-hidden.h-100(href='rentals')
+                    i.fas.fa-skiing.fa-3x
+                    h4.card-title.font-weight-bold Rental Shop
+        .col-xl-3.col-md-4.col-sm-6.mb-
+            a.card-pop.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(href='#', style='width: auto;')
                 .card-body
-                    .card-body-icon
-                        i.fas.fa-fw.fa-list
-                    .mr-5#rental-count New Rentals
-                .card-footer.text-white.clearfix.small.z-1
-                    span.float-left View Details
-                    span.float-right
-                        i.fas.fa-angle-right
-        .col-xl-4.col-md-4.col-sm-6.mb-3
-            a.a-no-style.card.text-white.bg-success.o-hidden.h-100(href='rentals/returns')
+                    i.fas.fa-ticket-alt.fa-3x
+                    h4.card-title.font-weight-bold Ticket Office
+        .col-xl-3.col-md-4.col-sm-6.mb-3
+            a.card-pop.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(href='#', style='width: auto;')
                 .card-body
-                    .card-body-icon
-                        i.fas.fa-fw.fa-reply
-                    .mr-5#return-count Waiting to Return
-                .card-footer.text-white.clearfix.small.z-1
-                    span.float-left View Details
-                    span.float-right
-                        i.fas.fa-angle-right
-        //.col-xl-3.col-sm-6.mb-3
-        //    .card.text-white.bg-danger.o-hidden.h-100
-        //        .card-body
-        //            .card-body-icon
-        //                i.fas.fa-fw.fa-life-ring
-        //            .mr-5 13 New Tickets!
-        //        a.card-footer.text-white.clearfix.small.z-1(href='#')
-        //            span.float-left View Details
-        //            span.float-right
-        //                i.fas.fa-angle-right
-    // Area Chart Example
-    //.card.mb-3
-    //    .card-header
-    //        i.fas.fa-chart-area
-    //        |             Area Chart Example
-    //    .card-body
-    //        canvas#myAreaChart(width='100%' height='30')
-    //    .card-footer.small.text-muted.date-updated Updated yesterday at 11:59 PM
-    #rentalModalCenter.modal.fade(tabindex='-1' role='dialog' aria-labelledby='Rental Modal' aria-hidden='true')
-        .modal-lg.modal-dialog.modal-dialog-centered(role='document')
-            .modal-content
-                .modal-header
-                    h5#modalTitle.modal-title Pomerelle Rental Ticket
-                    button.close(type='button' data-dismiss='modal' aria-label='Close')
-                        span(aria-hidden='true') &times;
-                .modal-body
-                    form(method='POST', action='/')#rentalForm
-                        .form-group
-                            .form-row
-                                .col-md-6
-                                    .form-label-group
-                                        input#firstName.form-control(name='firstName' type='text' placeholder='First name' required='required' autofocus=true)
-                                        label(for='firstName') First Name
-                                .col-md-6
-                                    .form-label-group
-                                        input#lastName.form-control(name='lastName' type='text' placeholder='Last name' required=true)
-                                        label(for='lastName') Last Name
-                        .form-group
-                            .form-row
-                                .col-md-8
-                                    .form-label-group
-                                        input#inputAddress.form-control(name='address' type='text' placeholder='Address' required=true)
-                                        label(for='inputAddress') Address
-                                .col-md-4
-                                    .form-label-group
-                                        input#inputPhone.form-control(name='phone' type='text' data-inputmask="'mask': '(999)-999-9999'" required=true)
-                                        label(for='inputPhone') Phone
-                        .form-group
-                            .form-row
-                                .col-md-4
-                                    .form-label-group
-                                        input#inputCity.form-control(name='city' type='text' placeholder='City' required=true)
-                                        label(for='inputCity') City
-                                .col-md-4
-                                    .form-label-group
-                                        input#inputState.form-control(name='state' type='text' placeholder='State' required=true)
-                                        label(for='inputState') State
-                                .col-md-4
-                                    .form-label-group
-                                        input#inputZip.form-control(name='zipcode' type='text' placeholder='Zip code' required=true)
-                                        label(for='inputZip') Zip Code
-                        .form-group
-                            .form-row
-                                .col-md-6
-                                    .form-label-group
-                                        input#inputLicense.form-control(name='license' type='text' placeholder="Driver's License" required=true)
-                                        label(for='inputLicense') Driver's License
-                                .col-md-6
-                                    .form-label-group
-                                        .form-label-group
-                                            input#rentalDate.form-control(type="date" placeholder="YYYY-MM-DD" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" name='rentalDate' required=true)
-                                            label(for='rentalDate') Date of Rental
-                        hr
-                        .font-12.text-center THE FOLLOWING INFORMATION WILL BE USED TO SET THE RELEASE VALUES FOR YOUR BINDINGS AND SHOULD BE GIVEN ACCURATELY
-                        hr
-                        .text-center Skier Type
-                        .form-group.text-center
-                            .form-label-group
-                                .custom-control.custom-radio.custom-control-inline
-                                    input#skierType1.custom-control-input(type='radio' name='skierType' value='1')
-                                    label.custom-control-label(for='skierType1') I
-                                .custom-control.custom-radio.custom-control-inline
-                                    input#skierType2.custom-control-input(type='radio' name='skierType' value='2')
-                                    label.custom-control-label(for='skierType2') II
-                                .custom-control.custom-radio.custom-control-inline
-                                    input#skierType3.custom-control-input(type='radio' name='skierType' value='3')
-                                    label.custom-control-label(for='skierType3') III
-                        .form-group
-                            .form-row
-                                .col-md-4
-                                    .form-label-group
-                                        input#inputWeight.form-control(name='weight' type='number' required=true)
-                                        label(for='inputWeight') Weight Lbs.
-                                .col-md-2
-                                    .form-label-group
-                                        input#inputHeightFt.form-control(name='heightFt' type='number' required=true)
-                                        label(for='inputHeightFt') Height Ft.
-                                .col-md-2
-                                    .form-label-group
-                                        input#inputHeightIn.form-control(name='heightIn' type='number' required=true)
-                                        label(for='inputHeightIn') In.
-                                .col-md-4
-                                    .form-label-group
-                                        input#inputAge.form-control(name='age' type='number' required=true)
-                                        label(for='inputAge') Age
-                        .form-group
-                            .form-row
-                                .col-md-4
-                                    .form-label-group
-                                        input#inputShoeSize.form-control(name='bootSize' type='number' step=0.5 required=true)
-                                        label(for='inputShoeSize') Shoe Size
-                                .col-md-4
-                                    .form-label-group
-                                        select#inputSex.custom-select(name='gender')
-                                            option(selected='') -Sex-
-                                            option(value='M') Male
-                                            option(value='F') Female
-                                .col-md-4.text-center
-                                    | Ski School Today
-                                    .form-label-group
-                                        .custom-control.custom-radio.custom-control-inline
-                                            input#skiSchoolYes.custom-control-input(type='radio' name='skiSchool' value='Yes')
-                                            label.custom-control-label(for='skiSchoolYes') Yes
-                                        .custom-control.custom-radio.custom-control-inline
-                                            input#skiSchoolNo.custom-control-input(type='radio' name='skiSchool' value='No')
-                                            label.custom-control-label(for='skiSchoolNo') No
-
-                        hr
-                        p.text-center RENTAL AND LIABILITY RELEASE AGREEMENT - PLEASE READ CAREFULLY BEFORE SIGNING
-                            ol.font-12.text-left
-                                li I accept for use as is the equipment listed on this form, and accept full responsibility for the care of the equipment while it is in my possession.
-                                li I will be responsible for the replacement at full retail value of any equipment rented under this form, but not returned to the shop.
-                                li I agree to return all rental equipment by the agreed date in clean condition to avoid any additional charges.
-                                li I have received instruction on the use of my equipment and fully understand its use and function.
-                                li I have made no misrepresentations to the ski shop concerning my height, weight, age, or skier type.
-                                li I verify that the visual indicator settings recorded on this form agree with the numbers appearing in the visual indicator windows of the equipment listed on this form.
-                                li I agree to hold harmless and indemnify the ski shop and its owners, agents amd employees, as well as the equipment manufacturers and distributors for any loss or damage, including any that results from claims for personal injury, death or property damage related to the use of this equipment.
-                                li I understand that there are inherent and other risks involved in the sport of snow skiing, for which this equipment is to be used, that injuries are a common and ordinary occurrence of the sport, and I freely and voluntarily assume those risks.
-                                li I understand that a ski-binding-boot system will not release at all times or under all circumstances where release may prevent injury or death, nor is it possible to predict every situation in which it will release, and it is , therefore, no guarantee of my safety.
-                                li I hereby release from any legal liability the ski shop and its owners, agents and employees, as well as the manufacturers and distributors of this equipment from any and all liability for damage and injury or death of myself or to any person or property resulting from the selection, installation, maintenance, adjustment or use of this equipment and for any claim based upon negligence, breach of warranty, contract or other legal theory, accepting myself the full responsibility for any and all such damage, injury or death which may result.
-                                li This agreement is governed by the applicable law of this state or province. If any part of this agreement is determined to be unenforceable, all other parts shall be given full force and effect.
-                            p.text-center POMERELLE SNOWBOARD RENTAL RELEASE AGREEMENT
-                            ol.font-12.text-left
-                                li I accept for use as is, the Snowboard equipment listed on this form and accept full responsibility for the care of the equipment while it is in my possession.
-                                li I will be responsible for the replacement, at full retail value for said equipment rented under this Agreement, which is not returned to the Pomerelle Rental Shop. I acknowledge my obligation to return this equipment in clean and #[u undamaged] condition, to avoid any additional charges.
-                                li I agree to hold harmless and indemnify Pomerelle Ski Resort, who rented or allowed me to use this equipment, aas well, it's owners, agents, employees for any loss or damage, including any that results from claims for personal injury or property damage related in any way to the use of this equipment - except reasonable wear and tear of the equipment itself.
-                                li I understand there are inherent and other risks involved in the sport of snowboarding for which the equipment is to be used. Injuries are a common and ordinary occurrence of snowboarding and I #[u freely assume those risks.]
-                                li I understand that the Snowboard/binding system will not (ordinarily) release during use, nor is it specifically designed to release as the result of forces induced during ordinary operation. There is absolutely no guarantee of my safety while using this Rental Snowboard.
-                                li In consideration of all the above and also in consideration of the equipment being rented to me at my request, I hereby release Pomerelle Ski Area, its owners, agents, and employees from any and all liability for damage and injury to myself, or to any person or property resulting from negligence, installation, maintenance, the selection adjustments and use of this equipment. I accept myself, full and complete responsibility for any and all such damage or injury or death which may result.
-                                li I have made no misrepresentation to Pomerelle Ski Area with regard to any information which they have requested of me related to the rental and/or my use of the rental Snowboard equipment.
-                                li Full instructions on the use of this equipment have been made clear to me, and I understand the use and function of this equipment.
-
-                            .form
-                                .form-group.text-center
-                                    .form-label-group
-                                        .custom-control.custom-checkbox.custom-control
-                                            input#accept.custom-control-input(type='checkbox' name='accept' required=true)
-                                            label.custom-control-label(for='accept')
-                                            strong BY CHECKING THIS BOX AND CLICKING SUBMIT I AGREE THAT I HAVE READ AND UNDERSTAND THESE RENTAL AND LIABILITY RELEASE AGREEMENTS.
-
-
-                        .modal-footer
-                            button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                            button.btn.btn-primary#submit-btn Submit
-
-block scripts
-    script(src='/js/index.js')
+                    i.fas.fa-cash-register.fa-3x
+                    h4.card-title.font-weight-bold Kitchen

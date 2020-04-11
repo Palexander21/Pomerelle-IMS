@@ -7,6 +7,21 @@ const { body, validationResult } = require('express-validator/check'),
 
 let controller = {};
 
+controller.get_rental_shop = function(req, res, next) {
+    return res.render('rental_shop', {
+        title: "Rental Shop",
+        user: req.session.user,
+        admin: req.session.role === 'admin'
+    })
+}
+
+controller.startRental = async (req, res, next) => {
+    res.render('rental_shop', {
+        title: 'Rental Shop',
+        user: req.session.user,
+        admin: req.session.role === 'admin',
+    });
+};
 controller.get_rentals = async function(req, res, next) {
     let open_rentals_list = await open_rentals.find()
         .catch(e => {

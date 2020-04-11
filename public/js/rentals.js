@@ -42,15 +42,13 @@ $(document).ready(function () {
     $('#inputSkiNumber, #inputBootNumber, #inputPoleNumber').on('focusout', function() {
         if ($(this).val().length !== 0) {
             $.ajax({
-                url: "/rentals/id-check",
-                data: {
-                    'number': $(this).val(),
-                },
+                url: `/api/v3/rentals/${$(this).val()}`,
             }).done(data => {
-                if (data !== 'success') {
-                    $(this).addClass('invalid')
-                } else
+                console.log(data)
+                if (data.msg === 'success') {
                     $(this).removeClass('invalid')
+                } else
+                    $(this).addClass('invalid')
             })
         } else {
             $(this).removeClass('invalid')

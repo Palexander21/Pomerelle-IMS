@@ -106,7 +106,6 @@ controller.login = async (req, res, next) => {
 };
 
 controller.logout = (req, res, next) => {
-    console.log(req);
     if (req.session)
         req.session.destroy((err) => {
             if (err)
