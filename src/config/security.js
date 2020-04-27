@@ -41,6 +41,8 @@ acl.allow([{
                 '/rental_shop/rentals/',
                 '/rental_shop/returns/',
                 '/logout/',
+                '/ticketing/',
+                '/ticketing'
             ],
             permissions: '*'
         },

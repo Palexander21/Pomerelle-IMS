@@ -1,0 +1,49 @@
+extends layout
+
+block content
+    ol.breadcrumb
+        li.breadcrumb-item
+            a(href='/') Dashboard
+        li.breadcrumb-item.active Ticketing
+    .row.text-center.center.justify-content-center
+        .col-xl-3.col-md-6.col-sm-6.mb-3
+            .card-pop.item.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(style='width: auto;')
+                .card-body
+                    //i.fas.fa-user-cog.fa-3x
+                    h4.card-title.font-weight-bold Full Day
+            .card-pop.item.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(style='width: auto;')
+                .card-body
+                    //i.fas.fa-users-cog.fa-3x
+                    h4.card-title.font-weight-bold Half Day
+            .card-pop.item.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(style='width: auto;')
+                .card-body
+                    //i.fas.fa-users-cog.fa-3x
+                    h4.card-title.font-weight-bold Night
+            .card-pop.item.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(style='width: auto;')
+                .card-body
+                    //i.fas.fa-money-check-alt.fa-3x
+                    h4.card-title.font-weight-bold Complimentary
+        .col-xl-3.col-md-6.col-sm-6.mb-3
+            .card-pop.item.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(style='width: auto;')
+                .card-body
+                    //i.fas.fa-barcode.fa-3x
+                    h4.card-title.font-weight-bold Private Lesson
+            .card-pop.item.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(style='width: auto;')
+                .card-body
+                    //i.fas.fa-barcode.fa-3x
+                    h4.card-title.font-weight-bold Group Lesson
+            .card-pop.item.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(style='width: auto;')
+                .card-body
+                    //i.fas.fa-barcode.fa-3x
+                    h4.card-title.font-weight-bold Rental Combo
+        .col-xl-6.col-md-8.col-sm-12.mb-3
+            .card.text-center
+               .card-header
+                   | Checkout
+               .card-body
+                   .ul.line-items
+               .card-footer.text-muted
+                    a.btn.btn-primary(href='#') Checkout
+
+block scripts
+    script(src='/js/ticketing.js')

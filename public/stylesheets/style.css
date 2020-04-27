@@ -24,3 +24,19 @@ tr.selected {
   -o-transform: scale(1.05);
   transform: scale(1.05);
 }
+.line-items {
+  text-align: left;
+  margin-left: 5%;
+  list-style-type: none;
+}
+.line-item {
+    padding: 1%;
+    font-size: 18px;
+}
+.item-span {
+  font-weight: bolder;
+  font-size: 20px;
+}
+.item-span:hover {
+  cursor: pointer;
+}
