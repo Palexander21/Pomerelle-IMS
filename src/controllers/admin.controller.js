@@ -26,4 +26,28 @@ controller.get_users = async function (req, res, next) {
     });
 };
 
+controller.get_configure = function (req, res, next) {
+    res.render('configure', {
+        title: 'Configure',
+        user: req.session.user,
+        admin: req.session.role === 'admin',
+    });
+};
+
+controller.get_ticketing = function (req, res, next) {
+    res.render('ticket_config', {
+        title: 'Configure | Tickets',
+        user: req.session.user,
+        admin: req.session.role === 'admin',
+    });
+};
+
+controller.get_kitchen = function (req, res, next) {
+    res.render('kitchen_config', {
+        title: 'Configure | Kitchen',
+        user: req.session.user,
+        admin: req.session.role === 'admin',
+    });
+};
+
 module.exports = controller;

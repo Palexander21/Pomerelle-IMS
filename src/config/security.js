@@ -24,6 +24,12 @@ acl.allow([{
             '/admin/users/update/',
             '/admin/users/delete/',
             '/tables/',
+            '/admin/configure',
+            '/admin/configure/',
+            '/admin/configure/kitchen',
+            '/admin/configure/kitchen/',
+            '/admin/configure/tickets',
+            '/admin/configure/tickets/',
         ],
         permissions: '*',
     }]

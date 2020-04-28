@@ -2,19 +2,15 @@ extends layout
 
 block content
     ol.breadcrumb
-        li.breadcrumb-item.active
+        li.breadcrumb-item
             a(href='/') Dashboard
+        li.breadcrumb-item.active Admin
     .row.text-center.justify-content-center.center
         .col-xl-3.col-md-4.col-sm-6.mb-3
-            a.card-pop.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(href='/rental_shop', style='width: auto;')
-                .card-body
-                    i.fas.fa-skiing.fa-3x
-                    h4.card-title.font-weight-bold Rental Shop
-        .col-xl-3.col-md-4.col-sm-6.mb-
-            a.card-pop.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(href='/ticketing', style='width: auto;')
+            a.card-pop.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(href='#', style='width: auto;')
                 .card-body
                     i.fas.fa-ticket-alt.fa-3x
-                    h4.card-title.font-weight-bold Ticket Office
+                    h4.card-title.font-weight-bold Tickets
         .col-xl-3.col-md-4.col-sm-6.mb-3
             a.card-pop.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(href='#', style='width: auto;')
                 .card-body
