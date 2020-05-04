@@ -1,27 +1,19 @@
 $(document).ready(function () {
-    let table = $.fn.createTable("#employeeDataTable", {stateSave: true}, 1);
-    let _id;
-    $('#employeeDel').on('click', ( function () {
-        let selected = $.fn.get_selected();
-        $('#delMsg').html(`Are you sure you want to delete <strong>${selected}</strong>?`);
-    })) ;
-
+    let table = $.fn.createTable('#ticketDataTable', {saveState: true}, 0);
     $('#createBtn').on('click', function (e) {
         e.preventDefault();
-        let data = $('#registerForm').serializeArray().reduce(function (obj, item) {
+        let data = $('#ticketForm').serializeArray().reduce(function (obj, item) {
             obj[item.name] = item.value;
             return obj;
         }, {});
         $.ajax({
-            url: '/api/v3/users/create',
+            url: '/api/v3/tickets',
             data: data,
             type: 'POST',
             success: function (res) {
                 table.row.add([
-                    `${data.firstName} ${data.lastName}`,
-                    data.username,
-                    data.startDate,
-                    data.position
+                    data.ticket,
+                    data.price,
                 ]).draw(false);
                 $('#createModal').modal('hide');
                 $('#completedMsg').html(res.msg);
@@ -29,23 +21,18 @@ $(document).ready(function () {
             },
             error: function (res) {
                 console.error(res);
-                $('#errmsg').html(res.responseJSON.msg)
+                $('#errmsg').html(res.statusText)
             }
         })
     });
-    $('#employeeUpdate').on('click', function () {
+    $('#ticketUpdate').on('click', function () {
         let selected = $.fn.get_selected();
         $.ajax({
-            url: `/api/v3/users/user/${selected}`,
+            url: `/api/v3/tickets/${selected}`,
             type: 'GET',
             success: function (res) {
-                $('#update_firstName').val(res.firstName);
-                $('#update_lastName').val(res.lastName);
-                $('#update_username').val(res.username);
-                $('#update_position').val(res.position);
-                $('#update_type').val(res.role);
-                $('#update_startDate').val(res.startDate);
-                _id = res._id;
+                $('#update_ticket').val(res.ticket);
+                $('#update_price').val(res.price);
             },
             error: function (res) {
                 console.error(res);
@@ -60,17 +47,16 @@ $(document).ready(function () {
             obj[name] = item.value;
             return obj;
         }, {});
+        let selected = $.fn.get_selected();
         let tds = $.fn.get_tds();
         $.ajax({
-            url: `/api/v3/users/update/${_id}`,
+            url: `/api/v3/tickets/${selected}`,
             data: data,
             type: 'PUT',
             success: function (res) {
-                console.log(res.user);
-                tds[0].textContent = `${res.user.firstName} ${res.user.lastName}`;
-                tds[1].textContent = `${res.user.username}`;
-                tds[2].textContent = `${res.user.startDate}`;
-                tds[3].textContent = `${res.user.position}`;
+                console.log(res)
+                tds[0].textContent = `${res.ticket.ticket}`;
+                tds[1].textContent = `${res.ticket.price}`;
                 $('#updateModal').modal('hide');
                 $('#completedMsg').html(res.msg);
                 $('#completedModal').modal('show');
@@ -84,11 +70,15 @@ $(document).ready(function () {
             }
         })
     });
+    $('#ticketDel').on('click', ( function () {
+        let selected = $.fn.get_selected();
+        $('#delMsg').html(`Are you sure you want to delete <strong>${selected}</strong>?`);
+    })) ;
     $('#deleteBtn').on('click', function (e) {
         e.preventDefault();
         let selected = $.fn.get_selected();
         $.ajax({
-            url: `/api/v3/users/delete/${selected}`,
+            url: `/api/v3/tickets/${selected}`,
             type: 'DELETE',
             success: function (res) {
                 $('#deleteModal').modal('hide');
