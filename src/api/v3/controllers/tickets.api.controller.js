@@ -21,7 +21,6 @@ controller.get_tickets = async (req, res) => {
 }
 
 controller.get_ticket_price = async (req, res) => {
-    console.log(req.params)
     let price = await Tickets.findOne({ticket: req.params.ticket})
         .catch(err => {
             console.error(`DB query failed for ticket: ${req.params.ticket}`)
@@ -29,7 +28,6 @@ controller.get_ticket_price = async (req, res) => {
                 message: err.error || `DB query failed for ticket: ${req.params.ticket}`
             })
         })
-    console.log(price)
     if (price)
         return res.status(200).send(price)
     else

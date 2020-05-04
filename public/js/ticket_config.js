@@ -32,7 +32,7 @@ $(document).ready(function () {
             type: 'GET',
             success: function (res) {
                 $('#update_ticket').val(res.ticket);
-                $('#update_price').val(res.price);
+                $('#update_price').val(res.price.toFixed(2));
             },
             error: function (res) {
                 console.error(res);
@@ -56,7 +56,7 @@ $(document).ready(function () {
             success: function (res) {
                 console.log(res)
                 tds[0].textContent = `${res.ticket.ticket}`;
-                tds[1].textContent = `${res.ticket.price}`;
+                tds[1].textContent = `${res.ticket.price.toFixed(2)}`;
                 $('#updateModal').modal('hide');
                 $('#completedMsg').html(res.msg);
                 $('#completedModal').modal('show');
