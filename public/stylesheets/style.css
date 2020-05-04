@@ -40,3 +40,11 @@ tr.selected {
 .item-span:hover {
   cursor: pointer;
 }
+.item-price {
+  float: right;
+  width: 20%;
+  text-align: right;
+}
+#total, #subtotal, #tax {
+  text-align: right;
+}

@@ -3,5 +3,6 @@ const express = require('express'),
     controller = require('../controllers/tickets.api.controller')
 ;
 
+router.get('/:ticket', controller.get_ticket_price);
 
 module.exports = router;
