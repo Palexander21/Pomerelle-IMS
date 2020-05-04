@@ -30,8 +30,8 @@ block content
                                     td #{user.startDate}
                                     td #{user.position}
                 button#employeeAdd.btn.btn-primary.table-btn(type='button' data-toggle='modal' data-target='#createModal') Add
-                button#employeeUpdate.btn.btn-secondary.table-btn.disabled(type='button' disabled data-toggle='modal' data-target='#updateModal') Update
-                button#employeeDel.btn.btn-danger.table-btn.disabled(type='button' disabled data-toggle='modal' data-target='#deleteModal') Delete
+                button#employeeUpdate.update-btn.btn.btn-secondary.table-btn.disabled(type='button' disabled data-toggle='modal' data-target='#updateModal') Update
+                button#employeeDel.delete-btn.btn.btn-danger.table-btn.disabled(type='button' disabled data-toggle='modal' data-target='#deleteModal') Delete
             .card-footer.small.text-muted.date-updated
     #createModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='createModal' aria-hidden='true')
         .modal.modal-dialog.modal-dialog-centered(role='document')
@@ -176,4 +176,5 @@ block scripts
     script(type='text/javascript' charset='utf8' src='https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js')
     script(type='text/javascript' charset='utf8' src='https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js')
     script(src="/js/datatables.js")
+    script(src="/js/users.js")
     script(src="/js/admin.js")

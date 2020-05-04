@@ -1,0 +1,30 @@
+extends layout
+
+block content
+    ol.breadcrumb
+        li.breadcrumb-item
+            a(href='/') Dashboard
+        li.breadcrumb-item.active Ticketing
+    .row.text-center.center.justify-content-center
+        each ticket, index in tickets
+            if index % 4 === 0
+                .col-xl-3.col-md-6.col-sm-6.mb-3
+                    each ticketRow, j in tickets.slice(index, index + 4)
+                        .card-pop.item.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(style='width: auto;')
+                            .card-body
+                                h4.card-title.font-weight-bold #{ticketRow.ticket}
+        .col-xl-6.col-md-8.col-sm-12.mb-3
+            .card.text-center
+               .card-header
+                   | Checkout
+               .card-body
+                   .ul.line-items
+               .card-footer.text-muted
+                   #subtotal Subtotal $0.00
+                   #tax Tax (6%) $0.00
+                   #total Total $0.00
+                   .btn.btn-danger.mr-4(id='cancel-btn') Cancel
+                   a.btn.btn-primary(href='#') Charge
+
+block scripts
+    script(src='/js/ticketing.js')
