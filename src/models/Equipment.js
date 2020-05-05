@@ -18,14 +18,12 @@ const EquipmentSchema = new mongoose.Schema({
     last_used: {
         type: String,
         required: false,
-        minlength: 3,
         maxlength: 50,
         trim: true,
     },
     last_tune: {
         type: String,
         required: false,
-        minlength: 3,
         maxlength: 50,
         trim: true,
     },
