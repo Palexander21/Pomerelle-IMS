@@ -1,7 +1,4 @@
 extends layout
-block head
-    link(rel='stylesheet' type='text/css' href='https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css')
-    link(rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css')
 
 block content
     ol.breadcrumb
@@ -10,142 +7,19 @@ block content
         li.breadcrumb-item
             a(href='/admin') Admin
         li.breadcrumb-item.active Inventory
-    .card.mb-3
-        .card-header
-            h5 Rental Equipment
-            .card-body
-                .table-responsive
-                    table#equipmentDataTable.table.table-bordered.data-table(width='100%' cellspacing='0')
-                        thead
-                            tr
-                                th Item
-                                th Last Used
-                                th Last Tuned
-                                th Size
-                                th Number
-                        tbody
-                            each item in equipment
-                                tr
-                                    td #{item.type}
-                                    td #{item.last_used}
-                                    td #{item.last_tune}
-                                    td #{item.size}
-                                    td #{item.number}
-                button#add.btn.btn-primary.table-btn(type='button' data-toggle='modal' data-target='#createModal') Add
-                button#update.update-btn.btn.btn-secondary.table-btn.disabled(type='button' disabled data-toggle='modal' data-target='#updateModal') Update
-                button#del.delete-btn.btn.btn-danger.table-btn.disabled(type='button' disabled data-toggle='modal' data-target='#deleteModal') Delete
-            .card-footer.small.text-muted.date-updated
-    #createModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='createModal' aria-hidden='true')
-        .modal.modal-dialog.modal-dialog-centered(role='document')
-            .modal-content
-                .modal-header
-                    h5#exampleModalLongTitle.modal-title New Equipment
-                    button.close(type='button' data-dismiss='modal' aria-label='Close')
-                        span(aria-hidden='true') &times;
-                .modal-body
-                    form#equipmentForm(method='POST' action='/admin/inventory/equipment')
-                        .form-group
-                            .form-row
-                                .col-md-6
-                                    .form-label-group
-                                        select#type.custom-select(name='type')
-                                            option(selected='') -Type-
-                                            option(value='ski') Skis
-                                            option(value='snowboard') Snowboard
-                                            option(value='boots') Boots
-                                            option(value='poles') Poles
-                                .col-md-6
-                                    .form-label-group
-                                        input#number.form-control(type='text' placeholder='Number' required=true name='number')
-                                        label(for='number') Number
-                        .form-group
-                            .form-row
-                                .col-md-4
-                                    .form-label-group
-                                        input#size.form-control(type='text' placeholder='Size' required=true name='size')
-                                        label(for='size') Size
-                                .col-md-4
-                                    .form-label-group
-                                        input#last_tune.form-control(type="date" placeholder="YYYY-MM-DD" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" name='last_tune')
-                                        label(for='last_tune') Last Tune
-                                .col-md-4
-                                    .form-label-group
-                                        input#last_used.form-control(type="date" placeholder="YYYY-MM-DD" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" name='last_used')
-                                        label(for='last_used') Last Used
-                        .form-group
-                            .form-label-group
-                                textarea#note.form-control(name='note' rows='5' placeholder='Notes...')
-                        .modal-footer
-                            button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                            button.btn.btn-primary#createBtn Add equipment
-    #completedModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='completedModalTitle' aria-hidden='true')
-        .modal.modal-dialog.modal-dialog-centered(role='document')
-            .modal-content
-                .modal-header
-                    h5#completedModalTitle.modal-title
-                    button.close(type='button' data-dismiss='modal' aria-label='Close')
-                        span(aria-hidden='true') &times;
-                .modal-body#completedMsg
-                    |
-                .modal-footer
-                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-    #updateModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='updateModal' aria-hidden='true')
-        .modal.modal-dialog.modal-dialog-centered(role='document')
-            .modal-content
-                .modal-header
-                    h5#updateModalTitle.modal-title Update Equipment
-                    button.close(type='button' data-dismiss='modal' aria-label='Close')
-                        span(aria-hidden='true') &times;
-                .modal-body
-                    p.text-center.text-danger#errmsg-update
-                        form(id='updateForm').form-signin
-                            .form-group
-                                .form-row
-                                    .col-md-6
-                                        .form-label-group
-                                            select#update_type.custom-select(name='type')
-                                                option(selected='') -Type-
-                                                option(value='ski') Skis
-                                                option(value='snowboard') Snowboard
-                                                option(value='boots') Boots
-                                                option(value='poles') Poles
-                                    .col-md-6
-                                        .form-label-group
-                                            input#update_number.form-control(type='text' placeholder='Number' required=true name='update_number')
-                                            label(for='update_number') Number
-                            .form-group
-                                .form-row
-                                    .col-md-4
-                                        .form-label-group
-                                            input#update_size.form-control(type='text' placeholder='Size' required=true name='update_size')
-                                            label(for='update_size') Size
-                                    .col-md-4
-                                        .form-label-group
-                                            input#update_last_tune.form-control(type="date" placeholder="YYYY-MM-DD" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" name='update_last_tune')
-                                            label(for='update_last_tune') Last Tune
-                                    .col-md-4
-                                        .form-label-group
-                                            input#update_last_used.form-control(type="date" placeholder="YYYY-MM-DD" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" name='update_last_used')
-                                            label(for='update_last_used') Last Used
-                            .form-group
-                                .form-label-group
-                                    textarea#update_note.form-control(name='update_note' rows='5' placeholder='Notes...')
-                            button.btn.btn-lg.btn-primary.btn-block#updateBtn Update Equipment
-    #deleteModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='deleteModal' aria-hidden='true')
-        .modal.modal-dialog.modal-dialog-centered(role='document')
-            .modal-content
-                .modal-header
-                    h5#deletedModalTitle.modal-title Delete Equipment
-                    button.close(type='button' data-dismiss='modal' aria-label='Close')
-                        span(aria-hidden='true') &times;
-                .modal-body
-                    p.text-center.text-danger#err
-                    p#delMsg
-                .modal-footer
-                    button.btn.btn-danger#deleteBtn Confirm
-                    button.btn.btn-secondary(type='button' data-dismiss='modal') Cancel
-block scripts
-    script(type='text/javascript' charset='utf8' src='https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js')
-    script(type='text/javascript' charset='utf8' src='https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js')
-    script(src="/js/datatables.js")
-    script(src='/js/inventory.js')
+    .row.text-center.justify-content-center.center
+        .col-xl-3.col-md-4.col-sm-6.mb-3
+            a.card-pop.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(href='/admin/inventory/tickets', style='width: auto;')
+                .card-body
+                    i.fas.fa-ticket-alt.fa-3x
+                    h4.card-title.font-weight-bold Tickets
+        .col-xl-3.col-md-4.col-sm-6.mb-3
+            a.card-pop.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(href='/admin/inventory/kitchen', style='width: auto;')
+                .card-body
+                    i.fas.fa-cash-register.fa-3x
+                    h4.card-title.font-weight-bold Kitchen
+        .col-xl-3.col-md-4.col-sm-6.mb-3
+            a.card-pop.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(href='/admin/inventory/equipment', style='width: auto;')
+                .card-body
+                    i.fas.fa-skiing.fa-3x
+                    h4.card-title.font-weight-bold Rental Equipment

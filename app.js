@@ -4,6 +4,7 @@ require('./src/models/Customers');
 require('./src/models/OpenRentals');
 require('./src/models/Rentals');
 require('./src/models/Tickets');
+require('./src/models/Kitchen');
 require('dotenv').config();
 const createError = require('http-errors'),
     express = require('express'),
@@ -57,7 +58,7 @@ initApp = function() {
         saveUninitialized: false,
         cookie: {
             secure: 'auto',
-            maxAge: 3600000 // 1 hour
+            maxAge: 3600000 * 4 // 1 hour
         }
     }));
 

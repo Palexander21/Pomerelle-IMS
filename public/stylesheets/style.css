@@ -48,3 +48,29 @@ tr.selected {
 #total, #subtotal, #tax {
   text-align: right;
 }
+.grid-stack > .grid-stack-item > .grid-stack-item-content {
+  margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0;
+  width: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.kitchen-tile {
+  border-radius: 1rem !important;
+}
+.kitchen-tile-content {
+  text-align: center;
+  padding: 30% 0;
+  margin: auto;
+}
+.kitchen-tile-content:hover {
+  cursor: pointer;
+}
+.jumbotron {
+  padding: 1%;
+  min-height: 50vh;
+}

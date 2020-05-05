@@ -1,11 +1,22 @@
 $(document).ready(function () {
     let items;
-
-
+    let opts = {
+        animate: true,
+        verticalMargin: 5,
+        float: true,
+    }
+    let grid = GridStack.init(opts);
+    let page;
+    if (window.location.href.indexOf('ticketing') !== -1)
+        page = 'tickets';
+    else if (window.location.href.indexOf('kitchen') !== -1)
+        page = 'kitchen';
+    else if (window.location.href.indexOf('kitchen') !== -1)
+        page = 'rentals';
     $('.item').on('click',function () {
         let val = $(this)[0].innerText
         $.ajax({
-            url: `api/v3/tickets/${val}`,
+            url: `api/v3/pos/${page}/${val}`,
             type: 'GET',
             success: function (data) {
                 $('.line-items').append(`<li class="line-item" id="${val}">

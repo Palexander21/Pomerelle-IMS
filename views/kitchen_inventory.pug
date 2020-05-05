@@ -10,47 +10,53 @@ block content
         li.breadcrumb-item
             a(href='/admin') Admin
         li.breadcrumb-item
-            a(href='/admin/configure') Configure
-        li.breadcrumb-item.active Tickets
+            a(href='/admin/inventory') Inventory
+        li.breadcrumb-item.active Kitchen
     .card.mb-3
         .card-header
             .card-body
                 .table-responsive
-                    table#ticketDataTable.table.table-bordered.data-table(style="width='100%'")
+                    table#kitchenDataTable.table.table-bordered.data-table(style="width='100%'")
                         thead
                             tr
-                                th Ticket
+                                th Item
+                                th Quantity
                                 th Price
                         tbody
-                            each ticket in tickets
+                            each item in items
                                 tr
-                                    td #{ticket.ticket}
-                                    td #{ticket.price.toFixed(2)}
-                button#ticketAdd.btn.btn-primary.table-btn(type='button' data-toggle='modal' data-target='#createModal') Add
-                button#ticketUpdate.update-btn.btn.btn-secondary.table-btn.disabled(type='button' disabled data-toggle='modal' data-target='#updateModal') Update
-                button#ticketDel.delete-btn.btn.btn-danger.table-btn.disabled(type='button' disabled data-toggle='modal' data-target='#deleteModal') Delete
+                                    td #{item.name}
+                                    td #{item.quantity}
+                                    td #{item.price.toFixed(2)}
+                button#add.btn.btn-primary.table-btn(type='button' data-toggle='modal' data-target='#createModal') Add
+                button#update.update-btn.btn.btn-secondary.table-btn.disabled(type='button' disabled data-toggle='modal' data-target='#updateModal') Update
+                button#del.delete-btn.btn.btn-danger.table-btn.disabled(type='button' disabled data-toggle='modal' data-target='#deleteModal') Delete
             .card-footer.small.text-muted.date-updated
     #createModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='createModal' aria-hidden='true')
         .modal.modal-dialog.modal-dialog-centered(role='document')
             .modal-content
                 .modal-header
-                    h5#modalTitle.modal-title New Ticket
+                    h5#modalTitle.modal-title New Item
                     button.close(type='button' data-dismiss='modal' aria-label='Close')
                         span(aria-hidden='true') &times;
                 .modal-body
                     p.text-center.text-danger#errmsg
-                    form(id='ticketForm').form-signin
+                    form(id='kitchenForm').form-signin
                         .form-group
                             .form-row
-                                .col-md-6
+                                .col-md-4
                                     .form-label-group
-                                        input#ticket.form-control(type='text' placeholder='Ticket Name' required autofocus='autofocus', name='ticket')
-                                        label(for='ticket') Ticket Name
-                                .col-md-6
+                                        input#name.form-control(type='text' placeholder='Item Name' required autofocus='autofocus', name='name')
+                                        label(for='name') Item Name
+                                .col-md-4
+                                    .form-label-group
+                                        input#quantity.form-control(type='text' placeholder='quantity' name='quantity')
+                                        label(for='quantity') Quantity
+                                .col-md-4
                                     .form-label-group
                                         input#price.form-control(type='text' placeholder='Price' required name='price')
                                         label(for='price') Price
-                        button.btn.btn-lg.btn-primary.btn-block#createBtn Create Ticket
+                        button.btn.btn-lg.btn-primary.btn-block#createBtn Create Item
                     .text-center
     #completedModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='completedModalTitle' aria-hidden='true')
         .modal.modal-dialog.modal-dialog-centered(role='document')
@@ -67,7 +73,7 @@ block content
         .modal.modal-dialog.modal-dialog-centered(role='document')
             .modal-content
                 .modal-header
-                    h5#updateModalTitle.modal-title Update Ticket
+                    h5#updateModalTitle.modal-title Update Item
                     button.close(type='button' data-dismiss='modal' aria-label='Close')
                         span(aria-hidden='true') &times;
                 .modal-body
@@ -75,20 +81,24 @@ block content
                         form(id='updateForm').form-signin
                             .form-group
                                 .form-row
-                                    .col-md-6
+                                    .col-md-4
                                         .form-label-group
-                                            input#update_ticket.form-control(type='text' placeholder='Ticket Name' name='update_ticket')
-                                            label(for='update_ticket') Ticket Name
-                                    .col-md-6
+                                            input#update_name.form-control(type='text' placeholder='Item Name' name='update_name')
+                                            label(for='update_name') Item Name
+                                    .col-md-4
+                                        .form-label-group
+                                            input#update_quantity.form-control(type='text' placeholder='Item quantity' name='update_quantity')
+                                            label(for='update_quantity') Quantity
+                                    .col-md-4
                                         .form-label-group
                                             input#update_price.form-control(type='text' placeholder='Price' name='update_price')
                                             label(for='update_price') Price
-                            button.btn.btn-lg.btn-primary.btn-block#updateBtn Update Ticket
+                            button.btn.btn-lg.btn-primary.btn-block#updateBtn Update Item
     #deleteModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='deleteModal' aria-hidden='true')
         .modal.modal-dialog.modal-dialog-centered(role='document')
             .modal-content
                 .modal-header
-                    h5#deletedModalTitle.modal-title Delete Ticket
+                    h5#deletedModalTitle.modal-title Delete Item
                     button.close(type='button' data-dismiss='modal' aria-label='Close')
                         span(aria-hidden='true') &times;
                 .modal-body
@@ -102,6 +112,6 @@ block scripts
     script(type='text/javascript' charset='utf8' src='https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js')
     script(type='text/javascript' charset='utf8' src='https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js')
     script(src="/js/datatables.js")
-    script(src="/js/ticket_config.js")
+    script(src="/js/kitchen_inventory.js")
     script(src="/js/admin.js")
 

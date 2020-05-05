@@ -19,6 +19,7 @@ module.exports = (function (app) {
     let usersRouter = require('../routes/users.route');
     let adminRouter = require('../routes/admin.route');
     let ticketRouter = require('../routes/tickets.route');
+    let kitchenRouter = require('../routes/kitchen.route');
 
     app.use(unless(auth.isAuthorized, '/api/\*', '/users/login'));
 
@@ -27,6 +28,7 @@ module.exports = (function (app) {
     app.use('/rental_shop', rentalRouter);
     app.use('/admin', adminRouter);
     app.use('/ticketing', ticketRouter);
+    app.use('/kitchen', kitchenRouter);
 
     app.use(unless(auth.api_auth, '/api/v3/users/login', '/api/v3/users/logout'));
 
@@ -34,10 +36,10 @@ module.exports = (function (app) {
     let users_api = require('../api/v3/routes/users.api.route');
     let rentals_api = require('../api/v3/routes/rentals.api.route');
     let equipment_api = require('../api/v3/routes/equipment.api.route');
-    let tickets_api = require('../api/v3/routes/tickets.api.route');
+    let pos_api = require('../api/v3/routes/pos.api.route');
     app.use('/api/v3/users', users_api);
     app.use('/api/v3/rentals', rentals_api);
     app.use('/api/v3/equipment', equipment_api);
-    app.use('/api/v3/tickets', tickets_api);
+    app.use('/api/v3/pos', pos_api);
 
 });
