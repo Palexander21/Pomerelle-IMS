@@ -67,7 +67,8 @@ controller.check_id = async (req, res) => {
         });
     if (valid)
         return res.send({
-            msg: "success"
+            msg: "success",
+            valid
         });
     else
         return res.status(404).send({

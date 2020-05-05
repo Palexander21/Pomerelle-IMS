@@ -30,6 +30,8 @@ acl.allow([{
             '/admin/configure/kitchen/',
             '/admin/configure/tickets',
             '/admin/configure/tickets/',
+            '/admin/inventory',
+            '/admin/inventory/'
         ],
         permissions: '*',
     }]

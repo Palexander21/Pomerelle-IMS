@@ -1,6 +1,7 @@
 const { body, validationResult } = require('express-validator/check'),
     mongoose = require('mongoose'),
     Users = mongoose.model('Users'),
+    Equipment = mongoose.model('Equipment'),
     Tickets = mongoose.model('Tickets');
 
 let controller = {};
@@ -56,5 +57,19 @@ controller.get_kitchen = function (req, res, next) {
         admin: req.session.role === 'admin',
     });
 };
+
+controller.get_inventory = async function (req, res, next) {
+        let equipment = await Equipment.find()
+            .catch((err) => {
+                console.error(`Failed to find equipment: ${err}`);
+                res.send('Failed to find equipment');
+            });
+        res.render('Inventory', {
+            title: 'Inventory',
+            user: req.session.user,
+            equipment: equipment,
+            admin: req.session.role === 'admin',
+        });
+}
 
 module.exports = controller;
