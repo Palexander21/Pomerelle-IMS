@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    ol.breadcrumb
+        li.breadcrumb-item
+            a(href='/') Dashboard
+        li.breadcrumb-item
+            a(href='/admin') Admin
+        li.breadcrumb-item.active Inventory
+    .row.text-center.justify-content-center.center
+        .col-xl-3.col-md-4.col-sm-6.mb-3
+            a.card-pop.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(href='/admin/inventory/tickets', style='width: auto;')
+                .card-body
+                    i.fas.fa-ticket-alt.fa-3x
+                    h4.card-title.font-weight-bold Tickets
+        .col-xl-3.col-md-4.col-sm-6.mb-3
+            a.card-pop.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(href='/admin/inventory/kitchen', style='width: auto;')
+                .card-body
+                    i.fas.fa-cash-register.fa-3x
+                    h4.card-title.font-weight-bold Kitchen
+        .col-xl-3.col-md-4.col-sm-6.mb-3
+            a.card-pop.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(href='/admin/inventory/equipment', style='width: auto;')
+                .card-body
+                    i.fas.fa-skiing.fa-3x
+                    h4.card-title.font-weight-bold Rental Equipment
