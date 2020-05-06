@@ -59,7 +59,7 @@ initApp = function() {
         saveUninitialized: false,
         cookie: {
             secure: 'auto',
-            maxAge: 3600000 * 4 // 1 hour
+            maxAge: 3600000 // 1 hour
         }
     }));
 
