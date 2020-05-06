@@ -7,8 +7,9 @@ $(document).ready(function () {
         disableDrag: true,
         disableResize: true,
     }
-    let grid = GridStack.init(opts);
-    let page;
+    let page,
+        grid
+    ;
     if (window.location.href.indexOf('ticketing') !== -1)
         page = 'tickets';
     else if (window.location.href.indexOf('kitchen') !== -1)
@@ -61,14 +62,39 @@ $(document).ready(function () {
         sessionStorage.setItem(`${page}-line-items`, JSON.stringify($('.line-items')[0].innerHTML));
         console.debug("session saved")
     }
-
     $.fn.loadSession = function () {
         items = sessionStorage.getItem(`${page}-line-items`);
         items = JSON.parse(items)
         $('.line-items').append(items)
         $.fn.updateTotal();
     }
+    let config_items;
+    $.fn.loadConfig = function (config) {
+        config_items = JSON.parse(config)
+        config_items.forEach(el => {
+            let id = `#${el.id}`
+            $(id).attr('data-gs-x', el.x)
+            $(id).attr('data-gs-y', el.y)
+            $(id).attr('data-gs-width', el.w)
+            $(id).attr('data-gs-height', el.h)
+            $(id).attr('data-gs-x', el.x)
+        })
 
+        grid = GridStack.init(opts);
+    }
+
+    $.ajax({
+        url: `/api/v3/pos/configuration/${page}-dashboard`,
+        method: 'GET',
+        success: function (res) {
+            $.fn.loadConfig(res.config)
+        },
+        error: function (res) {
+            $('.toast-body').html(res.responseJSON.msg)
+            $('.toast').toast('show')
+            grid = GridStack.init(opts);
+        }
+    });
     if (sessionStorage.getItem(`${page}-line-items`))
         $.fn.loadSession();
 })

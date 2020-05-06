@@ -12,7 +12,7 @@ $(document).ready(function () {
             type: 'POST',
             success: function (res) {
                 table.row.add([
-                    data.ticket,
+                    data.name,
                     data.price,
                 ]).draw(false);
                 $('#createModal').modal('hide');
@@ -31,7 +31,7 @@ $(document).ready(function () {
             url: `/api/v3/pos/tickets/${selected}`,
             type: 'GET',
             success: function (res) {
-                $('#update_ticket').val(res.ticket);
+                $('#update_name').val(res.name);
                 $('#update_price').val(res.price.toFixed(2));
             },
             error: function (res) {
@@ -55,7 +55,7 @@ $(document).ready(function () {
             type: 'PUT',
             success: function (res) {
                 console.log(res)
-                tds[0].textContent = `${res.ticket.ticket}`;
+                tds[0].textContent = `${res.ticket.name}`;
                 tds[1].textContent = `${res.ticket.price.toFixed(2)}`;
                 $('#updateModal').modal('hide');
                 $('#completedMsg').html(res.msg);

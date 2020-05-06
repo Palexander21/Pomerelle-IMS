@@ -23,4 +23,8 @@ router.put('/kitchen/:item', controller.update_item);
 
 router.delete('/kitchen/:item', controller.delete_item);
 
+router.get('/configuration/:id', controller.get_config)
+
+router.post('/configuration', controller.save_config)
+
 module.exports = router;

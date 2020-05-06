@@ -64,7 +64,6 @@ tr.selected {
 }
 .kitchen-tile-content {
   text-align: center;
-  padding: 30% 0;
   margin: auto;
 }
 .kitchen-tile-content:hover {
@@ -73,4 +72,17 @@ tr.selected {
 .jumbotron {
   padding: 1%;
   min-height: 50vh;
+}
+
+.toast {
+  position: absolute;
+  bottom: 90px;
+  right: 10px;
+  width: 300px;
+  height: 100px;
+}
+.toast, .toast-header {
+  background-color: rgba(24, 26, 27, 0.85);
+  border-bottom-color: rgba(102, 102, 102, 0.05) ;
+  color: #dae0e5;
 }

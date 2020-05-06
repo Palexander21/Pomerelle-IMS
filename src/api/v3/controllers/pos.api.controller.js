@@ -1,7 +1,9 @@
 const { body, validationResult } = require('express-validator/check');
 const mongoose = require('mongoose');
 const Tickets = mongoose.model('Tickets'),
-    Kitchen = mongoose.model('Kitchen');
+    Kitchen = mongoose.model('Kitchen'),
+    Configuration = mongoose.model('Configuration')
+    ;
 
 let controller = {};
 
@@ -210,6 +212,48 @@ controller.delete_item = async (req, res) => {
         })
     }
     return res.send({msg: 'Item successfully deleted'})
+}
 
+controller.get_config = async (req, res) => {
+    let config = await Configuration.findOne({id: req.params.id})
+        .catch(err => {
+            console.error(`DB query failed for: ${req.params.id}`)
+            res.status(500).send({
+                message: err.error || `DB query failed for: ${req.params.id}`
+            })
+        })
+    if (config)
+        return res.status(200).send(config)
+    else
+        return res.status(404).send({msg: 'Failed to find configuration'})
+}
+
+controller.save_config = async (req, res) => {
+    const errors = validationResult(req);
+    if (errors.isEmpty()) {
+        let config = await Configuration.findOne({id: req.body.id})
+        if (config) {
+            config.config = req.body.config;
+            config.id = req.body.id;
+            await config.save();
+        }
+        else {
+            config = new Configuration(req.body);
+            await config.save()
+                .catch(err => {
+                    return res.status(500).send({
+                        msg: err.message || 'Failed to create new config'
+                    })
+                });
+            return res.status(201).send({
+                msg: `Configuration ${req.body.id} successfully saved.`
+            })
+        }
+    } else {
+        console.error('Failed to validate POST request: ' + errors.array());
+        return res.status(400).send({
+            msg: 'Failed to validate POST, ensure all fields are filled',
+        });
+    }
 }
 module.exports = controller;

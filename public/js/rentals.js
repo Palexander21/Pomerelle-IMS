@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    $('#inputPhone').inputmask({"mask": "(999)-999-9999"});
     $('.open-rentals').click( function (e) {
         let renter_data = rental_data.find(renter => renter.customer.license === e.target.id);
         $('#firstName').val(renter_data.customer.firstName);
