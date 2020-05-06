@@ -28,7 +28,6 @@ $(document).ready(function () {
                 h: $this.attr('data-gs-height'),
                 id: $this.attr('id'),
             });
-            console.log(items)
         });
 
         $.fn.saveConfig();
@@ -47,6 +46,13 @@ $(document).ready(function () {
             success: function (res) {
                 $('.toast-body').html(res.msg)
                 $('.toast').toast('show')
+                console.log('Toast')
+            },
+            error: function (res) {
+                $('.toast-body').html(res.msg)
+                $('.toast').toast('show')
+                console.log(res)
+
             }
         })
     }
@@ -73,7 +79,7 @@ $(document).ready(function () {
             $.fn.loadConfig(res.config)
         },
         error: function (res) {
-            $('.toast-body').html(res.responseJSON.msg)
+            $('.toast-body').html(res.msg)
             $('.toast').toast('show')
             grid = GridStack.init(opts);
             $('.grid-stack').addTouch();

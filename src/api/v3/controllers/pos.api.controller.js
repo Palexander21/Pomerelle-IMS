@@ -236,6 +236,9 @@ controller.save_config = async (req, res) => {
             config.config = req.body.config;
             config.id = req.body.id;
             await config.save();
+            return res.status(201).send({
+                msg: `Configuration ${req.body.id} successfully saved.`
+            })
         }
         else {
             config = new Configuration(req.body);

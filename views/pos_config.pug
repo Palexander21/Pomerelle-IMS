@@ -13,18 +13,19 @@ block content
         li.breadcrumb-item
             a(href='/admin/configure') Configure
         li.breadcrumb-item.active #{active}
-    .jumbotron.jumbotron-fluid(style="width: 66%; float: left;")
-        .container
-            .grid-stack
-                each item, i in inventory
-                    .grid-stack-item.card-pop.item.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark.kitchen-tile(id=`_${i}` data-gs-width='2' data-gs-height='2')
-                        .grid-stack-item-content
-                            .card-body.kitchen-tile-content( style='width: auto')
-                                .card-title.font-weight-bold #{item.name}
+    .row
+        .col-xl-8.col-md-12.col-sm-12
+            .jumbotron.jumbotron-fluid()
+                .container
+                    .grid-stack
+                        each item, i in inventory
+                            .grid-stack-item.card-pop.item.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark.kitchen-tile(id=`_${i}` data-gs-width='2' data-gs-height='2')
+                                .grid-stack-item-content
+                                    .card-body.kitchen-tile-content( style='width: auto')
+                                        .card-title.font-weight-bold #{item.name}
     button.btn.btn-md.btn-primary.mr-2.ml-2#saveBtn Save Layout
-    button.btn.btn-md.btn-danger#resetBtn Reset Layout
 
-    .toast(role='alert' aria-live='assertive' aria-atomic='true' data-autohide='true' data-delay='2000' style='')
+    .toast(role='alert' aria-live='assertive' aria-atomic='true' data-autohide='true' data-delay='2000')
         .toast-header
             strong.mr-auto Notification
             small Just Now
