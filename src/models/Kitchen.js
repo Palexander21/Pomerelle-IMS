@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const TicketSchema = new mongoose.Schema({
+const KitchenSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -11,7 +11,12 @@ const TicketSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
+    quantity: {
+        type: Number,
+        required: true,
+        trim: true,
+    }
 
 }, {autoCreate: true});
 
-module.exports = mongoose.model('Tickets', TicketSchema);
+module.exports = mongoose.model('Kitchen', KitchenSchema);

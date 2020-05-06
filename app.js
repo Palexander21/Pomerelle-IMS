@@ -4,6 +4,8 @@ require('./src/models/Customers');
 require('./src/models/OpenRentals');
 require('./src/models/Rentals');
 require('./src/models/Tickets');
+require('./src/models/Kitchen');
+require('./src/models/Configuration');
 require('dotenv').config();
 const createError = require('http-errors'),
     express = require('express'),

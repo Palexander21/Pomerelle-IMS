@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    $('#inputPhone').inputmask({"mask": "(999)-999-9999"});
     $.ajax({
         url: '/api/v3/rentals/open/count',
         type: 'get',

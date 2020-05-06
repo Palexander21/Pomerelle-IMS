@@ -1,0 +1,42 @@
+extends layout
+
+block head
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/gridstack@1.1.1/dist/gridstack.min.css')
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/gridstack@1.1.1/dist/gridstack-extra.css')
+
+block content
+    ol.breadcrumb
+        li.breadcrumb-item
+            a(href='/') Dashboard
+        li.breadcrumb-item.active #{active}
+    .row
+        .col-xl-8.col-md-12.col-sm-12
+            .jumbotron.jumbotron-fluid()
+                .container
+                    .grid-stack
+                        each item, i in inventory
+                            .grid-stack-item.card-pop.item.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark.kitchen-tile(id=`_${i}` data-gs-width='2' data-gs-height='2')
+                                .grid-stack-item-content
+                                    .card-body.kitchen-tile-content(style='width: auto')
+                                        .card-title.font-weight-bold #{item.name}
+        .col-xl-4.col-md-12.col-sm-12
+            .card.text-center()
+                .card-header
+                    | Checkout
+                .card-body
+                    .ul.line-items
+                .card-footer.text-muted
+                    #total Total $0.00
+                    .btn.btn-danger.mr-4(id='cancel-btn') Cancel
+                    a.btn.btn-primary(href='#') Charge
+
+    .toast(role='alert' aria-live='assertive' aria-atomic='true' data-autohide='true' data-delay='2000' style='')
+        .toast-header
+            strong.mr-auto Notification
+            small Just Now
+            button.ml-2.mb-1.close(type='button' data-dismiss='toast' aria-label='Close')
+                span(aria-hidden='true') &times;
+        .toast-body
+            |
+block scripts
+    script(src='/js/pos.js')

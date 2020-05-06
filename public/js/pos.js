@@ -1,11 +1,25 @@
 $(document).ready(function () {
     let items;
-
-
+    let opts = {
+        animate: true,
+        verticalMargin: 5,
+        float: true,
+        disableDrag: true,
+        disableResize: true,
+    }
+    let page,
+        grid
+    ;
+    if (window.location.href.indexOf('ticketing') !== -1)
+        page = 'tickets';
+    else if (window.location.href.indexOf('kitchen') !== -1)
+        page = 'kitchen';
+    else if (window.location.href.indexOf('kitchen') !== -1)
+        page = 'rentals';
     $('.item').on('click',function () {
         let val = $(this)[0].innerText
         $.ajax({
-            url: `api/v3/tickets/${val}`,
+            url: `api/v3/pos/${page}/${val}`,
             type: 'GET',
             success: function (data) {
                 $('.line-items').append(`<li class="line-item" id="${val}">
@@ -45,18 +59,43 @@ $(document).ready(function () {
     }
 
     $.fn.saveSession = function () {
-        sessionStorage.setItem('line-items', JSON.stringify($('.line-items')[0].innerHTML));
+        sessionStorage.setItem(`${page}-line-items`, JSON.stringify($('.line-items')[0].innerHTML));
         console.debug("session saved")
     }
-
     $.fn.loadSession = function () {
-        items = sessionStorage.getItem('line-items');
+        items = sessionStorage.getItem(`${page}-line-items`);
         items = JSON.parse(items)
         $('.line-items').append(items)
         $.fn.updateTotal();
     }
+    let config_items;
+    $.fn.loadConfig = function (config) {
+        config_items = JSON.parse(config)
+        config_items.forEach(el => {
+            let id = `#${el.id}`
+            $(id).attr('data-gs-x', el.x)
+            $(id).attr('data-gs-y', el.y)
+            $(id).attr('data-gs-width', el.w)
+            $(id).attr('data-gs-height', el.h)
+            $(id).attr('data-gs-x', el.x)
+        })
 
-    if (sessionStorage.getItem('line-items'))
+        grid = GridStack.init(opts);
+    }
+
+    $.ajax({
+        url: `/api/v3/pos/configuration/${page}-dashboard`,
+        method: 'GET',
+        success: function (res) {
+            $.fn.loadConfig(res.config)
+        },
+        error: function (res) {
+            $('.toast-body').html(res.responseJSON.msg)
+            $('.toast').toast('show')
+            grid = GridStack.init(opts);
+        }
+    });
+    if (sessionStorage.getItem(`${page}-line-items`))
         $.fn.loadSession();
 })
 
