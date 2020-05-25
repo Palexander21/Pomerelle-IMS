@@ -6,37 +6,22 @@ block content
             a(href='/') Dashboard
         li.breadcrumb-item
             | Rental Shop
-    .row
+    .row.text-center.justify-content-center.center
         .col-xl-4.col-md-4.col-sm-6.mb-3
-            a.a-no-style.card.text-white.bg-primary.o-hidden.h-100(href='/rental_shop' data-toggle='modal' data-target='#rentalModalCenter')
+            a.card-pop.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(href='/rental_shop' data-toggle='modal' data-target='#rentalModalCenter')
                 .card-body
-                    .card-body-icon
-                        i.fas.fa-fw.fa-cash-register
-                    .mr-5 Rental Form
-                .card-footer.text-white.clearfix.small.z-1
-                    span.float-left Start New Rental
-                    span.float-right
-                        i.fas.fa-angle-right
+                    i.fas.fa-user-cog.fa-3x
+                    h4.card-title.font-weight-bold Start Rental
         .col-xl-4.col-md-4.col-sm-6.mb-3
-            a.a-no-style.card.text-white.bg-warning.o-hidden.h-100(href='/rental_shop/rentals')
+            a.card-pop.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(href='/rental_shop/rentals')
                 .card-body
-                    .card-body-icon
-                        i.fas.fa-fw.fa-list
-                    .mr-5#rental-count New Rentals
-                .card-footer.text-white.clearfix.small.z-1
-                    span.float-left View Details
-                    span.float-right
-                        i.fas.fa-angle-right
+                    i.fas.fa-list.fa-3x
+                    h4.card-title.font-weight-bold#rental-count New Rentals
         .col-xl-4.col-md-4.col-sm-6.mb-3
-            a.a-no-style.card.text-white.bg-success.o-hidden.h-100(href='/rental_shop/returns')
+            a.card-pop.a-no-style.card.shadow.p-3.mb-3.bg-white.rounded.text-dark(href='/rental_shop/returns')
                 .card-body
-                    .card-body-icon
-                        i.fas.fa-fw.fa-reply
-                    .mr-5#return-count Waiting to Return
-                .card-footer.text-white.clearfix.small.z-1
-                    span.float-left View Details
-                    span.float-right
-                        i.fas.fa-angle-right
+                    i.fas.fa-reply.fa-3x
+                    h4.card-title.font-weight-bold#return-count Waiting to Return
         //.col-xl-3.col-sm-6.mb-3
         //    .card.text-white.bg-danger.o-hidden.h-100
         //        .card-body
@@ -47,14 +32,6 @@ block content
         //            span.float-left View Details
         //            span.float-right
         //                i.fas.fa-angle-right
-    // Area Chart Example
-    //.card.mb-3
-    //    .card-header
-    //        i.fas.fa-chart-area
-    //        |             Area Chart Example
-    //    .card-body
-    //        canvas#myAreaChart(width='100%' height='30')
-    //    .card-footer.small.text-muted.date-updated Updated yesterday at 11:59 PM
     #rentalModalCenter.modal.fade(tabindex='-1' role='dialog' aria-labelledby='Rental Modal' aria-hidden='true')
         .modal-lg.modal-dialog.modal-dialog-centered(role='document')
             .modal-content

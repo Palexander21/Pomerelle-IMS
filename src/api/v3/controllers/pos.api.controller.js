@@ -11,7 +11,7 @@ controller.get_tickets = async (req, res) => {
     let tickets = await Tickets.find()
         .catch(err => {
             console.error('DB query failed to get all tickets')
-            res.status(500).send({
+            return res.status(500).send({
                 message: err.error || 'DB query failed to get all tickets'
             })
         })
@@ -27,7 +27,7 @@ controller.get_ticket_price = async (req, res) => {
     let price = await Tickets.findOne({name: req.params.ticket})
         .catch(err => {
             console.error(`DB query failed for ticket: ${req.params.ticket}`)
-            res.status(500).send({
+            return res.status(500).send({
                 message: err.error || `DB query failed for ticket: ${req.params.ticket}`
             })
         })
@@ -115,7 +115,7 @@ controller.get_kitchen_items = async (req, res) => {
     let items = await Kitchen.find()
         .catch(err => {
             console.error('DB query failed to get all items')
-            res.status(500).send({
+            return res.status(500).send({
                 message: err.error || 'DB query failed to get all items'
             })
         })
@@ -131,7 +131,7 @@ controller.get_item_price = async (req, res) => {
     let price = await Kitchen.findOne({name: req.params.item})
         .catch(err => {
             console.error(`DB query failed for item: ${req.params.item}`)
-            res.status(500).send({
+            return res.status(500).send({
                 message: err.error || `DB query failed for item: ${req.params.item}`
             })
         })
@@ -218,7 +218,7 @@ controller.get_config = async (req, res) => {
     let config = await Configuration.findOne({id: req.params.id})
         .catch(err => {
             console.error(`DB query failed for: ${req.params.id}`)
-            res.status(500).send({
+            return res.status(500).send({
                 message: err.error || `DB query failed for: ${req.params.id}`
             })
         })

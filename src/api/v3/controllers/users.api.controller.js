@@ -1,3 +1,4 @@
+require('dotenv').config()
 const mongoose = require('mongoose');
 const User = mongoose.model('Users');
 const {body, validationResult} = require('express-validator/check');
@@ -86,7 +87,7 @@ controller.login = async (req, res, next) => {
                     .then(function () {
                         const options = {
                             httpOnly: true,
-                            maxAge: 3600000
+                            maxAge: 3600000 * process.env.AGE
                         };
                         return res.status(201).cookie('jwt', req.token, options).send({
                             msg: user.username + ' successfully logged in.',
