@@ -15,7 +15,8 @@ const createError = require('http-errors'),
     session = require('express-session'),
     MongoStore = require('connect-mongo')(session),
     uuid = require('uuid/v4');
-    cookieParser = require('cookie-parser');
+    cookieParser = require('cookie-parser')
+    io = require('socket.io')
 
 let db;
 

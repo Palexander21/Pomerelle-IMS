@@ -22,20 +22,22 @@ $(document).ready(function () {
             url: `api/v3/pos/${page}/${val}`,
             type: 'GET',
             success: function (data) {
-                $('.line-items').append(`<li class="line-item" id="${val}">
-                                            <span class="item-span" onclick="$(this).removeItem(this)"> &times;</span>
-                                            <span> ${val}</span>
-                                            <input onchange="$(this).updateTotal()" class="item-price" value="${data.price.toFixed(2)}">
-                                         </li>`)
+                $('.line-items').append(`<li class="line-item" id="${data._id}">
+                                        <span class="item-span" onclick="$(this).removeItem(this)"> &times;</span>
+                                        <span id="${val}"> ${val}</span>
+                                        <input onchange="$(this).updateTotal()" class="item-price" value="${data.price.toFixed(2)}">
+                                        <input onchange="$(this).updateTotal()" class="item-qty" id="${val}-qty" value="1">
+                                     </li>`)
                 $.fn.updateTotal();
             },
             error: function (data) {
                 console.error(data.responseJSON.message);
-                $('.line-items').append(`<li class="line-item" id="${val}">
-                                            <span class="item-span" onclick="$(this).removeItem(this)"> &times;</span>
-                                            <span> ${val}</span>
-                                            <input onchange="$(this).updateTotal()" class="item-price" value="0.00">
-                                         </li>`)
+                $('.line-items').append(`<li class="line-item" id="${data._id}">
+                                        <span class="item-span" onclick="$(this).removeItem(this)"> &times;</span>
+                                        <span> ${val}</span>
+                                        <input onchange="$(this).updateTotal()" class="item-price" value="0.00">
+                                        <input onchange="$(this).updateTotal()" class="item-qty" id="${val}-qty" value="1">
+                                     </li>`)
             }
         })
     })
@@ -45,9 +47,14 @@ $(document).ready(function () {
     })
     $.fn.updateTotal = function () {
         let total = 0.00;
-        $('.item-price').each(function () {
-            total += Number($(this).val());
-            this.value = Number(this.value).toFixed(2)
+        let price_idx = 2,
+            qty_idx = 3;
+        $('.line-item').each(function () {
+            let price = $(this).children()[price_idx],
+                qty = $(this).children()[qty_idx];
+            console.log(price.value)
+            total += Number(price.value) * Number(qty.value)
+            // TODO Update the input value to save the session
         })
         $('#total').text(`Total $${total.toFixed(2)}`)
         $.fn.saveSession();

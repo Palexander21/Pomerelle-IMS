@@ -40,6 +40,12 @@ tr.selected {
 .item-span:hover {
   cursor: pointer;
 }
+.item-qty {
+  float: right;
+  margin-right: 5%;
+  width: 10%;
+  text-align: right;
+}
 .item-price {
   float: right;
   width: 20%;
