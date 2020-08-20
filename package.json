@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "acl": "github:Palexander21/node_acl#master",
-    "bcrypt": "^3.0.4",
+    "bcrypt": "^5.0.0",
     "body-parser": "latest",
     "connect-mongo": "^3.2.0",
     "cookie-parser": "~1.4.3",
